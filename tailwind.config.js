@@ -19,6 +19,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        main: {
+          1: withOpacity(" --yellow-app-rgb"),
+          2: withOpacity("--navyBlue-app-rgb"),
+        },
         primary: {
           900: withOpacity("--color-primary-900"),
           800: withOpacity("--color-primary-800"),
@@ -46,13 +50,16 @@ module.exports = {
         error: withOpacity("--color-error"),
       },
       fontFamily: {
-        sans: ["var(--font-vazir)", ...fontFamily.sans],
+        sans_light: ["vazir-Regular"],
+        sans_normal: ["vazir-Medium"],
+        sans_bold: ["vazir-Bold"],
       },
+
       container: {
         center: true,
       },
       boxShadow: {
-        "input-focus": "0 12px 24px -8px rgb(var(--color-primary-300))",
+        "input-focus": "0 12px 24px -8px rgb(var(--navyBlue-app-rgb))",
       },
     },
   },

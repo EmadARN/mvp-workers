@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    --background-app-rgb: 244, 245, 247;
+    --yellow-app-rgb: 253, 190, 51;
+    --navyBlue-app-rgb: 3, 15, 39;
     --color-primary-900: 74, 109, 255;
     --color-primary-800: 92, 124, 255;
     --color-primary-700: 110, 138, 255;
@@ -33,6 +34,30 @@
   }
 }
 
+@layer base {
+  @font-face {
+    font-family: "vazir-Regular";
+    font-style: normal;
+    font-weight: bold;
+    src: url("./assets/fonts/vazir/Vazirmatn-Regular.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "vazir-Medium";
+    font-style: normal;
+    font-weight: 100;
+    src: url("./assets/fonts/vazir/Vazirmatn-Medium.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "vazir-Bold";
+    font-style: normal;
+    font-weight: 500;
+    src: url("./assets/fonts/vazir/Vazirmatn-Bold.woff2") format("woff2");
+    font-display: swap;
+  }
+}
 @layer components {
   .textField__input {
     @apply w-full py-3 px-4 rounded-xl bg-gray-100 text-secondary-900 border border-gray-100 outline-none duration-200 transition-all ease-in-out hover:border-primary-300 focus:outline-none focus:border-primary-300 focus:shadow-input-focus focus:bg-white;
@@ -70,8 +95,93 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: var(--vazir-font);
+  font-family: vazir-Regular;
   min-height: 100vh;
   user-select: none;
-  background-color: var(--background-app-rgb);
+}
+
+/* BtnAnimation */
+@keyframes line1 {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes line2 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes line3 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-line1 {
+  animation: line1 3s linear infinite;
+}
+
+.animate-line2 {
+  animation: line2 3s 1.5s linear infinite;
+}
+
+.animate-line3 {
+  animation: line3 3s linear infinite;
+}
+
+/* VisitBtn */
+@keyframes span1 {
+  0% {
+    transform: scaleX(80%);
+  }
+  100% {
+    transform: scaleX(100%);
+    background-color: #030f27;
+    color: #fdbe33;
+  }
+}
+
+.home-button {
+  padding: 15px 35px;
+  height: 60px;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Lalezar", sans-serif;
+  color: #030f27;
+  background-color: #fdbe33;
+  border: 2px solid #fdbe33;
+  border-radius: 2px;
+  transition: all 0.5s ease-in-out;
+  animation: span1 3s ease-in-out infinite alternate;
+}
+
+.home-button:hover {
+  background-color: transparent;
+  color: #fdbe33;
+}
+
+@media screen and (min-width: 600px) {
+  body::-webkit-scrollbar {
+    width: 0.7em;
+  }
+
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: #030f27;
+    outline: 2px solid #fdbe33;
+  }
 }
