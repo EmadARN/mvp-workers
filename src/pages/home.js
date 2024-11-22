@@ -1,4 +1,5 @@
 import BackToUp from "../common/BackToUp";
+import FAQs from "../components/AccordionMenu";
 import Carousel from "../components/Carousel";
 import CounterMain from "../components/counterMain/CounterMain";
 import Table from "../components/Table";
@@ -6,7 +7,6 @@ import WhyWorkers from "../components/whyWorkers/WhyWorkers";
 import Layout from "../container";
 import RightBar from "../container/RightBar";
 import { serviceVisitBtn } from "../widget/ServiceVisitBtn";
-import FAQs from "../components/AccordionMenu";
 
 const Home = () => {
   return (
