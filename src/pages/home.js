@@ -1,5 +1,7 @@
 import BackToUp from "../common/BackToUp";
 import Table from "../common/Table";
+import FAQs from "../components/AccordionMenu";
+
 import Carousel from "../components/Carousel";
 import CounterMain from "../components/counterMain/CounterMain";
 import WhyWorkers from "../components/whyWorkers/WhyWorkers";
@@ -16,6 +18,7 @@ const Home = () => {
         <CounterMain />
         <Table />
         {serviceVisitBtn()}
+   <FAQs/>
       </div>
     </Layout>
   );
