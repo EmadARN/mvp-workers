@@ -6,6 +6,7 @@ import WhyWorkers from "../components/whyWorkers/WhyWorkers";
 import Layout from "../container";
 import RightBar from "../container/RightBar";
 import { serviceVisitBtn } from "../widget/ServiceVisitBtn";
+import FAQs from "../components/AccordionMenu";
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
           <CounterMain />
           <Table />
           {serviceVisitBtn()}
+          <FAQs />
         </div>
       </div>
     </Layout>
