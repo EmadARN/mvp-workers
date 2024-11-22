@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { CameraPreview } from "./CameraPreview";
 
-const RulesDetails = () => {
+const UploadImageForm = () => {
   const [openCamera, setOpenCamera] = useState(false);
   const [openFile, setOpenFile] = useState(false);
   const [storeData, setStoreData] = useState(null);
@@ -54,12 +54,6 @@ const RulesDetails = () => {
 
   const handleSavePhoto = () => {
     alert("عکس ذخیره شد!");
-  };
-
-  const handleRetakePhoto = () => {
-    setStoreData(null);
-    setPhotoCaptured(false);
-    setIsUploading(true);
   };
 
   const uploadImage = (e) => {
@@ -157,7 +151,13 @@ const RulesDetails = () => {
           باز شدن دوربین
         </button>
       </div>
-
+      <div className="mt-8 flex justify-center">
+        <button
+          className="px-8 py-3 bg-yellow-400 text-gray-900 font-semibold text-lg rounded transition duration-500 hover:bg-gray-800 hover:text-yellow-400"
+        >
+          ادامه
+        </button>
+      </div>
       <canvas
         ref={canvasRef}
         className="hidden"
@@ -168,4 +168,4 @@ const RulesDetails = () => {
   );
 };
 
-export default RulesDetails;
+export default UploadImageForm;

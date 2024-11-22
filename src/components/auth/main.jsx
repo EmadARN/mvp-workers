@@ -1,36 +1,21 @@
-import React from "react";
 import SendOTPForm from "./otpForm/SendOTPForm";
 import CheckOTPForm from "./otpForm/CheckOTPForm";
-import RulesDetails from "./uploadImageForm/RulesDetails";
-
-const RESEND_TIME = 90;
+import useOtpForm from "../../hooks/useOtpForm";
+import UploadImageForm from "./uploadImageForm/UploadImageForm";
 
 const AuthPage = () => {
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [step, setStep] = React.useState(1);
-  const [otp, setOtp] = React.useState("");
-  const [time, setTime] = React.useState(RESEND_TIME);
-
-  const phoneNumberHandler = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  const sendOtpHandler = async (e) => {
-    e.preventDefault();
-    setStep(2);
-  };
-
-  const checkOtpHandler = async (e) => {
-    e.preventDefault();
-    setStep(3);
-  };
-  React.useEffect(() => {
-    const timer =
-      time > 0 && setInterval(() => setTime((time) => time - 1), 1000);
-    return () => {
-      if (timer) clearInterval(timer);
-    };
-  }, [time]);
+  const {
+    phoneNumber,
+    phoneNumberHandler,
+    step,
+    otp,
+    setOtp,
+    time,
+    sendOtpHandler,
+    checkOtpHandler,
+    onBack,
+    onResendOtp,
+  } = useOtpForm();
 
   const renderSteps = () => {
     switch (step) {
@@ -45,17 +30,17 @@ const AuthPage = () => {
       case 2:
         return (
           <CheckOTPForm
-            onBack={() => setStep((s) => s - 1)}
+            onBack={onBack}
             otp={otp}
             setOtp={setOtp}
             onSubmit={checkOtpHandler}
             time={time}
-            onResendOtp={sendOtpHandler}
+            onResendOtp={onResendOtp}
             phoneNumber={phoneNumber}
           />
         );
       case 3:
-        return <RulesDetails />;
+        return <UploadImageForm />;
       default:
         return null;
     }

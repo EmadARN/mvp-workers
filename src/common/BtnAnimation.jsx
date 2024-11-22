@@ -11,7 +11,7 @@ const BtnAnimation = ({ title, color, size, ffamily, fweight }) => {
       <div className="relative z-10 flex items-center justify-center px-6 py-3 text-center whitespace-nowrap">
         <Link to="/SignIn">
           <button
-            className="text-white"
+            className="text-white font-sans_bold"
             style={{
               color: color,
               fontFamily: ffamily,

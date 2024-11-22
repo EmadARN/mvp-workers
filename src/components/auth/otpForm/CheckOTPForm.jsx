@@ -37,7 +37,7 @@ function CheckOTPForm({
         <div className="flex justify-center">
           <button
             type="submit"
-            className="w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105"
+            className="w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105 pt-1"
           >
             تایید
           </button>

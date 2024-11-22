@@ -1,10 +1,10 @@
 import AppBar from "./appBar/AppBar";
 import Footer from "./Footer";
 
-const Layout = ({ children }) => {
+const Layout = ({ children,signinBtnDisplay }) => {
   return (
     <>
-      <AppBar />
+      <AppBar signinBtnDisplay={signinBtnDisplay}/>
       {children}
       <Footer />
     </>

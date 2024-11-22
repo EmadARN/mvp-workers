@@ -1,12 +1,11 @@
 export const UploadButtons = ({
-  isUploading,
   photoCaptured,
   onCapture,
   onSave,
   onDelete,
   onClose,
 }) => (
-  <div className="flex space-x-4">
+  <div className="flex gap-x-2">
     {!photoCaptured ? (
       <button
         onClick={onCapture}
@@ -33,7 +32,7 @@ export const UploadButtons = ({
     {!photoCaptured && (
       <button
         onClick={onClose}
-        className="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
       >
         بستن دوربین
       </button>
