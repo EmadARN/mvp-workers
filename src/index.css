@@ -98,6 +98,7 @@ body {
   font-family: vazir-Regular;
   min-height: 100vh;
   user-select: none;
+  background-color: rgb(251, 252, 241);
 }
 
 /* BtnAnimation */
