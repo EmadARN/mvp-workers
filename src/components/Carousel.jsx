@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { carouselData } from "../constants";
 import BtnAnimation from "../common/BtnAnimation";
 
-
 // تغییرات مربوط به اندازه‌های صفحه
 const getSlideHeight = (width) => {
   if (width <= 480) {
@@ -51,19 +50,21 @@ function Carousel() {
         }}
       >
         {/* محتوای داخل اسلاید */}
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4 space-y-4">
+          <h1 className="text-sm sm:text-3xl md:text-4xl lg:text-5xl font-bold font-sans_bold">
             {carouselData[currentSlide].title}
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl mb-4">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-sans_bold">
             {carouselData[currentSlide].text}
           </p>
+          <div className="w-full flex justify-center">
             <BtnAnimation
               title="ثبت نام کارجو"
               color="#fff"
-              size="18px"
+              size="16px"
               fweight="700"
             />
+          </div>
         </div>
       </div>
     </div>

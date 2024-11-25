@@ -8,8 +8,10 @@ function FAQs() {
   };
 
   return (
-    <div className="mr-2 sm:mr-10">
-      <h1 className="text-2xl text-center font-semibold mb-6 mt-8">سوالات شما</h1>
+    <div className="mr-2 sm:mr-10 ">
+      <h1 className="text-2xl text-center font-semibold mb-6 mt-8">
+        سوالات شما
+      </h1>
 
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
         {/* First Column */}
@@ -20,10 +22,14 @@ function FAQs() {
           >
             <div
               className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel1" ? "bg-[#030f27] text-[#fdbe33]" : "bg-[#fdbe33]"
+                expanded === "panel1"
+                  ? "bg-[#030f27] text-[#fdbe33]"
+                  : "bg-[#fdbe33]"
               }`}
             >
-              <h2 className="text-lg md:text-xl font-medium">چه چیزی درباره ما میخواهید؟</h2>
+              <h2 className="text-lg md:text-xl font-medium">
+                چه چیزی درباره ما میخواهید؟
+              </h2>
               <span
                 className={`transition-transform transform ${
                   expanded === "panel1" ? "rotate-180" : ""
@@ -46,8 +52,10 @@ function FAQs() {
               </span>
             </div>
             {expanded === "panel1" && (
-              <div className="p-4 bg-white border-t border-gray-300">
-                <p className="text-lg">شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.</p>
+              <div className="p-4 bg-white border-t border-gray-300 ">
+                <p className="text-lg">
+                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
+                </p>
               </div>
             )}
           </div>
@@ -58,10 +66,14 @@ function FAQs() {
           >
             <div
               className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel2" ? "bg-[#030f27] text-[#fdbe33]" : "bg-[#fdbe33]"
+                expanded === "panel2"
+                  ? "bg-[#030f27] text-[#fdbe33]"
+                  : "bg-[#fdbe33]"
               }`}
             >
-              <h2 className="text-lg md:text-xl font-medium">چه چیزی درباره ما میخواهید؟</h2>
+              <h2 className="text-lg md:text-xl font-medium">
+                چه چیزی درباره ما میخواهید؟
+              </h2>
               <span
                 className={`transition-transform transform ${
                   expanded === "panel2" ? "rotate-180" : ""
@@ -85,7 +97,9 @@ function FAQs() {
             </div>
             {expanded === "panel2" && (
               <div className="p-4 bg-white border-t border-gray-300">
-                <p className="text-lg">شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.</p>
+                <p className="text-lg">
+                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
+                </p>
               </div>
             )}
           </div>
@@ -99,10 +113,14 @@ function FAQs() {
           >
             <div
               className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel6" ? "bg-[#030f27] text-[#fdbe33]" : "bg-[#fdbe33]"
+                expanded === "panel6"
+                  ? "bg-[#030f27] text-[#fdbe33]"
+                  : "bg-[#fdbe33]"
               }`}
             >
-              <h2 className="text-lg md:text-xl font-medium">چه چیزی درباره ما میخواهید؟</h2>
+              <h2 className="text-lg md:text-xl font-medium">
+                چه چیزی درباره ما میخواهید؟
+              </h2>
               <span
                 className={`transition-transform transform ${
                   expanded === "panel6" ? "rotate-180" : ""
@@ -126,7 +144,9 @@ function FAQs() {
             </div>
             {expanded === "panel6" && (
               <div className="p-4 bg-white border-t border-gray-300">
-                <p className="text-lg">شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.</p>
+                <p className="text-lg">
+                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
+                </p>
               </div>
             )}
           </div>
@@ -137,10 +157,14 @@ function FAQs() {
           >
             <div
               className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel7" ? "bg-[#030f27] text-[#fdbe33]" : "bg-[#fdbe33]"
+                expanded === "panel7"
+                  ? "bg-[#030f27] text-[#fdbe33]"
+                  : "bg-[#fdbe33]"
               }`}
             >
-              <h2 className="text-lg md:text-xl font-medium">چه چیزی درباره ما میخواهید؟</h2>
+              <h2 className="text-lg md:text-xl font-medium">
+                چه چیزی درباره ما میخواهید؟
+              </h2>
               <span
                 className={`transition-transform transform ${
                   expanded === "panel7" ? "rotate-180" : ""
@@ -164,7 +188,9 @@ function FAQs() {
             </div>
             {expanded === "panel7" && (
               <div className="p-4 bg-white border-t border-gray-300">
-                <p className="text-lg">شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.</p>
+                <p className="text-lg">
+                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
+                </p>
               </div>
             )}
           </div>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { CameraPreview } from "./CameraPreview";
 
-const RulesDetails = ({confirmCameraHandler}) => {
+const UploadImageForm = ({confirmCameraHandler}) => {
   const [openCamera, setOpenCamera] = useState(false);
   const [openFile, setOpenFile] = useState(false);
   const [storeData, setStoreData] = useState(null);
@@ -54,12 +54,6 @@ const RulesDetails = ({confirmCameraHandler}) => {
 
   const handleSavePhoto = () => {
     alert("عکس ذخیره شد!");
-  };
-
-  const handleRetakePhoto = () => {
-    setStoreData(null);
-    setPhotoCaptured(false);
-    setIsUploading(true);
   };
 
   const uploadImage = (e) => {
@@ -175,4 +169,4 @@ const RulesDetails = ({confirmCameraHandler}) => {
   );
 };
 
-export default RulesDetails;
+export default UploadImageForm;

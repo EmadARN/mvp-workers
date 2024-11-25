@@ -1,9 +1,9 @@
-import { MdForwardToInbox } from "react-icons/md";
-import { RiContactsBook2Line } from "react-icons/ri";
-import { SlCalender } from "react-icons/sl";
+import { MdForwardToInbox, MdOutlinePhoneCallback } from "react-icons/md";
 import NavBar from "./NavBar";
+import { toPersianDigits } from "../../utils/toPersianDigits";
+import { FaRegAddressBook } from "react-icons/fa";
 
-const AppBar = () => {
+const AppBar = ({ signinBtnDisplay }) => {
   return (
     <div className="w-full bg-main-1">
       <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
@@ -18,16 +18,16 @@ const AppBar = () => {
         <div className="hidden md:flex md:w-1/2 justify-around text-lg mt-3">
           {/* Address */}
           <div className="flex flex-col items-start font-bold">
-            <SlCalender className="text-3xl pb-2" />
+            <FaRegAddressBook className="text-3xl pb-2" />
             <p className="">آدرس</p>
             <p className="">زنجان , اعتمادیه</p>
           </div>
 
           {/* Contact */}
           <div className="flex flex-col items-start font-bold">
-            <RiContactsBook2Line className="text-3xl pb-2" />
+            <MdOutlinePhoneCallback className="text-3xl pb-2" />
             <p className="">تماس با ما</p>
-            <p className="">0243332265</p>
+            <p className="">{toPersianDigits(`0243332265`)}</p>
           </div>
 
           {/* Email */}
@@ -38,7 +38,7 @@ const AppBar = () => {
           </div>
         </div>
       </div>
-      <NavBar />
+      <NavBar signinBtnDisplay={signinBtnDisplay} />
     </div>
   );
 };

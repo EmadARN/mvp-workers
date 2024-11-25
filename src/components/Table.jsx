@@ -1,4 +1,4 @@
-import Title from "./Tilte";
+import Title from "../common/Tilte";
 
 const Table = () => {
   return (
@@ -6,7 +6,7 @@ const Table = () => {
       <div>
         <Title title="ثپت نامی های اخیر" />
       </div>
-      <div className="overflow-x-auto my-8">
+      <div className="overflow-x-auto ">
         <table className="min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-main-2 text-white">

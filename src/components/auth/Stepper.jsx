@@ -15,7 +15,7 @@ const Stepper = ({ currentStep }) => {
           <div key={step.id} className="flex flex-col items-center">
             {/* دایره هر مرحله */}
             <div
-              className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
+              className={`flex items-center justify-center rounded-full w-5 h-5  md:w-10 md:h-10 first-letter:rounded-full border-2 text-[14px]  md:text-lg  ${
                 currentStep > index + 1
                   ? "bg-green-500 text-white border-green-500"
                   : currentStep === index + 1
@@ -27,9 +27,9 @@ const Stepper = ({ currentStep }) => {
             </div>
             {/* متن مرحله */}
             <p
-              className={`mt-2 text-sm ${
+              className={`mt-2 text-[10px] md:text-lg ${
                 currentStep === index + 1
-                  ? "text-blue-500 font-semibold"
+                  ? "text-blue-500 font-sans"
                   : "text-gray-500"
               }`}
             >

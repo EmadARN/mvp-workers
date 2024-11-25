@@ -1,55 +1,26 @@
-import React from "react";
 import SendOTPForm from "./otpForm/SendOTPForm";
 import CheckOTPForm from "./otpForm/CheckOTPForm";
-import RulesDetails from "./uploadImageForm/RulesDetails";
-import RegisterMain from "./registerForm/RegisterMain";
-import SignUpFinalPage from "./submitInformation/SubmitInfo";
-
-const RESEND_TIME = 90;
+import useOtpForm from "../../hooks/useOtpForm";
+import UploadImageForm from "./uploadImageForm/UploadImageForm";
+import { useState } from "react";
 
 const AuthPage = () => {
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [step, setStep] = React.useState(1);
-  const [otp, setOtp] = React.useState("");
-  const [time, setTime] = React.useState(RESEND_TIME);
+  const [step, setStep] = useState(1);
 
-  const phoneNumberHandler = (e) => {
-    setPhoneNumber(e.target.value);
-  };
+  const {
+    phoneNumber,
+    phoneNumberHandler,
 
-  const sendOtpHandler = async (e) => {
-    e.preventDefault();
-    setStep(2);
-  };
-
-  const checkOtpHandler = async (e) => {
-    e.preventDefault();
-    setStep(3);
-  };
-
-
-  const confirmCameraHandler = async (e) => {
-    e.preventDefault();
-    setStep(5);
-  };
-
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setStep(4);
-    
-  };
-
-
-  
-  React.useEffect(() => {
-    const timer =
-      time > 0 && setInterval(() => setTime((time) => time - 1), 1000);
-    return () => {
-      if (timer) clearInterval(timer);
-    };
-  }, [time]);
+    otp,
+    setOtp,
+    time,
+    sendOtpHandler,
+    checkOtpHandler,
+    onBack,
+    confirmCameraHandler,
+    onResendOtp,
+    handleSubmit
+  } = useOtpForm(step, setStep);
 
   const renderSteps = () => {
     switch (step) {
@@ -64,28 +35,25 @@ const AuthPage = () => {
       case 2:
         return (
           <CheckOTPForm
-            onBack={() => setStep((s) => s - 1)}
+            onBack={onBack}
             otp={otp}
             setOtp={setOtp}
             onSubmit={checkOtpHandler}
             time={time}
-            onResendOtp={sendOtpHandler}
+            onResendOtp={onResendOtp}
             phoneNumber={phoneNumber}
           />
         );
 
-        case 3:
-          return(
-            <RegisterMain handleSubmit={handleSubmit}/>
-          )
+      case 3:
+        return <RegisterMain handleSubmit={handleSubmit} />;
       case 4:
-        return <RulesDetails  confirmCameraHandler={confirmCameraHandler}/>;
+        return <UploadImageForm confirmCameraHandler={confirmCameraHandler} />;
 
-        case 5:
-          return( 
-          <SignUpFinalPage  />
-        )
-     default: return null
+      case 5:
+        return <SignUpFinalPage />;
+      default:
+        return null;
     }
   };
 
