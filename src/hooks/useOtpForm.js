@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 
 const RESEND_TIME = 90;
 
-const useOtpForm = () => {
+const useOtpForm = (step, setStep) => {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [step, setStep] = useState(1);
+
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_TIME);
 
@@ -20,6 +20,16 @@ const useOtpForm = () => {
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     setStep(3);
+  };
+
+  const confirmCameraHandler = async (e) => {
+    e.preventDefault();
+    setStep(5);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStep(4);
   };
 
   const onBack = () => setStep((s) => s - 1);
@@ -51,6 +61,8 @@ const useOtpForm = () => {
     checkOtpHandler,
     onBack,
     onResendOtp,
+    handleSubmit,
+    confirmCameraHandler,
   };
 };
 
