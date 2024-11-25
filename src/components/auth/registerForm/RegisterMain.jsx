@@ -1,5 +1,6 @@
 import  { useState } from 'react';
-import { fields } from './formData';
+import { fields } from '../../../constants';
+
 const RegisterMain = ({ handleSubmit }) => {
   const [formData, setFormData] = useState({
     first_name: '',

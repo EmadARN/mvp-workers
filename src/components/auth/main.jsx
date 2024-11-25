@@ -2,6 +2,8 @@ import React from "react";
 import SendOTPForm from "./otpForm/SendOTPForm";
 import CheckOTPForm from "./otpForm/CheckOTPForm";
 import RulesDetails from "./uploadImageForm/RulesDetails";
+import RegisterMain from "./registerForm/RegisterMain";
+import SignUpFinalPage from "./submitInformation/SubmitInfo";
 
 const RESEND_TIME = 90;
 
@@ -24,6 +26,23 @@ const AuthPage = () => {
     e.preventDefault();
     setStep(3);
   };
+
+
+  const confirmCameraHandler = async (e) => {
+    e.preventDefault();
+    setStep(5);
+  };
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStep(4);
+    
+  };
+
+
+  
   React.useEffect(() => {
     const timer =
       time > 0 && setInterval(() => setTime((time) => time - 1), 1000);
@@ -54,10 +73,19 @@ const AuthPage = () => {
             phoneNumber={phoneNumber}
           />
         );
-      case 3:
-        return <RulesDetails />;
-      default:
-        return null;
+
+        case 3:
+          return(
+            <RegisterMain handleSubmit={handleSubmit}/>
+          )
+      case 4:
+        return <RulesDetails  confirmCameraHandler={confirmCameraHandler}/>;
+
+        case 5:
+          return( 
+          <SignUpFinalPage  />
+        )
+     default: return null
     }
   };
 
