@@ -2,25 +2,8 @@ import { useState, useEffect } from "react";
 
 const RESEND_TIME = 90;
 
-const useOtpForm = () => {
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [step, setStep] = useState(1);
-  const [otp, setOtp] = useState("");
+const useOtpForm = (setStep) => {
   const [time, setTime] = useState(RESEND_TIME);
-
-  const phoneNumberHandler = (e) => {
-    setPhoneNumber(e.target.value);
-  };
-
-  const sendOtpHandler = async (e) => {
-    e.preventDefault();
-    setStep(2);
-  };
-
-  const checkOtpHandler = async (e) => {
-    e.preventDefault();
-    setStep(3);
-  };
 
   const onBack = () => setStep((s) => s - 1);
 
@@ -38,17 +21,8 @@ const useOtpForm = () => {
   }, [time]);
 
   return {
-    phoneNumber,
-    setPhoneNumber,
-    phoneNumberHandler,
-    step,
-    setStep,
-    otp,
-    setOtp,
     time,
     setTime,
-    sendOtpHandler,
-    checkOtpHandler,
     onBack,
     onResendOtp,
   };

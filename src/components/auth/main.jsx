@@ -2,41 +2,24 @@ import SendOTPForm from "./otpForm/SendOTPForm";
 import CheckOTPForm from "./otpForm/CheckOTPForm";
 import useOtpForm from "../../hooks/useOtpForm";
 import UploadImageForm from "./uploadImageForm/UploadImageForm";
+import { useState } from "react";
 
 const AuthPage = () => {
-  const {
-    phoneNumber,
-    phoneNumberHandler,
-    step,
-    otp,
-    setOtp,
-    time,
-    sendOtpHandler,
-    checkOtpHandler,
-    onBack,
-    onResendOtp,
-  } = useOtpForm();
+  const [step, setStep] = useState(1);
+
+  const { time, onBack, onResendOtp } = useOtpForm(setStep);
 
   const renderSteps = () => {
     switch (step) {
       case 1:
-        return (
-          <SendOTPForm
-            phoneNumber={phoneNumber}
-            onChange={phoneNumberHandler}
-            onSubmit={sendOtpHandler}
-          />
-        );
+        return <SendOTPForm setStep={setStep} />;
       case 2:
         return (
           <CheckOTPForm
             onBack={onBack}
-            otp={otp}
-            setOtp={setOtp}
-            onSubmit={checkOtpHandler}
+            setStep={setStep}
             time={time}
             onResendOtp={onResendOtp}
-            phoneNumber={phoneNumber}
           />
         );
       case 3:
