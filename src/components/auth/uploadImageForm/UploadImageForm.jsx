@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { CameraPreview } from "./CameraPreview";
 
-const UploadImageForm = () => {
+const UploadImageForm = ({confirmCameraHandler}) => {
   const [openCamera, setOpenCamera] = useState(false);
   const [openFile, setOpenFile] = useState(false);
   const [storeData, setStoreData] = useState(null);
@@ -126,7 +126,7 @@ const UploadImageForm = () => {
 
       <div className="flex justify-center mb-4 ">
         <button
-          className={`bg-yellow-400 text-gray-900 p-3 font-bold text-lg hover:bg-yellow-500 flex items-center justify-center space-x-2 rounded-md transition duration-300 ${
+          className={`bg-main-1 text-gray-900 p-3 font-bold text-lg hover:bg-yellow-500 flex items-center justify-center space-x-2 rounded-md transition duration-300 ${
             isUploading ? "cursor-not-allowed opacity-50" : ""
           }`}
           onClick={() => document.getElementById("file-input").click()}
@@ -143,7 +143,7 @@ const UploadImageForm = () => {
         />
         <button
           onClick={handleOpenCamera}
-          className={`transition-all duration-500 p-3 text-yellow-400 font-semibold bg-gray-900 rounded-l-full text-lg hover:bg-gray-800 hover:text-yellow-400 ${
+          className={`transition-all duration-500 p-3 text-main-1 font-semibold bg-gray-900 rounded-l-full text-lg hover:bg-gray-800 hover:text-main-1 ${
             isUploading ? "cursor-not-allowed opacity-50" : ""
           }`}
           disabled={isUploading}
@@ -151,13 +151,14 @@ const UploadImageForm = () => {
           باز شدن دوربین
         </button>
       </div>
-      <div className="mt-8 flex justify-center">
-        <button
-          className="px-8 py-3 bg-yellow-400 text-gray-900 font-semibold text-lg rounded transition duration-500 hover:bg-gray-800 hover:text-yellow-400"
-        >
-          ادامه
-        </button>
-      </div>
+
+      <button
+          onClick={confirmCameraHandler}
+            className="w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105"
+          >
+            تایید
+          </button>
+
       <canvas
         ref={canvasRef}
         className="hidden"

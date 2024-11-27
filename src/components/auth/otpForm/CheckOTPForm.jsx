@@ -1,22 +1,33 @@
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import { useAuth, useAuthActions } from "../../../context/AuthReducer";
-import usePinInput from "../../../hooks/usePinInput";
+import usePinInput from "./usePinInput";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../common/Loading";
 
 function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
   const { phone_number, loading } = useAuth();
+  const navigate = useNavigate();
+
   const { pin, getInputProps } = usePinInput(length);
   const dispatch = useAuthActions();
-
   const checkOtpHandler = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: "OTP_POST",
-      payload: { phone_number: phone_number, otp: pin },
-    });
-    setStep(3);
+    if (phone_number) {
+      dispatch({
+        type: "OTP_POST",
+        payload: { phoneNumber: phone_number, otp: pin },
+      });
+    }
+
+    setTimeout(() => {
+      if (!loading) {
+        setStep(3);
+        navigate(`/signIn/step3`);
+        localStorage.setItem("authStep", "3");
+      }
+    }, 3000);
   };
-  console.log("pin", pin);
 
   return (
     <div className="w-full max-w-md mx-auto p-4 sm:p-6 text-left">
@@ -58,7 +69,7 @@ function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
             type="submit"
             className="w-full sm:w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105 pt-1"
           >
-            تایید
+            {loading ? <Loading /> : " تایید"}
           </button>
         </div>
       </form>

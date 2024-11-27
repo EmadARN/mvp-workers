@@ -46,11 +46,6 @@ const asyncActionHandlers = {
           `${baseURL}/Auth/signup/phone_number=${action.payload}/`
         );
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || "خطایی رخ داده است");
-        }
-
         const data = await response.json();
         toast.success("شماره همراه با موفقیت ثبت شد");
         dispatch({ type: "USER_GET_SUCCESS", payload: action.payload });
@@ -75,20 +70,15 @@ const asyncActionHandlers = {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              phone_number: action.phone_number,
-              code: action.otp,
+              phone_number: action.payload.phoneNumber,
+              code: action.payload.otp,
             }),
           }
         );
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || "خطایی رخ داده است");
-        }
-
         const data = await response.json();
         toast.success("کد تایید با موفقیت ثبت شد");
-        dispatch({ type: "USER_GET_SUCCESS", payload: data });
+        dispatch({ type: "USER_GET_SUCCESS" });
         console.log(data);
       } catch (error) {
         console.log(error);
