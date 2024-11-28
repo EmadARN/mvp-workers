@@ -5,7 +5,7 @@ import CheckOTPForm from "./otpForm/CheckOTPForm";
 import UploadImageForm from "./uploadImageForm/UploadImageForm";
 import RegisterMain from "./registerForm/RegisterMain";
 import SignUpFinalPage from "./submitInformation/SignUpFinalPage";
-import { useAuth } from "../../context/AuthReducer";
+import { useAuth, useAuthActions } from "../../context/AuthReducer";
 import useOtpForm from "./otpForm/useOtpForm";
 
 const AuthPage = () => {
@@ -16,6 +16,7 @@ const AuthPage = () => {
   const savedStep = localStorage.getItem("authStep");
   const initialStep = savedStep ? parseInt(savedStep) : 1;
   const [currentStep, setCurrentStep] = useState(initialStep); // تنظیم مرحله جاری
+  const dispatch = useAuthActions();
 
   //hook
   const {
@@ -28,12 +29,7 @@ const AuthPage = () => {
   } = useOtpForm(setCurrentStep, navigate);
   const { loading } = useAuth();
 
-  const confirmCameraHandler = async (e) => {
-    e.preventDefault();
-    setCurrentStep(5);
-    localStorage.setItem("authStep", "5"); // ذخیره مرحله در localStorage
-    navigate(`/signIn/step5`);
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,7 +93,7 @@ const AuthPage = () => {
       case 3:
         return <RegisterMain handleSubmit={handleSubmit} />;
       case 4:
-        return <UploadImageForm confirmCameraHandler={confirmCameraHandler} />;
+        return <UploadImageForm setCurrentStep={setCurrentStep} />;
       case 5:
         return <SignUpFinalPage />;
       default:

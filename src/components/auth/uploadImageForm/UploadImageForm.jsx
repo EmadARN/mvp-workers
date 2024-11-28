@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { CameraPreview } from "./CameraPreview";
+import { useAuth, useAuthActions } from "../../../context/AuthReducer";
+import { useNavigate } from "react-router-dom";
 
-const UploadImageForm = ({confirmCameraHandler}) => {
+const UploadImageForm = ({ setCurrentStep }) => {
   const [openCamera, setOpenCamera] = useState(false);
   const [openFile, setOpenFile] = useState(false);
   const [storeData, setStoreData] = useState(null);
   const [cameraStream, setCameraStream] = useState(null);
   const [photoCaptured, setPhotoCaptured] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-
+  const dispatch = useAuthActions();
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const navigate = useNavigate();
+  const { phone_number } = useAuth();
 
   const handleOpenCamera = async () => {
     try {
@@ -47,20 +51,30 @@ const UploadImageForm = ({confirmCameraHandler}) => {
       context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
 
       const imageData = canvas.toDataURL("image/png");
-      setStoreData(imageData);
+      console.log("Captured image data:", imageData); // بررسی مقدار
+      setStoreData(imageData); // مقداردهی `storeData`
       setPhotoCaptured(true);
     }
   };
 
   const handleSavePhoto = () => {
     alert("عکس ذخیره شد!");
+    if (cameraStream) {
+      const tracks = cameraStream.getTracks();
+      tracks.forEach((track) => track.stop());
+    }
+    setOpenCamera(false);
+    setCameraStream(null);
+    setPhotoCaptured(false);
+    setIsUploading(false);
   };
 
   const uploadImage = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
-      setStoreData(imageUrl);
+      console.log("Uploaded image URL:", imageUrl); // بررسی مقدار
+      setStoreData(imageUrl); // مقداردهی `storeData`
       setOpenFile(true);
       setPhotoCaptured(true);
       setOpenCamera(false);
@@ -80,6 +94,22 @@ const UploadImageForm = ({confirmCameraHandler}) => {
       videoRef.current.play();
     }
   }, [openCamera, cameraStream, photoCaptured]);
+
+  const confirmCameraHandler = async (e) => {
+    e.preventDefault();
+    console.log("storeData:", storeData); // بررسی مقدار
+    if (!storeData) {
+      alert("هیچ عکسی بارگذاری نشده است!");
+      return;
+    }
+    dispatch({
+      type: "IMG_POST",
+      payload: { storeData: storeData, phone_number: phone_number },
+    });
+    setCurrentStep(5);
+    localStorage.setItem("authStep", "5"); // ذخیره مرحله در localStorage
+    navigate(`/signIn/step5`);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center w-full">
@@ -126,13 +156,13 @@ const UploadImageForm = ({confirmCameraHandler}) => {
 
       <div className="flex justify-center mb-4 ">
         <button
-          className={`bg-main-1 text-gray-900 p-3 font-bold text-lg hover:bg-yellow-500 flex items-center justify-center space-x-2 rounded-md transition duration-300 ${
+          className={`bg-main-1 text-gray-900 p-3 font-bold text-lg hover:bg-yellow-500 flex items-center justify-center space-x-6 transition duration-300 gap-x-2${
             isUploading ? "cursor-not-allowed opacity-50" : ""
           }`}
           onClick={() => document.getElementById("file-input").click()}
           disabled={isUploading}
         >
-          <IoCloudUploadOutline className="text-gray-900" />
+          <IoCloudUploadOutline className="text-gray-900 " />
           <span>بارگذاری عکس</span>
         </button>
         <input
@@ -153,11 +183,11 @@ const UploadImageForm = ({confirmCameraHandler}) => {
       </div>
 
       <button
-          onClick={confirmCameraHandler}
-            className="w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105"
-          >
-            تایید
-          </button>
+        onClick={confirmCameraHandler}
+        className="w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105"
+      >
+        تایید
+      </button>
 
       <canvas
         ref={canvasRef}

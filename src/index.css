@@ -9,9 +9,6 @@
     --color-primary-300: 183, 197, 255;
     --color-secondary-900: 42, 45, 83;
   }
-}
-
-@layer base {
   @font-face {
     font-family: "vazir-Regular";
     font-style: normal;
@@ -49,6 +46,19 @@ body {
   min-height: 100vh;
   user-select: none;
   background-color: rgb(254, 255, 247);
+}
+/* ScrollBar */
+*::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--navyBlue-app-rgb));
+  outline: 2px solid rgb(var(--yellow-app-rgb));
 }
 
 /* BtnAnimation */
@@ -98,8 +108,8 @@ body {
   }
   100% {
     transform: scaleX(100%);
-    background-color: #030f27;
-    color: #fdbe33;
+    background-color: rgb(var(--navyBlue-app-rgb));
+    color: rgb(var(--yellow-app-rgb));
   }
 }
 
@@ -109,9 +119,9 @@ body {
   font-weight: bold;
   font-size: 20px;
   font-family: "Lalezar", sans-serif;
-  color: #030f27;
-  background-color: #fdbe33;
-  border: 2px solid #fdbe33;
+  color: rgb(var(--navyBlue-app-rgb));
+  background-color: rgb(var(--yellow-app-rgb));
+  border: 2px solid rgb(var(--yellow-app-rgb));
   border-radius: 2px;
   transition: all 0.5s ease-in-out;
   animation: span1 3s ease-in-out infinite alternate;
@@ -119,22 +129,10 @@ body {
 
 .home-button:hover {
   background-color: transparent;
-  color: #fdbe33;
+  color: rgb(var(--yellow-app-rgb));
 }
 
-*::-webkit-scrollbar {
-  width: 0.7em;
-}
-
-*::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #030f27;
-  outline: 2px solid #fdbe33;
-}
-
+/*Loading */
 @keyframes bounceMove {
   0% {
     transform: translateY(0);

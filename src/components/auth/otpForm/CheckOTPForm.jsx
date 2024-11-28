@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../../../common/Loading";
 
 function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
-  const { phone_number, loading } = useAuth();
+  const { phone_number } = useAuth();
   const navigate = useNavigate();
 
   const { pin, getInputProps } = usePinInput(length);
@@ -21,11 +21,9 @@ function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
     }
 
     setTimeout(() => {
-      if (!loading) {
-        setStep(3);
-        navigate(`/signIn/step3`);
-        localStorage.setItem("authStep", "3");
-      }
+      setStep(3);
+      navigate(`/signIn/step3`);
+      localStorage.setItem("authStep", "3");
     }, 3000);
   };
 
@@ -69,7 +67,7 @@ function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
             type="submit"
             className="w-full sm:w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105 pt-1"
           >
-            {loading ? <Loading /> : " تایید"}
+            تایید
           </button>
         </div>
       </form>

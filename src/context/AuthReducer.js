@@ -87,6 +87,36 @@ const asyncActionHandlers = {
         dispatch({ type: "USER_GET_REJECT", error: errorMessage });
       }
     },
+  IMG_POST:
+    ({ dispatch }) =>
+    async (action) => {
+      dispatch({ type: "USER_GET_PENDING" });
+      try {
+        const formData = new FormData();
+        formData.append("image", action.payload.formData);
+
+        const response = await fetch(
+          `${baseURL}/AddUserInf/upload/image/camera/`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${action.payload.phoneNumber}`,
+            },
+            body: formData,
+          }
+        );
+
+        const data = await response.json();
+        toast.success("عکس با موفقیت ثبت شد");
+        dispatch({ type: "USER_GET_SUCCESS" });
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+        const errorMessage = error.message || "خطایی رخ داده است";
+        toast.error(errorMessage);
+        dispatch({ type: "USER_GET_REJECT", error: errorMessage });
+      }
+    },
 };
 
 export const AuthReducer = ({ children }) => {

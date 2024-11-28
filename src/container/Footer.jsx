@@ -2,7 +2,7 @@ import { FaAngleRight } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div  className="mt-7">
+    <div className="mt-7">
       <footer className="w-full bg-[#030F27]">
         <div className="flex flex-wrap justify-evenly border-b-3 border-white pb-8 pt-8 sm:pr-0">
           {/* <!-- Useful Pages --> */}

@@ -30,7 +30,7 @@ const BackToUp = () => {
       }`}
     >
       <button
-        className="bg-main-1 text-main-2 flex items-center justify-center font-bold hover:bg-main-2 hover:shadow-lg hover:text-main-1 hover:transform hover:-translate-y-1 active:transform active:translate-y-0.5 active:shadow-md p-3 rounded-sm border border-main-2"
+        className="bg-main-1 text-main-2 flex items-center justify-center font-bold hover:bg-main-2 hover:shadow-lg hover:text-main-1 hover:transform hover:-translate-y-1 active:transform active:translate-y-0.5 active:shadow-md p-3 rounded-[3px] border border-main-2 transition-all"
         onClick={() => backToUp()}
       >
         <IoMdArrowUp />
