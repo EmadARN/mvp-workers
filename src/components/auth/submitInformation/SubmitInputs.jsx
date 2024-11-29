@@ -14,9 +14,9 @@ const SubmitInputs = () => {
   return (
     <div className="flex flex-col items-center w-full justify-center px-4 sm:px-0">
       {/* Profile Image */}
-      <div className="flex justify-center mb-5 p-2 rounded-full border border-4 border-main-2">
+      <div className="flex justify-center mb-5 p-2 rounded-sm border border-1 border-main-1">
         <img
-          className="p-2 border-2 border-main-1 rounded-full"
+          className="p-2 border-2 border-main-1 rounded-sm"
           src={user.profile_image}
           alt="Profile"
           height="270"
