@@ -9,16 +9,16 @@ const routes = [
   { path: "/about", element: <AboutUs /> },
 
   {
-    path: "/signIn",
-    element: <SignIn />,
-  },
-  {
     path: "/servicesPage",
     element: <ServicesUs />,
   },
   {
     path: "/allWorker",
     element: <AllWorkerPage />,
+  },
+  {
+    path: "/signIn/*",
+    element: <SignIn />,
   },
 ];
 export default routes;

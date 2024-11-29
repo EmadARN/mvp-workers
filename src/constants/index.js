@@ -1,3 +1,6 @@
+import { FaHome } from "react-icons/fa";
+import { LuShieldAlert } from "react-icons/lu";
+import { MdOutlineMiscellaneousServices } from "react-icons/md";
 
 //navBar
 export const pages = [
@@ -31,33 +34,52 @@ export const carouselData = [
 //register form data
 export const fields = [
   {
-    id: 'first_name',
-    label: 'نام:',
-    type: 'text',
-    placeholder: 'نام خود را وارد کنید...',
+    id: "first_name",
+    label: "نام:",
+    type: "text",
+    placeholder: "نام خود را وارد کنید...",
   },
   {
-    id: 'last_name',
-    label: 'نام خانوادگی:',
-    type: 'text',
-    placeholder: 'نام و نام خانوادگی خود را وارد کنید...',
+    id: "last_name",
+    label: "نام خانوادگی:",
+    type: "text",
+    placeholder: "نام و نام خانوادگی خود را وارد کنید...",
   },
   {
-    id: 'work_experience',
-    label: 'سابقه کار:',
-    type: 'text',
-    placeholder: 'سابقه کاری خود را وارد کنید...',
+    id: "work_experience",
+    label: "سابقه کار:",
+    type: "text",
+    placeholder: "سابقه کاری خود را وارد کنید...",
   },
   {
-    id: 'city',
-    label: 'شهر:',
-    type: 'select',
-    options: ['زنجان'], // به راحتی می‌توانید شهرها را اضافه کنید
+    id: "city",
+    label: "شهر:",
+    type: "select",
+    options: ["زنجان"], // به راحتی می‌توانید شهرها را اضافه کنید
   },
   {
-    id: 'job',
-    label: 'شغل:',
-    type: 'select',
-    options: ['خدمات منزل', 'خدمات ساختمانی'], // لیست شغل‌ها
+    id: "job",
+    label: "شغل:",
+    type: "select",
+    options: ["خدمات منزل", "خدمات ساختمانی"], // لیست شغل‌ها
+  },
+];
+
+//RightBar
+export const navLinks = [
+  {
+    to: "/",
+    icon: <FaHome />,
+    label: "خانه",
+  },
+  {
+    to: "/About",
+    icon: <LuShieldAlert />,
+    label: "درباره ما",
+  },
+  {
+    to: "/ServicesPage",
+    icon: <MdOutlineMiscellaneousServices />,
+    label: "سرویس ها",
   },
 ];

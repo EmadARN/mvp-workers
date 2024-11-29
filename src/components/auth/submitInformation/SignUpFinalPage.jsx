@@ -1,7 +1,5 @@
-
 import { useNavigate } from "react-router-dom";
 import SubmitInputs from "./SubmitInputs";
-
 
 const SignUpFinalPage = () => {
   const navigate = useNavigate();
@@ -14,9 +12,10 @@ const SignUpFinalPage = () => {
   return (
     <div className="mt-8 w-[100%]">
       <div className="container mx-auto text-center  w-full mb-5">
-        <SubmitInputs/>
+        <SubmitInputs />
         <p className="text-gray-600 text-lg font-bold mb-4">
-          برای ثبت نهایی مشخصات خود را بررسی کرده و سپس بر روی دکمه ثبت اطلاعات حساب کلیک نمایید.
+          برای ثبت نهایی مشخصات خود را بررسی کرده و سپس بر روی دکمه ثبت اطلاعات
+          حساب کلیک نمایید.
         </p>
       </div>
       <div className="flex justify-center mb-8 ">
@@ -34,7 +33,6 @@ const SignUpFinalPage = () => {
           ثبت اطلاعات حساب
         </button>
       </div>
-      
     </div>
   );
 };

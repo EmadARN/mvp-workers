@@ -9,16 +9,16 @@ const usePinInput = (length = 6) => {
     updatedPin[index] = value.slice(-1); // فقط آخرین کاراکتر را ذخیره می‌کنیم
     setPin(updatedPin);
 
-    // فوکوس خودکار به خانه قبلی (از راست به چپ)
-    if (value && index > 0) {
-      inputRefs.current[index - 1].focus();
+    // فوکوس خودکار به خانه بعدی (از چپ به راست)
+    if (value && index < length - 1) {
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
   const handleKeyDown = (e, index) => {
-    // کلید Backspace و فوکوس به خانه بعدی
-    if (e.key === "Backspace" && !pin[index] && index < length - 1) {
-      inputRefs.current[index + 1].focus();
+    // کلید Backspace و فوکوس به خانه قبلی
+    if (e.key === "Backspace" && !pin[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
     }
   };
 
@@ -32,6 +32,7 @@ const usePinInput = (length = 6) => {
 
   return {
     pin: pin.join(""), // مقدار کامل پین
+    setPin,
     getInputProps, // پراپ‌های ورودی
     inputRefs, // ریفرنس‌ها (در صورت نیاز به اعمال تغییرات)
   };
