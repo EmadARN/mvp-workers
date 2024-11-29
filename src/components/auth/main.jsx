@@ -3,6 +3,8 @@ import CheckOTPForm from "./otpForm/CheckOTPForm";
 import useOtpForm from "../../hooks/useOtpForm";
 import UploadImageForm from "./uploadImageForm/UploadImageForm";
 import { useState } from "react";
+import RegisterMain from "./registerForm/RegisterMain";
+import SignUpFinalPage from "./submitInformation/SubmitInfo";
 
 const AuthPage = () => {
   const [step, setStep] = useState(1);
@@ -51,7 +53,7 @@ const AuthPage = () => {
         return <UploadImageForm confirmCameraHandler={confirmCameraHandler} />;
 
       case 5:
-        return <SignUpFinalPage />;
+        return <SignUpFinalPage/>;
       default:
         return null;
     }
