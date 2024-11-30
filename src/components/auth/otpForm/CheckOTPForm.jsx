@@ -3,7 +3,7 @@ import { CiEdit } from "react-icons/ci";
 import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 import usePinInput from "./usePinInput";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../../common/Loading";
+
 
 function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
   const { phone_number } = useAuth();

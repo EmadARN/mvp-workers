@@ -7,18 +7,18 @@ import RegisterMain from "./registerForm/RegisterMain";
 import SignUpFinalPage from "./submitInformation/SignUpFinalPage";
 import { useAuth, useAuthActions } from "../../context/AuthReducer";
 import useOtpForm from "./otpForm/useOtpForm";
+import { useCookie } from "../../hooks/useCookies";
 
 const AuthPage = () => {
   const { step } = useParams(); // دریافت شماره مرحله از URL
   const navigate = useNavigate();
+  const [cookieValue, setBrowserCookie] = useCookie("auth-token");
 
   // دریافت یا تنظیم مرحله از localStorage
   const savedStep = localStorage.getItem("authStep");
   const initialStep = savedStep ? parseInt(savedStep) : 1;
   const [currentStep, setCurrentStep] = useState(initialStep); // تنظیم مرحله جاری
   const dispatch = useAuthActions();
-
-  
 
   // هوک
   const {
@@ -29,19 +29,22 @@ const AuthPage = () => {
     sendOtpHandler,
     phoneNumber,
   } = useOtpForm(setCurrentStep, navigate);
-  const { loading } = useAuth();
+  const { loading, token } = useAuth();
 
-  const handleSubmit = (e,formData) => {
-    e.preventDefault(); 
-    
-    
+  useEffect(() => {
+    if (token) setBrowserCookie(token, "auth-token");
+  }, [token]);
+
+  const handleSubmit = (e, formData) => {
+    e.preventDefault();
+
     dispatch({
-      type:"FORM_POST",
-      payload:{formData}
-    })
-     setCurrentStep(4);
-     localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
-     navigate(`/signIn/step4`);
+      type: "FORM_POST",
+      payload: { formData ,cookieValue},
+    });
+    setCurrentStep(4);
+    localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
+    navigate(`/signIn/step4`);
   };
 
   // استفاده از useEffect برای همگام‌سازی localStorage و currentStep
@@ -91,12 +94,12 @@ const AuthPage = () => {
           <CheckOTPForm
             onBack={onBack}
             setStep={setCurrentStep}
-          //time={time}
+            //time={time}
             onResendOtp={onResendOtp}
           />
         );
       case 3:
-        return <RegisterMain handleSubmit={handleSubmit} />;
+        return <RegisterMain  handleSubmit={handleSubmit} />;
       case 4:
         return <UploadImageForm setCurrentStep={setCurrentStep} />;
       case 5:
@@ -104,7 +107,7 @@ const AuthPage = () => {
       default:
         return null;
     }
-  }, [currentStep, phoneNumber,  loading, onBack, onResendOtp, handleSubmit]);
+  }, [currentStep, phoneNumber, loading, onBack, onResendOtp, handleSubmit]);
 
   return (
     <div className="flex justify-center">
