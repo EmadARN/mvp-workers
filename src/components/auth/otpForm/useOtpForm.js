@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 
 const RESEND_TIME = 90;
@@ -14,7 +14,7 @@ const useOtpForm = (setCurrentStep, navigate) => {
     setPhoneNumber(e.target.value);
   };
 
-  const sendOtpHandler = async (e) => {
+  const sendOtpHandler = useCallback(async (e) => {
     e.preventDefault();
     dispatch({
       type: "PHONENUMBER_GET",
@@ -28,26 +28,24 @@ const useOtpForm = (setCurrentStep, navigate) => {
         navigate(`/signIn/step2`);
       }
     }, 3000);
-  };
+  }, [phoneNumber, loading, navigate, dispatch]);
 
-  const onBack = () => setCurrentStep((s) => s - 1);
+  const onBack = useCallback(() => setCurrentStep((s) => s - 1), [setCurrentStep]);
 
-  const onResendOtp = () => {
+  const onResendOtp = useCallback(() => {
     setTime(RESEND_TIME);
-    // می‌توانید ارسال مجدد OTP را هم اضافه کنید
-  };
+    // ارسال مجدد OTP را اینجا اضافه کنید
+  }, []);
 
   useEffect(() => {
-    const timer =
-      time > 0 && setInterval(() => setTime((time) => time - 1), 1000);
-    return () => {
-      if (timer) clearInterval(timer);
-    };
+    if (time > 0) {
+      const timer = setInterval(() => setTime((prevTime) => prevTime - 1), 1000);
+      return () => clearInterval(timer); // پاک کردن تایمر در صورت تغییر time یا unmount
+    }
   }, [time]);
 
   return {
     time,
-    setTime,
     onBack,
     onResendOtp,
     phoneNumberHandler,
