@@ -57,7 +57,7 @@ const asyncActionHandlers = {
         dispatch({ type: "USER_GET_REJECT", error: errorMessage });
       }
     },
-  OTP_POST:
+    OTP_POST:
     ({ dispatch }) =>
     async (action) => {
       dispatch({ type: "USER_GET_PENDING" });
@@ -75,8 +75,11 @@ const asyncActionHandlers = {
             }),
           }
         );
-
+  
         const data = await response.json();
+  
+       
+  
         toast.success("کد تایید با موفقیت ثبت شد");
         dispatch({ type: "USER_GET_SUCCESS" });
         console.log(data);
@@ -87,6 +90,7 @@ const asyncActionHandlers = {
         dispatch({ type: "USER_GET_REJECT", error: errorMessage });
       }
     },
+  
   IMG_POST:
     ({ dispatch }) =>
     async (action) => {
@@ -117,6 +121,42 @@ const asyncActionHandlers = {
         dispatch({ type: "USER_GET_REJECT", error: errorMessage });
       }
     },
+    FORM_POST:
+    ({dispatch})=>async (action) =>{
+    
+      
+      dispatch({ type: "USER_GET_PENDING" });
+      try{
+        const response = await fetch(
+          `${baseURL}/AddUserInf/send/first_level/inf/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              first_name: action.payload.formData.first_name,
+              last_name: action.payload.formData.last_name,
+              work_experience:action.payload.formData.work_experience ,
+              city: action.payload.formData.city,
+              job: action.payload.formData.job
+            }),
+          }
+        );
+
+        const data = await response.json();
+        toast.success("اطلاعات با موفقیت ثبت شد");
+        dispatch({ type: "USER_GET_SUCCESS" });
+        console.log('form success',data);
+      }
+      catch(error){
+        console.log('form error',error);
+        const errorMessage = error.message || "خطایی رخ داده است";
+        toast.error(errorMessage);
+        dispatch({ type: "USER_GET_REJECT", error: errorMessage });
+        
+      }
+    }
 };
 
 export const AuthReducer = ({ children }) => {
