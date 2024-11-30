@@ -10,25 +10,76 @@ const initialState = {
   phone_number: "",
   loading: false,
   error: null,
+  token: "",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "USER_GET_PENDING":
+    case "PHONENUMBER_GET_PENDING":
       return { ...state, phone_number: "", error: null, loading: true };
-    case "USER_GET_SUCCESS":
+    case "PHONENUMBER_GET_SUCCESS":
       return {
         ...state,
         phone_number: action.payload,
         error: null,
         loading: false,
       };
-    case "USER_GET_REJECT":
+    case "PHONENUMBER_GET_REJECT":
       return {
         ...state,
         error: action.error,
         loading: false,
         phone_number: "",
+      };
+
+    case "OTP-POST_PENDING":
+      return { ...state, token: "", error: null, loading: true };
+    case "OTP_POST_SUCCESS":
+      return {
+        ...state,
+        token: action.payload,
+        error: null,
+        loading: false,
+      };
+    case "OTP_POST_REJECT":
+      return {
+        ...state,
+        error: action.error,
+        loading: false,
+
+        token: "",
+      };
+
+    case "IMG-POST_PENDING":
+      return { ...state, token: "", error: null, loading: true };
+    case "IMG_POST_SUCCESS":
+      return {
+        ...state,
+
+        error: null,
+        loading: false,
+      };
+    case "IMG_POST_REJECT":
+      return {
+        ...state,
+        error: action.error,
+        loading: false,
+      };
+
+    case "FORM_POST_PENDING":
+      return { ...state, token: "", error: null, loading: true };
+    case "FORM_POST_SUCCESS":
+      return {
+        ...state,
+
+        error: null,
+        loading: false,
+      };
+    case "FORM_POST_REJECT":
+      return {
+        ...state,
+        error: action.error,
+        loading: false,
       };
 
     default:
@@ -40,7 +91,7 @@ const asyncActionHandlers = {
   PHONENUMBER_GET:
     ({ dispatch }) =>
     async (action) => {
-      dispatch({ type: "USER_GET_PENDING" });
+      dispatch({ type: "PHONENUMBER_GET_PENDING" });
       try {
         const response = await fetch(
           `${baseURL}/Auth/signup/phone_number=${action.payload}/`
@@ -48,19 +99,19 @@ const asyncActionHandlers = {
 
         const data = await response.json();
         toast.success("شماره همراه با موفقیت ثبت شد");
-        dispatch({ type: "USER_GET_SUCCESS", payload: action.payload });
+        dispatch({ type: "PHONENUMBER_GET_SUCCESS", payload: action.payload });
         console.log(data);
       } catch (error) {
         console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
-        dispatch({ type: "USER_GET_REJECT", error: errorMessage });
+        dispatch({ type: "PHONENUMBER_GET_REJECT", error: errorMessage });
       }
     },
-    OTP_POST:
+  OTP_POST:
     ({ dispatch }) =>
     async (action) => {
-      dispatch({ type: "USER_GET_PENDING" });
+      dispatch({ type: "OTP_POST_PENDING" });
       try {
         const response = await fetch(
           `${baseURL}/Auth/validate/signup/phone_number/`,
@@ -75,26 +126,27 @@ const asyncActionHandlers = {
             }),
           }
         );
-  
+
         const data = await response.json();
-  
-       
-  
+        if (data.token) {
+          dispatch({ type: "OTP_POST_SUCCESS", payload: data.token });
+        }
+
         toast.success("کد تایید با موفقیت ثبت شد");
-        dispatch({ type: "USER_GET_SUCCESS" });
+
         console.log(data);
       } catch (error) {
         console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
-        dispatch({ type: "USER_GET_REJECT", error: errorMessage });
+        dispatch({ type: "OTP_POST_REJECT", error: errorMessage });
       }
     },
-  
+
   IMG_POST:
     ({ dispatch }) =>
     async (action) => {
-      dispatch({ type: "USER_GET_PENDING" });
+      dispatch({ type: "IMG_POST_PENDING" });
       try {
         const formData = new FormData();
         formData.append("image", action.payload.formData);
@@ -112,51 +164,49 @@ const asyncActionHandlers = {
 
         const data = await response.json();
         toast.success("عکس با موفقیت ثبت شد");
-        dispatch({ type: "USER_GET_SUCCESS" });
+        dispatch({ type: "IMG_POST_SUCCESS" });
         console.log(data);
       } catch (error) {
         console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
-        dispatch({ type: "USER_GET_REJECT", error: errorMessage });
+        dispatch({ type: "IMG_POST_REJECT", error: errorMessage });
       }
     },
-    FORM_POST:
-    ({dispatch})=>async (action) =>{
-    
-      
-      dispatch({ type: "USER_GET_PENDING" });
-      try{
+  FORM_POST:
+    ({ dispatch }) =>
+    async (action) => {
+      dispatch({ type: "FORM_POST_PENDING" });
+      try {
         const response = await fetch(
           `${baseURL}/AddUserInf/send/first_level/inf/`,
           {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+              Authorization: `Bearer ${action.payload.cookieValue}`, // اصلاح Bearer
+              "Content-Type": "application/json", // اضافه کردن هدر Content-Type
             },
             body: JSON.stringify({
               first_name: action.payload.formData.first_name,
               last_name: action.payload.formData.last_name,
-              work_experience:action.payload.formData.work_experience ,
+              work_experience: action.payload.formData.work_experience,
               city: action.payload.formData.city,
-              job: action.payload.formData.job
+              job: action.payload.formData.job,
             }),
           }
         );
 
         const data = await response.json();
         toast.success("اطلاعات با موفقیت ثبت شد");
-        dispatch({ type: "USER_GET_SUCCESS" });
-        console.log('form success',data);
-      }
-      catch(error){
-        console.log('form error',error);
+        dispatch({ type: "FORM_POST_SUCSESS" });
+        console.log("form success", data);
+      } catch (error) {
+        console.log("form error", error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
-        dispatch({ type: "USER_GET_REJECT", error: errorMessage });
-        
+        dispatch({ type: "FORM_POST_REJECTED", error: errorMessage });
       }
-    }
+    },
 };
 
 export const AuthReducer = ({ children }) => {
