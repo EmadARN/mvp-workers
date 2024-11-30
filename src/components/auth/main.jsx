@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import SendOTPForm from "./otpForm/SendOTPForm";
 import CheckOTPForm from "./otpForm/CheckOTPForm";
@@ -18,9 +18,11 @@ const AuthPage = () => {
   const [currentStep, setCurrentStep] = useState(initialStep); // تنظیم مرحله جاری
   const dispatch = useAuthActions();
 
-  //hook
+  
+
+  // هوک
   const {
-    time,
+    //time,
     onBack,
     onResendOtp,
     phoneNumberHandler,
@@ -29,13 +31,17 @@ const AuthPage = () => {
   } = useOtpForm(setCurrentStep, navigate);
   const { loading } = useAuth();
 
-  
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setCurrentStep(4);
-    localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
-    navigate(`/signIn/step4`);
+  const handleSubmit = (e,formData) => {
+    e.preventDefault(); 
+    
+    
+    dispatch({
+      type:"FORM_POST",
+      payload:{formData}
+    })
+     setCurrentStep(4);
+     localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
+     navigate(`/signIn/step4`);
   };
 
   // استفاده از useEffect برای همگام‌سازی localStorage و currentStep
@@ -47,7 +53,7 @@ const AuthPage = () => {
         localStorage.setItem("authStep", newStep.toString()); // ذخیره مرحله جدید در localStorage
       }
     }
-  }, [step]); // وابسته به تغییرات step
+  }, [step, currentStep]);
 
   useEffect(() => {
     localStorage.setItem("authStep", currentStep.toString()); // ذخیره مرحله در localStorage هر بار که currentStep تغییر می‌کند
@@ -55,7 +61,6 @@ const AuthPage = () => {
 
   // برای مدیریت برگشت و کاهش مرحله
   useEffect(() => {
-    // بررسی زمان برگشت به مرحله قبلی
     const onPopState = (event) => {
       if (currentStep > 1) {
         setCurrentStep(currentStep - 1); // کاهش مرحله
@@ -64,13 +69,13 @@ const AuthPage = () => {
 
     window.addEventListener("popstate", onPopState);
 
-    // تمیزکاری: حذف eventListener بعد از تغییر
     return () => {
       window.removeEventListener("popstate", onPopState);
     };
   }, [currentStep]);
 
-  const renderSteps = () => {
+  // استفاده از useMemo برای جلوگیری از رندر اضافی
+  const renderSteps = useMemo(() => {
     switch (currentStep) {
       case 1:
         return (
@@ -86,7 +91,7 @@ const AuthPage = () => {
           <CheckOTPForm
             onBack={onBack}
             setStep={setCurrentStep}
-            time={time}
+          //time={time}
             onResendOtp={onResendOtp}
           />
         );
@@ -95,15 +100,15 @@ const AuthPage = () => {
       case 4:
         return <UploadImageForm setCurrentStep={setCurrentStep} />;
       case 5:
-        return <SignUpFinalPage/>;
+        return <SignUpFinalPage />;
       default:
         return null;
     }
-  };
+  }, [currentStep, phoneNumber,  loading, onBack, onResendOtp, handleSubmit]);
 
   return (
     <div className="flex justify-center">
-      <div className="w-full sm:max-w-sm">{renderSteps()}</div>
+      <div className="w-full sm:max-w-sm">{renderSteps}</div>
     </div>
   );
 };

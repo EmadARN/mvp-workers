@@ -7,7 +7,13 @@ const SendOTPForm = ({
   sendOtpHandler,
   loading,
 }) => {
+
+console.log('an');
+
+
+  
   return (
+  
     <div className="px-4 sm:px-6 md:px-8 lg:px-10">
       <form className="space-y-10" onSubmit={sendOtpHandler}>
         <TextField

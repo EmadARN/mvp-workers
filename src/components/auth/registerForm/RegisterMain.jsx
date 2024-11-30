@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fields } from '../../../constants';
 
 const RegisterMain = ({ handleSubmit }) => {
@@ -11,19 +11,23 @@ const RegisterMain = ({ handleSubmit }) => {
   });
 
 
+ 
+  
+  
+
+  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
 
   return (
     <div className="flex justify-center items-center mt-20">
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-center text-2xl text-main-1 font-bold mb-6">ساخت اکانت جدید</h2>
 
-        {/* فرم */}
-        <form onSubmit={handleSubmit}>
+        <form >
           {fields.map((field) => (
             <div className="mb-4" key={field.id}>
               <label htmlFor={field.id} className="block text-sm font-medium text-gray-700">
@@ -57,9 +61,8 @@ const RegisterMain = ({ handleSubmit }) => {
             </div>
           ))}
 
-          {/* دکمه ثبت */}
           <button
-            type="submit"
+            onClick={(e)=>handleSubmit(e,formData)}
             className="w-full bg-main-1 text-white py-2 rounded-md hover:bg-[#030F27] transition-all duration-300"
           >
             ساخت اکانت
