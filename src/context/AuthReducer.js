@@ -11,6 +11,7 @@ const initialState = {
   loading: false,
   error: null,
   token: "",
+  userInfo:[]
 };
 
 const reducer = (state, action) => {
@@ -78,6 +79,24 @@ const reducer = (state, action) => {
     case "FORM_POST_REJECT":
       return {
         ...state,
+        error: action.error,
+        loading: false,
+      };
+
+    case "FORM_GET_PENDING":
+      return { ...state, userInfo:null, error: null, loading: true };
+      case "FORM_GET_SUCCESS":
+        return {
+          ...state,
+          userInfo: action.payload,
+          error: null,
+          loading: false,
+        };
+      
+    case "FORM_GET_REJECT":
+      return {
+        ...state,
+        userInfo :null,
         error: action.error,
         loading: false,
       };
@@ -205,6 +224,33 @@ const asyncActionHandlers = {
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
         dispatch({ type: "FORM_POST_REJECTED", error: errorMessage });
+      }
+    },
+
+  FORM_GET:
+    ({ dispatch }) =>
+    async (action) => {
+      dispatch({ type: "FORM_GET_PENDING" });
+      try {
+        const response = await fetch(`${baseURL}/UserInf/account/inf/`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${action.payload.cookieValue}`, // اصلاح Bearer
+            "Content-Type": "application/json", // اضافه کردن هدر Content-Type
+          },
+        });
+
+        const data = await response.json();
+       
+
+        dispatch({ type: "FORM_GET_SUCCESS" ,payload:data.user_inf});
+        
+        console.log("form success", data);
+      } catch (error) {
+        console.log("form error", error);
+        const errorMessage = error.message || "خطایی رخ داده است";
+        toast.error(errorMessage);
+        dispatch({ type: "FORM_GET_REJECTED", error: errorMessage });
       }
     },
 };
