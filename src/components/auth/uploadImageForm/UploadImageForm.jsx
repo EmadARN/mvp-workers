@@ -8,7 +8,7 @@ const UploadImageForm = ({ setCurrentStep }) => {
   const [openCamera, setOpenCamera] = useState(false);
   const [openFile, setOpenFile] = useState(false);
   const [storeData, setStoreData] = useState(null);
-  const [cameraStream, setCameraStream] = useState(null);
+  const [cameraStream, setCameraStream] = useState(null);//baraye controle vaziate dorbin
   const [photoCaptured, setPhotoCaptured] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const dispatch = useAuthActions();
@@ -19,6 +19,7 @@ const UploadImageForm = ({ setCurrentStep }) => {
 
   const handleOpenCamera = async () => {
     try {
+      //code baraye dastersi be dorbine device
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       setCameraStream(stream);
       if (videoRef.current) videoRef.current.srcObject = stream;
