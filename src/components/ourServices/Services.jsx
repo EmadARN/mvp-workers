@@ -1,28 +1,9 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
- import builder from '../../assets/image/portfolio-5.jpg';
- import mechanic from '../../assets/image/officecleaning.jpg';
 import Title from "../../common/Tilte";
-
+import { buttons } from "../../constants";
 
 const OurService = () => {
-  const buttons = [
-    {
-      id: 1,
-      name: "خدمات  ساختمانی",
-      img: builder,
-      desc: "نیروی کارگر ساختمان",
-      to: "/allWorker",
-    },
-    {
-      id: 2,
-      name: "خدمات منزل",
-      img: mechanic,
-      desc: " خدمات منزل",
-      to: "/allWorker",
-    },
-  ];
-
   const navigate = useNavigate();
 
   return (
@@ -56,9 +37,7 @@ const OurService = () => {
 
               <div className="p-0 m-0">
                 <a href={item.to}>
-                  <button
-                    className="w-full bg-[#030f27] text-[#fdbe33] font-lalezar text-2xl py-2 px-4 hover:bg-[#fdbe33] hover:text-[#030f27] transition-all"
-                  >
+                  <button className="w-full bg-[#030f27] text-[#fdbe33] font-lalezar text-2xl py-2 px-4 hover:bg-[#fdbe33] hover:text-[#030f27] transition-all">
                     {item.name}
                   </button>
                 </a>

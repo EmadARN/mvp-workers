@@ -3,6 +3,7 @@ import { IoCloudUploadOutline } from "react-icons/io5";
 import { CameraPreview } from "./CameraPreview";
 import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 import { useNavigate } from "react-router-dom";
+import { useCookie } from "../../../hooks/useCookies";
 
 const UploadImageForm = ({ setCurrentStep }) => {
   const [openCamera, setOpenCamera] = useState(false);
@@ -11,11 +12,14 @@ const UploadImageForm = ({ setCurrentStep }) => {
   const [cameraStream, setCameraStream] = useState(null);//baraye controle vaziate dorbin
   const [photoCaptured, setPhotoCaptured] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [cookieValue, setBrowserCookie] = useCookie("auth-token");
+
+  const navigate = useNavigate();
   const dispatch = useAuthActions();
+  const { phone_number } = useAuth();
+
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const navigate = useNavigate();
-  const { phone_number } = useAuth();
 
   const handleOpenCamera = async () => {
     try {
@@ -58,18 +62,6 @@ const UploadImageForm = ({ setCurrentStep }) => {
     }
   };
 
-  const handleSavePhoto = () => {
-    alert("عکس ذخیره شد!");
-    if (cameraStream) {
-      const tracks = cameraStream.getTracks();
-      tracks.forEach((track) => track.stop());
-    }
-    setOpenCamera(false);
-    setCameraStream(null);
-    setPhotoCaptured(false);
-    setIsUploading(false);
-  };
-
   const uploadImage = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -80,6 +72,18 @@ const UploadImageForm = ({ setCurrentStep }) => {
       setPhotoCaptured(true);
       setOpenCamera(false);
     }
+  };
+
+  const handleSavePhoto = () => {
+    alert("عکس ذخیره شد!");
+    if (cameraStream) {
+      const tracks = cameraStream.getTracks();
+      tracks.forEach((track) => track.stop());
+    }
+    setOpenCamera(false);
+    setCameraStream(null);
+    setPhotoCaptured(false);
+    setIsUploading(false);
   };
 
   const handleDeletePhoto = () => {
@@ -105,7 +109,11 @@ const UploadImageForm = ({ setCurrentStep }) => {
     }
     dispatch({
       type: "IMG_POST",
-      payload: { storeData: storeData, phone_number: phone_number },
+      payload: {
+        storeData: storeData,
+        phone_number: phone_number,
+        token: cookieValue,
+      },
     });
     setCurrentStep(5);
     localStorage.setItem("authStep", "5"); // ذخیره مرحله در localStorage

@@ -175,7 +175,8 @@ const asyncActionHandlers = {
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${action.payload.phoneNumber}`,
+              Authorization: `Bearer ${action.payload.cookieValue}`,
+              "Content-Type": "application/json",
             },
             body: formData,
           }
