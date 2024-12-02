@@ -1,6 +1,8 @@
 import { FaHome } from "react-icons/fa";
 import { LuShieldAlert } from "react-icons/lu";
 import { MdOutlineMiscellaneousServices } from "react-icons/md";
+import builder from "../assets/image/portfolio-5.jpg";
+import mechanic from "../assets/image/officecleaning.jpg";
 
 //navBar
 export const pages = [
@@ -81,5 +83,23 @@ export const navLinks = [
     to: "/ServicesPage",
     icon: <MdOutlineMiscellaneousServices />,
     label: "سرویس ها",
+  },
+];
+
+//service
+export const buttons = [
+  {
+    id: 1,
+    name: "خدمات  ساختمانی",
+    img: builder,
+    desc: "نیروی کارگر ساختمان",
+    to: "/allWorker",
+  },
+  {
+    id: 2,
+    name: "خدمات منزل",
+    img: mechanic,
+    desc: " خدمات منزل",
+    to: "/allWorker",
   },
 ];
