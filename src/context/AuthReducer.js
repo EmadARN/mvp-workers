@@ -11,7 +11,7 @@ const initialState = {
   loading: false,
   error: null,
   token: "",
-  userInfo:[]
+  userInfo: [],
 };
 
 const reducer = (state, action) => {
@@ -51,16 +51,30 @@ const reducer = (state, action) => {
         token: "",
       };
 
-    case "IMG-POST_PENDING":
+    case "UPLOAD_IMG_POST_PENDING":
       return { ...state, token: "", error: null, loading: true };
-    case "IMG_POST_SUCCESS":
+    case "UPLOAD_IMG_POST_SUCCESS":
       return {
         ...state,
-
         error: null,
         loading: false,
       };
-    case "IMG_POST_REJECT":
+    case "UPLOAD_IMG_POST_REJECT":
+      return {
+        ...state,
+        error: action.error,
+        loading: false,
+      };
+
+    case "CAPTURE_IMG_POST_PENDING":
+      return { ...state, token: "", error: null, loading: true };
+    case "CAPTURE_IMG_POST_SUCCESS":
+      return {
+        ...state,
+        error: null,
+        loading: false,
+      };
+    case "CAPTURE_IMG_POST_REJECT":
       return {
         ...state,
         error: action.error,
@@ -84,19 +98,19 @@ const reducer = (state, action) => {
       };
 
     case "FORM_GET_PENDING":
-      return { ...state, userInfo:null, error: null, loading: true };
-      case "FORM_GET_SUCCESS":
-        return {
-          ...state,
-          userInfo: action.payload,
-          error: null,
-          loading: false,
-        };
-      
+      return { ...state, userInfo: null, error: null, loading: true };
+    case "FORM_GET_SUCCESS":
+      return {
+        ...state,
+        userInfo: action.payload,
+        error: null,
+        loading: false,
+      };
+
     case "FORM_GET_REJECT":
       return {
         ...state,
-        userInfo :null,
+        userInfo: null,
         error: action.error,
         loading: false,
       };
@@ -162,35 +176,53 @@ const asyncActionHandlers = {
       }
     },
 
-  IMG_POST:
+  UPLOAD_IMG_POST:
     ({ dispatch }) =>
     async (action) => {
-      dispatch({ type: "IMG_POST_PENDING" });
+      dispatch({ type: "UPLOAD_IMG_POST_PENDING" });
       try {
-        const formData = new FormData();
-        formData.append("image", action.payload.formData);
+        const response = await fetch(`${baseURL}/AddUserInf/upload/image/`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${action.payload.token}`,
+          },
+          body: action.payload.formData, // ارسال فرم‌داده
+        });
 
+        dispatch({ type: "UPLOAD_IMG_POST_SUCCESS" });
+        toast.success("تصویر با موفقیت آپلود شد!");
+        console.log(await response.json());
+      } catch (error) {
+        console.log(error);
+        const errorMessage = error.message || "خطایی رخ داده است";
+        toast.error(errorMessage);
+        dispatch({ type: "UPLOAD_IMG_POST_REJECT", error: errorMessage });
+      }
+    },
+  CAPTURE_IMG_POST:
+    ({ dispatch }) =>
+    async (action) => {
+      dispatch({ type: "CAPTURE_IMG_POST_PENDING" });
+      try {
         const response = await fetch(
           `${baseURL}/AddUserInf/upload/image/camera/`,
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${action.payload.cookieValue}`,
-              "Content-Type": "application/json",
+              Authorization: `Bearer ${action.payload.token}`,
             },
-            body: formData,
+            body: action.payload.formData, // ارسال فرم‌داده
           }
         );
 
-        const data = await response.json();
-        toast.success("عکس با موفقیت ثبت شد");
-        dispatch({ type: "IMG_POST_SUCCESS" });
-        console.log(data);
+        dispatch({ type: "CAPTURE_IMG_POST_SUCCESS" });
+        toast.success("تصویر با موفقیت گرفته شد!");
+        console.log(await response.json());
       } catch (error) {
         console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
-        dispatch({ type: "IMG_POST_REJECT", error: errorMessage });
+        dispatch({ type: "CAPTURE_IMG_POST_REJECT", error: errorMessage });
       }
     },
   FORM_POST:
@@ -242,10 +274,9 @@ const asyncActionHandlers = {
         });
 
         const data = await response.json();
-       
 
-        dispatch({ type: "FORM_GET_SUCCESS" ,payload:data.user_inf});
-        
+        dispatch({ type: "FORM_GET_SUCCESS", payload: data.user_inf });
+
         console.log("form success", data);
       } catch (error) {
         console.log("form error", error);

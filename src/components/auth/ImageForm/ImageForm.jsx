@@ -1,97 +1,45 @@
 import { useEffect, useRef, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import { CameraPreview } from "./CameraPreview";
-import { useAuth, useAuthActions } from "../../../context/AuthReducer";
+import { useAuthActions } from "../../../context/AuthReducer";
 import { useNavigate } from "react-router-dom";
 import { useCookie } from "../../../hooks/useCookies";
+import useUploadImageForm from "./useUploadImageForm";
+import useCaptureImage from "./useCaptureImage";
 
-const UploadImageForm = ({ setCurrentStep }) => {
+const ImageForm = ({ setCurrentStep }) => {
+  const [previewImage, setPreviewImage] = useState(null); // visiable upload img
+  const [storeData, setStoreData] = useState(null); //save img
+  const [cameraStream, setCameraStream] = useState(null); //for camera satus
   const [openCamera, setOpenCamera] = useState(false);
   const [openFile, setOpenFile] = useState(false);
-  const [storeData, setStoreData] = useState(null);
-  const [cameraStream, setCameraStream] = useState(null);//baraye controle vaziate dorbin
   const [photoCaptured, setPhotoCaptured] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const [cookieValue, setBrowserCookie] = useCookie("auth-token");
+  const [isDisable, setIsDisable] = useState(false);
 
+  const [cookieValue] = useCookie("auth-token");
   const navigate = useNavigate();
   const dispatch = useAuthActions();
-  const { phone_number } = useAuth();
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const handleOpenCamera = async () => {
-    try {
-      //code baraye dastersi be dorbine device
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      setCameraStream(stream);
-      if (videoRef.current) videoRef.current.srcObject = stream;
-      setOpenCamera(true);
-      setIsUploading(true);
-    } catch (error) {
-      console.error("Error accessing camera: ", error);
-      alert("خطایی در دسترسی به دوربین رخ داده است.");
-    }
-  };
-
-  const handleCloseCamera = () => {
-    if (cameraStream) {
-      const tracks = cameraStream.getTracks();
-      tracks.forEach((track) => track.stop());
-    }
-    setOpenCamera(false);
-    setCameraStream(null);
-    setStoreData(null);
-    setPhotoCaptured(false);
-    setIsUploading(false);
-  };
-
-  const handleCapturePhoto = () => {
-    if (canvasRef.current && videoRef.current) {
-      const canvas = canvasRef.current;
-      const context = canvas.getContext("2d");
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-
-      const imageData = canvas.toDataURL("image/png");
-      console.log("Captured image data:", imageData); // بررسی مقدار
-      setStoreData(imageData); // مقداردهی `storeData`
-      setPhotoCaptured(true);
-    }
-  };
-
-  const uploadImage = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      console.log("Uploaded image URL:", imageUrl); // بررسی مقدار
-      setStoreData(imageUrl); // مقداردهی `storeData`
-      setOpenFile(true);
-      setPhotoCaptured(true);
-      setOpenCamera(false);
-    }
-  };
-
-  const handleSavePhoto = () => {
-    alert("عکس ذخیره شد!");
-    if (cameraStream) {
-      const tracks = cameraStream.getTracks();
-      tracks.forEach((track) => track.stop());
-    }
-    setOpenCamera(false);
-    setCameraStream(null);
-    setPhotoCaptured(false);
-    setIsUploading(false);
-  };
-
-  const handleDeletePhoto = () => {
-    setStoreData(null);
-    setPhotoCaptured(false);
-    setOpenFile(false);
-    setIsUploading(false);
-  };
+  const { handleOpenCamera, handleCapturePhoto } = useCaptureImage(
+    setOpenCamera,
+    setPhotoCaptured,
+    videoRef,
+    canvasRef,
+    setStoreData,
+    setPreviewImage,
+    setIsDisable,
+    setCameraStream
+  );
+  const { uploadImage } = useUploadImageForm(
+    setOpenCamera,
+    setPhotoCaptured,
+    setOpenFile,
+    setStoreData,
+    setPreviewImage,
+    setIsDisable
+  );
 
   useEffect(() => {
     if (openCamera && videoRef.current && cameraStream) {
@@ -102,22 +50,48 @@ const UploadImageForm = ({ setCurrentStep }) => {
 
   const confirmCameraHandler = async (e) => {
     e.preventDefault();
-    console.log("storeData:", storeData); // بررسی مقدار
     if (!storeData) {
       alert("هیچ عکسی بارگذاری نشده است!");
       return;
     }
+
+    const formData = new FormData();
+    formData.append("image", storeData); // اضافه کردن فایل به FormData
+
+    console.log("formData", formData.get("image")); // بررسی محتوای فرم‌داده
+
     dispatch({
-      type: "IMG_POST",
+      type: "UPLOAD_IMG_POST",
       payload: {
-        storeData: storeData,
-        phone_number: phone_number,
+        formData,
         token: cookieValue,
       },
     });
-    setCurrentStep(5);
-    localStorage.setItem("authStep", "5"); // ذخیره مرحله در localStorage
-    navigate(`/signIn/step5`);
+    dispatch({
+      type: "CAPTURE_IMG_POST",
+      payload: {
+        formData,
+        token: cookieValue,
+      },
+    });
+  };
+
+  const handleDeletePhoto = () => {
+    setStoreData(null);
+    setPhotoCaptured(false);
+    setOpenFile(false);
+    setIsDisable(false);
+  };
+  const handleCloseCamera = () => {
+    if (cameraStream) {
+      const tracks = cameraStream.getTracks();
+      tracks.forEach((track) => track.stop());
+    }
+    setOpenCamera(false);
+    setCameraStream(null);
+    setStoreData(null);
+    setPhotoCaptured(false);
+    setIsDisable(false);
   };
 
   return (
@@ -131,15 +105,50 @@ const UploadImageForm = ({ setCurrentStep }) => {
       </p>
 
       {openFile || openCamera ? (
-        <CameraPreview
-          storeData={storeData}
-          videoRef={videoRef}
-          photoCaptured={photoCaptured}
-          onCapture={handleCapturePhoto}
-          onSave={handleSavePhoto}
-          onDelete={handleDeletePhoto}
-          onClose={handleCloseCamera}
-        />
+        <div className="flex flex-col items-center">
+          {storeData ? (
+            <img
+              src={previewImage}
+              alt="Captured"
+              className="w-full max-w-md rounded-md mb-4"
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              className="w-full max-w-md rounded-md mb-4"
+            ></video>
+          )}
+
+          <div className="flex gap-x-2">
+            {!photoCaptured ? (
+              <button
+                onClick={handleCapturePhoto}
+                className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+              >
+                گرفتن عکس
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={handleDeletePhoto}
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                >
+                  حذف عکس
+                </button>
+              </>
+            )}
+            {!photoCaptured && (
+              <button
+                onClick={handleCloseCamera}
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                بستن دوربین
+              </button>
+            )}
+          </div>
+        </div>
       ) : (
         <div className="flex flex-col items-center">
           <img
@@ -166,10 +175,10 @@ const UploadImageForm = ({ setCurrentStep }) => {
       <div className="flex justify-center mb-4 ">
         <button
           className={`bg-main-1 text-gray-900 p-3 font-bold text-lg hover:bg-yellow-500 flex items-center justify-center space-x-6 transition duration-300 gap-x-2${
-            isUploading ? "cursor-not-allowed opacity-50" : ""
+            isDisable ? "cursor-not-allowed opacity-50" : ""
           }`}
           onClick={() => document.getElementById("file-input").click()}
-          disabled={isUploading}
+          disabled={isDisable}
         >
           <IoCloudUploadOutline className="text-gray-900 " />
           <span>بارگذاری عکس</span>
@@ -177,15 +186,16 @@ const UploadImageForm = ({ setCurrentStep }) => {
         <input
           id="file-input"
           type="file"
+          accept="image/png, image/jpeg"
           className="hidden"
           onChange={uploadImage}
         />
         <button
           onClick={handleOpenCamera}
           className={`transition-all duration-500 p-3 text-main-1 font-semibold bg-gray-900 rounded-l-full text-lg hover:bg-gray-800 hover:text-main-1 ${
-            isUploading ? "cursor-not-allowed opacity-50" : ""
+            isDisable ? "cursor-not-allowed opacity-50" : ""
           }`}
-          disabled={isUploading}
+          disabled={isDisable}
         >
           باز شدن دوربین
         </button>
@@ -208,4 +218,4 @@ const UploadImageForm = ({ setCurrentStep }) => {
   );
 };
 
-export default UploadImageForm;
+export default ImageForm;
