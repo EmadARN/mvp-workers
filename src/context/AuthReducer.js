@@ -166,16 +166,18 @@ const asyncActionHandlers = {
     ({ dispatch }) =>
     async (action) => {
       dispatch({ type: "IMG_POST_PENDING" });
+      console.log(action.payload.token);
+      
       try {
         const formData = new FormData();
-        formData.append("image", action.payload.formData);
+        formData.append("image", action.payload.storeData);
 
         const response = await fetch(
           `${baseURL}/AddUserInf/upload/image/camera/`,
           {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${action.payload.cookieValue}`,
+              Authorization: `Bearer ${action.payload.token}`,
               "Content-Type": "application/json",
             },
             body: formData,
@@ -185,9 +187,9 @@ const asyncActionHandlers = {
         const data = await response.json();
         toast.success("عکس با موفقیت ثبت شد");
         dispatch({ type: "IMG_POST_SUCCESS" });
-        console.log(data);
+        console.log('imageee',data);
       } catch (error) {
-        console.log(error);
+        console.log('image',error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
         dispatch({ type: "IMG_POST_REJECT", error: errorMessage });
