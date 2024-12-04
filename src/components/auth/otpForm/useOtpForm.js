@@ -3,7 +3,7 @@ import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 
 const RESEND_TIME = 90;
 
-const useOtpForm = (setCurrentStep, navigate) => {
+const useOtpForm = ( navigate) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [time, setTime] = useState(RESEND_TIME);
 
@@ -23,14 +23,13 @@ const useOtpForm = (setCurrentStep, navigate) => {
 
     setTimeout(() => {
       if (!loading) {
-        setCurrentStep(2);
-        localStorage.setItem("authStep", "2"); // ذخیره مرحله در localStorage
+       
         navigate(`/signIn/step2`);
       }
     }, 3000);
   }, [phoneNumber, loading, navigate, dispatch]);
 
-  const onBack = useCallback(() => setCurrentStep((s) => s - 1), [setCurrentStep]);
+ // const onBack = useCallback(() => setCurrentStep((s) => s - 1), [setCurrentStep]);
 
   const onResendOtp = useCallback(() => {
     setTime(RESEND_TIME);
@@ -46,7 +45,7 @@ const useOtpForm = (setCurrentStep, navigate) => {
 
   return {
     time,
-    onBack,
+   // onBack,
     onResendOtp,
     phoneNumberHandler,
     sendOtpHandler,
