@@ -1,7 +1,8 @@
-import AuthPage from "../components/auth/main";
+
 import Stepper from "../components/auth/Stepper";
 import Layout from "../container";
 import RightBar from "../container/RightBar";
+import SignInPhoneNumber from "./auth/SignInPhoneNumber";
 
 const SignIn = () => {
   return (
@@ -12,7 +13,7 @@ const SignIn = () => {
         </div>
         <div className="col-span-3 md:col-span-4">
           <Stepper />
-          <AuthPage />
+          <SignInPhoneNumber />
         </div>
       </div>
     </Layout>
