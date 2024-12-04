@@ -219,7 +219,7 @@ const asyncActionHandlers = {
         toast.success("تصویر با موفقیت گرفته شد!");
         console.log(await response.json());
       } catch (error) {
-        console.log(error);
+        console.log('image',error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
         dispatch({ type: "CAPTURE_IMG_POST_REJECT", error: errorMessage });
