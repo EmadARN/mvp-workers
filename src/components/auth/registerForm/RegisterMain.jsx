@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { fields } from '../../../constants';
+import { useAuthActions } from '../../../context/AuthReducer';
+import { Navigate } from 'react-router-dom';
+import { useCookie } from '../../../hooks/useCookies';
 
-const RegisterMain = ({ handleSubmit }) => {
+const RegisterMain = () => {
+
+  const dispatch = useAuthActions();
+
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -9,6 +15,21 @@ const RegisterMain = ({ handleSubmit }) => {
     city: 'زنجان',
     job: 'خدمات منزل',
   });
+
+  const [cookieValue] = useCookie("auth-token");
+
+  const handleSubmit = (e, formData) => {
+    e.preventDefault();
+
+    dispatch({
+      type: "FORM_POST",
+      payload: { formData, cookieValue },
+    });
+
+    localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
+    Navigate(`/signIn/step4`);
+  };
+
 
 
   const handleChange = (e) => {

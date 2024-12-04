@@ -1,14 +1,24 @@
 import TextField from "../../../common/TextField";
 import Loading from "../../../common/Loading";
+import useOtpForm from "./useOtpForm";
+import {  useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthReducer";
 
-const SendOTPForm = ({
-  phoneNumber,
-  phoneNumberHandler,
-  sendOtpHandler,
-  loading,
-}) => {
+const SendOTPForm = (
 
-console.log('an');
+) => {
+
+  const {loading} = useAuth()
+
+  const navigate = useNavigate()
+
+  const {
+    //time,
+
+    phoneNumberHandler,
+    sendOtpHandler,
+    phoneNumber,
+  } = useOtpForm( navigate);
 
 
   

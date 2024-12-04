@@ -3,11 +3,19 @@ import { CiEdit } from "react-icons/ci";
 import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 import usePinInput from "./usePinInput";
 import { useNavigate } from "react-router-dom";
+import useOtpForm from "./useOtpForm";
 
 
-function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
+function CheckOTPForm({     length = 6 }) {
   const { phone_number } = useAuth();
   const navigate = useNavigate();
+
+  const {
+   // time,
+    onBack,
+    onResendOtp,
+
+  } = useOtpForm(navigate);
 
   const { pin, getInputProps } = usePinInput(length);
   const dispatch = useAuthActions();
@@ -21,7 +29,7 @@ function CheckOTPForm({ onBack, time, onResendOtp, setStep, length = 6 }) {
     }
 
     setTimeout(() => {
-      setStep(3);
+    
       navigate(`/signIn/step3`);
       localStorage.setItem("authStep", "3");
     }, 3000);

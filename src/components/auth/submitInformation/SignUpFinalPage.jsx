@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import SubmitInputs from "./SubmitInputs";
-import { useCookie } from "../../../hooks/useCookies";
+
 
 const SignUpFinalPage = () => {
   const navigate = useNavigate();

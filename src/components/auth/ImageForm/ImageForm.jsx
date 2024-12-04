@@ -6,7 +6,7 @@ import { useCookie } from "../../../hooks/useCookies";
 import useUploadImageForm from "./useUploadImageForm";
 import useCaptureImage from "./useCaptureImage";
 
-const ImageForm = ({ setCurrentStep }) => {
+const ImageForm = () => {
   const [previewImage, setPreviewImage] = useState(null); // visiable upload img
   const [storeData, setStoreData] = useState(null); //save img
   const [cameraStream, setCameraStream] = useState(null); //for camera satus
