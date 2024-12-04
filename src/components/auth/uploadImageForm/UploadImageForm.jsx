@@ -12,7 +12,9 @@ const UploadImageForm = ({ setCurrentStep }) => {
   const [cameraStream, setCameraStream] = useState(null);//baraye controle vaziate dorbin
   const [photoCaptured, setPhotoCaptured] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [cookieValue, setBrowserCookie] = useCookie("auth-token");
+  const [cookieValue] = useCookie("auth-token");
+
+  
 
   const navigate = useNavigate();
   const dispatch = useAuthActions();
@@ -111,7 +113,7 @@ const UploadImageForm = ({ setCurrentStep }) => {
       type: "IMG_POST",
       payload: {
         storeData: storeData,
-        phone_number: phone_number,
+       
         token: cookieValue,
       },
     });
