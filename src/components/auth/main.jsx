@@ -2,12 +2,12 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import SendOTPForm from "./otpForm/SendOTPForm";
 import CheckOTPForm from "./otpForm/CheckOTPForm";
-import UploadImageForm from "./uploadImageForm/UploadImageForm";
 import RegisterMain from "./registerForm/RegisterMain";
 import SignUpFinalPage from "./submitInformation/SignUpFinalPage";
 import { useAuth, useAuthActions } from "../../context/AuthReducer";
 import useOtpForm from "./otpForm/useOtpForm";
 import { useCookie } from "../../hooks/useCookies";
+import ImageForm from "./ImageForm/ImageForm";
 
 const AuthPage = () => {
   const { step } = useParams(); // دریافت شماره مرحله از URL
@@ -40,7 +40,7 @@ const AuthPage = () => {
 
     dispatch({
       type: "FORM_POST",
-      payload: { formData ,cookieValue},
+      payload: { formData, cookieValue },
     });
     setCurrentStep(4);
     localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
@@ -99,9 +99,9 @@ const AuthPage = () => {
           />
         );
       case 3:
-        return <RegisterMain  handleSubmit={handleSubmit} />;
+        return <RegisterMain handleSubmit={handleSubmit} />;
       case 4:
-        return <UploadImageForm setCurrentStep={setCurrentStep} />;
+        return <ImageForm setCurrentStep={setCurrentStep} />;
       case 5:
         return <SignUpFinalPage />;
       default:
