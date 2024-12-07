@@ -24,7 +24,7 @@ const useOtpForm = ( navigate) => {
     setTimeout(() => {
       if (!loading) {
        
-        navigate(`/signIn/step2`);
+        navigate("SigninOtp");
       }
     }, 3000);
   }, [phoneNumber, loading, navigate, dispatch]);
