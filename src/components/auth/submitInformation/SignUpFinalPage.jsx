@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import SubmitInputs from "./SubmitInputs";
 
-
 const SignUpFinalPage = () => {
   const navigate = useNavigate();
 
@@ -9,8 +8,6 @@ const SignUpFinalPage = () => {
     // Handling the final button click
     navigate("/SignUpPage3");
   };
-
-  
 
   return (
     <div className="mt-8 w-[100%]">
