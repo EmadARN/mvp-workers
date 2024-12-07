@@ -5,48 +5,50 @@ import usePinInput from "./usePinInput";
 import { useNavigate } from "react-router-dom";
 import useOtpForm from "./useOtpForm";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { useCookie } from "../../../hooks/useCookies";
 
 function CheckOTPForm({ length = 6 }) {
-  const { phone_number,error, token } = useAuth();
+  const { phone_number, error, token } = useAuth();
   const navigate = useNavigate();
 
-  
-console.log(phone_number);
+  const [setBrowserCookie] = useCookie("auth-token");
+  console.log("tttt", token);
+
+  // useEffect(() => {
+  //   if (token) setBrowserCookie(token, "auth-token");
+  // }, [token]);
 
   const { time, onBack, onResendOtp } = useOtpForm(navigate);
 
   const { pin, getInputProps } = usePinInput(length);
   const dispatch = useAuthActions();
 
-
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     if (phone_number) {
       try {
-
         await dispatch({
           type: "OTP_POST",
           payload: { phoneNumber: phone_number, otp: pin },
         });
-  
-    
-        
-        if (error) {
-      
-          console.log("خطا:", error);
-          toast.error("کد وارد شده اشتباه است");
-        } else if (token) {
-    
+
+        if (token) {
+          setBrowserCookie(token, "auth-token");
           navigate("/signIn/SigninRegister");
         }
+
+        if (error) {
+          console.log("خطا:", error);
+          toast.error("کد وارد شده اشتباه است");
+        } 
       } catch (error) {
-    
         console.log("خطای پیش‌بینی نشده:", error.message);
         toast.error("خطای پیش‌بینی نشده");
       }
     }
   };
-  
+
   return (
     <div className="w-full max-w-md mx-auto p-4 sm:p-6 text-left">
       <button onClick={onBack} className="mb-4">

@@ -42,7 +42,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         token: action.payload,
-       response:action.payload,
+       
         error: null,
         loading: false,
       };
@@ -170,7 +170,7 @@ const asyncActionHandlers = {
         if (data.status === 200) {
           dispatch({
             type: "OTP_POST_SUCCESS",
-            payload: { token: data.token, response: data },
+            payload: data.token ,
           });
           toast.success("کد تایید با موفقیت ثبت شد");
         } else if (data.status === 300) {

@@ -1,9 +1,7 @@
-
 import Stepper from "../components/auth/Stepper";
 import Layout from "../container";
 import RightBar from "../container/RightBar";
 import { Outlet } from "react-router-dom";
-
 
 const SignIn = () => {
   return (
@@ -14,7 +12,7 @@ const SignIn = () => {
         </div>
         <div className="col-span-3 md:col-span-4">
           <Stepper />
-  <Outlet/>
+          <Outlet />
         </div>
       </div>
     </Layout>
