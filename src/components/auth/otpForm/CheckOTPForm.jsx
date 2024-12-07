@@ -35,10 +35,6 @@ function CheckOTPForm({ length = 6 }) {
           payload: { phoneNumber: phone_number, otp: pin },
         });
 
-        if (token) {
-          setBrowserCookie(token, "auth-token");
-          navigate("/signIn/SigninRegister");
-        }
       } catch (error) {
         toast.error("خطای پیش‌بینی نشده");
       }
