@@ -12,7 +12,7 @@ const initialState = {
   error: null,
   token: "",
   userInfo: [],
-  response: null,
+  userInTable:[]
 };
 
 const reducer = (state, action) => {
@@ -112,7 +112,27 @@ const reducer = (state, action) => {
         error: action.error,
         loading: false,
       };
-
+      case "GET_USER_LIST_PENDING":
+        return {
+          ...state,
+          userInTable:null,
+          error: action.error,
+          loading: false,
+        };
+        case "GET_USER_LIST_SUCCESS":
+        return {
+          ...state,
+          userInTable:action.payload,
+          error: action.error,
+          loading: false,
+        };
+        case "GET_USER_LIST_REJECTED":
+          return {
+            ...state,
+            userInTable:null,
+            error: action.error,
+            loading: false,
+          };
     default:
       return state;
   }
@@ -267,6 +287,8 @@ const asyncActionHandlers = {
       }
     },
 
+
+
   FORM_GET:
     ({ dispatch }) =>
     async (action) => {
@@ -292,6 +314,32 @@ const asyncActionHandlers = {
         dispatch({ type: "FORM_GET_REJECTED", error: errorMessage });
       }
     },
+
+    USERS_TABLE:
+    ({dispatch})=>
+      async (action)=>{
+        dispatch({type:"GET_USER_LIST_PENDING"});
+        try {
+          const response = await fetch(`${baseURL}/UserInf/user/list/`, {
+            method: "GET",
+            headers: {
+              Authorization: "Barear 1",
+            },
+          });
+  
+          const data = await response.json();
+  
+          dispatch({ type: "GET_USER_LIST_SUCCESS", payload: data.data });
+  
+          console.log("tabel success", data);
+        } catch (error) {
+          console.log("table error", error);
+          const errorMessage = error.message || "خطایی رخ داده است";
+          toast.error(errorMessage);
+          dispatch({ type: "GET_USER_LIST_REJECT", error: errorMessage });
+        }
+      }
+    
 };
 
 export const AuthReducer = ({ children }) => {
