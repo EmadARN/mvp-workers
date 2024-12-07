@@ -67,15 +67,15 @@ const ImageForm = () => {
         token: cookieValue,
       },
     });
-    dispatch({
-      type: "CAPTURE_IMG_POST",
-      payload: {
-        formData,
-        token: cookieValue,
-      },
-    });
+    // dispatch({
+    //   type: "CAPTURE_IMG_POST",
+    //   payload: {
+    //     formData,
+    //     token: cookieValue,
+    //   },
+    // });
 
-    navigate("signIn/SigninFinal");
+    navigate("/signIn/SigninFinal");
   };
 
   const handleDeletePhoto = () => {
