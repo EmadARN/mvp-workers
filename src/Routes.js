@@ -25,15 +25,15 @@ const routes = [
     path: "/signIn/",
     element: <SignIn />,
     children: [
-      { path: "/SigninPhone", element: <SignInPhoneNumber /> },
-      { path: "/SigninOtp", element: <SignInOtp /> },
-      { path: "/SigninRegister", element: <SignInRegister /> },
+      { index: true, element: <SignInPhoneNumber /> },
+      { path: "SigninOtp", element: <SignInOtp /> },
+      { path: "SigninRegister", element: <SignInRegister /> },
       {
-        path: "/SigninImage",
+        path: "SigninImage",
         element: <SigninImageForm />,
       },
       {
-        path: "/SigninFinal",
+        path: "SigninFinal",
         element: <SigninFinal />,
       },
     ],
