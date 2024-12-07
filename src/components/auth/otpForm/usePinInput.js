@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-const usePinInput = (length = 6) => {
+const usePinInput = (length) => {
   const [pin, setPin] = useState(new Array(length).fill("")); // مقدار اولیه پین
   const inputRefs = useRef([]); // ریفرنس‌های ورودی
 

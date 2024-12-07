@@ -28,17 +28,17 @@
 //     if (token) setBrowserCookie(token, "auth-token");
 //   }, [token]);
 
-//   // const handleSubmit = (e, formData) => {
-//   //   e.preventDefault();
+//   const handleSubmit = (e, formData) => {
+//     e.preventDefault();
 
-//   //   dispatch({
-//   //     type: "FORM_POST",
-//   //     payload: { formData, cookieValue },
-//   //   });
-//   //   setCurrentStep(4);
-//   //   localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
-//   //   navigate(`/signIn/step4`);
-//   // };
+//     dispatch({
+//       type: "FORM_POST",
+//       payload: { formData, cookieValue },
+//     });
+//     setCurrentStep(4);
+//     localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
+//     navigate(`/signIn/step4`);
+//   };
 
 //   // استفاده از useEffect برای همگام‌سازی localStorage و currentStep
 //   useEffect(() => {
@@ -73,13 +73,12 @@
 //   // استفاده از useMemo برای جلوگیری از رندر اضافی
 //   const renderSteps = useMemo(() => {
 //     switch () {
-     
-    
+
 //       case 2:
 //         return (
 //           <CheckOTPForm
 //             onBack={onBack}
-       
+
 //             //time={time}
 //             onResendOtp={onResendOtp}
 //           />

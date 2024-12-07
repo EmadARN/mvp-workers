@@ -75,7 +75,7 @@ const ImageForm = () => {
       },
     });
 
-    navigate('signIn/SigninFinal')
+    navigate("signIn/SigninFinal");
   };
 
   const handleDeletePhoto = () => {
