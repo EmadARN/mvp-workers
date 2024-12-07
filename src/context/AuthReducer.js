@@ -3,6 +3,7 @@ import { useReducerAsync } from "use-reducer-async";
 import { baseURL } from "../service/http";
 import toast from "react-hot-toast";
 
+
 const AuthContext = createContext();
 const AuthContextDispatcher = createContext();
 
@@ -12,6 +13,7 @@ const initialState = {
   error: null,
   token: "",
   userInfo: [],
+  response: null
 };
 
 const reducer = (state, action) => {
@@ -22,6 +24,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         phone_number: action.payload,
+        
         error: null,
         loading: false,
       };
@@ -39,6 +42,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         token: action.payload,
+       response:action.payload,
         error: null,
         loading: false,
       };
@@ -161,13 +165,21 @@ const asyncActionHandlers = {
         );
 
         const data = await response.json();
-        if (data.token) {
-          dispatch({ type: "OTP_POST_SUCCESS", payload: data.token });
+       
+        
+        if (data.status === 200) {
+          dispatch({
+            type: "OTP_POST_SUCCESS",
+            payload: { token: data.token, response: data },
+          });
+          toast.success("کد تایید با موفقیت ثبت شد");
+        } else if (data.status === 300) {
+          throw new Error("کد وارد شده اشتباه است");
+        } else {
+          throw new Error("خطای ناشناخته");
         }
 
-        toast.success("کد تایید با موفقیت ثبت شد");
-
-        console.log(data);
+        console.log('otpd data',data);
       } catch (error) {
         console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
