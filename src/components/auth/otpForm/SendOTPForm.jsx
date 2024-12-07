@@ -3,6 +3,7 @@ import Loading from "../../../common/Loading";
 import useOtpForm from "./useOtpForm";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthReducer";
+import Stepper from "../Stepper";
 
 const SendOTPForm = () => {
   const { loading } = useAuth();
@@ -19,6 +20,7 @@ const SendOTPForm = () => {
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10">
+      <Stepper currentStep={1} />
       <form className="space-y-10" onSubmit={sendOtpHandler}>
         <TextField
           label="شماره موبایل"

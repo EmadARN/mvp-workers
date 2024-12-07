@@ -4,6 +4,7 @@ import { useAuthActions } from "../../../context/AuthReducer";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useCookie } from "../../../hooks/useCookies";
 import toast from "react-hot-toast";
+import Stepper from "../Stepper";
 
 const RegisterMain = () => {
   const navigate = useNavigate();
@@ -38,6 +39,8 @@ const RegisterMain = () => {
 
   return (
     <div className="flex justify-center items-center mt-20">
+      <Stepper currentStep={2} />
+
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-center text-2xl text-main-1 font-bold mb-6">
           ساخت اکانت جدید

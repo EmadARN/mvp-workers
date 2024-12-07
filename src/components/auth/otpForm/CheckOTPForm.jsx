@@ -7,6 +7,7 @@ import useOtpForm from "./useOtpForm";
 import toast from "react-hot-toast";
 import { useCookie } from "../../../hooks/useCookies";
 import { useEffect } from "react";
+import Stepper from "../Stepper";
 
 function CheckOTPForm({ length = 6 }) {
   const { phone_number, error, token } = useAuth();
@@ -34,7 +35,6 @@ function CheckOTPForm({ length = 6 }) {
           type: "OTP_POST",
           payload: { phoneNumber: phone_number, otp: pin },
         });
-
       } catch (error) {
         toast.error("خطای پیش‌بینی نشده");
       }
@@ -43,6 +43,7 @@ function CheckOTPForm({ length = 6 }) {
 
   return (
     <div className="w-full max-w-md mx-auto p-4 sm:p-6 text-left">
+      <Stepper currentStep={1} />
       <button onClick={onBack} className="mb-4">
         <HiArrowNarrowRight className="w-6 h-6 text-secondary-500 rotate-180" />
       </button>

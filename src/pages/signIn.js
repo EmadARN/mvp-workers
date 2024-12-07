@@ -11,7 +11,6 @@ const SignIn = () => {
           <RightBar />
         </div>
         <div className="col-span-3 md:col-span-4">
-          <Stepper />
           <Outlet />
         </div>
       </div>

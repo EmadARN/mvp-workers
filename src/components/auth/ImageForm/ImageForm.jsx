@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookie } from "../../../hooks/useCookies";
 import useUploadImageForm from "./useUploadImageForm";
 import useCaptureImage from "./useCaptureImage";
+import Stepper from "../Stepper";
 
 const ImageForm = () => {
   const [previewImage, setPreviewImage] = useState(null); // visiable upload img
@@ -98,6 +99,8 @@ const ImageForm = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full">
+      <Stepper currentStep={3} />
+
       <h4 className="text-3xl font-bold text-center sm:text-2xl md:text-3xl mt-8 mb-4">
         بارگذاری چهره متقاضی
       </h4>

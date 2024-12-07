@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import SubmitInputs from "./SubmitInputs";
+import Stepper from "../Stepper";
 
 const SignUpFinalPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ const SignUpFinalPage = () => {
 
   return (
     <div className="mt-8 w-[100%]">
+      <Stepper currentStep={4} />
+
       <div className="container mx-auto text-center  w-full mb-5">
         <SubmitInputs />
         <p className="text-gray-600 text-lg font-bold mb-4">
