@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { fields } from '../../../constants';
 import { useAuthActions } from '../../../context/AuthReducer';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useCookie } from '../../../hooks/useCookies';
 
 const RegisterMain = () => {
+
+  const navigate = useNavigate()
 
   const dispatch = useAuthActions();
 
@@ -26,8 +28,8 @@ const RegisterMain = () => {
       payload: { formData, cookieValue },
     });
 
-    localStorage.setItem("authStep", "4"); // ذخیره مرحله در localStorage
-    Navigate(`/signIn/step4`);
+   
+    navigate(`/signIn/SigninImage`);
   };
 
 

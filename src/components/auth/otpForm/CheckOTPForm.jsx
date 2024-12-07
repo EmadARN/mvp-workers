@@ -4,37 +4,49 @@ import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 import usePinInput from "./usePinInput";
 import { useNavigate } from "react-router-dom";
 import useOtpForm from "./useOtpForm";
+import toast from "react-hot-toast";
 
-
-function CheckOTPForm({     length = 6 }) {
-  const { phone_number } = useAuth();
+function CheckOTPForm({ length = 6 }) {
+  const { phone_number,error, token } = useAuth();
   const navigate = useNavigate();
 
-  const {
-   // time,
-    onBack,
-    onResendOtp,
+  
+console.log(phone_number);
 
-  } = useOtpForm(navigate);
+  const { time, onBack, onResendOtp } = useOtpForm(navigate);
 
   const { pin, getInputProps } = usePinInput(length);
   const dispatch = useAuthActions();
+
+
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     if (phone_number) {
-      dispatch({
-        type: "OTP_POST",
-        payload: { phoneNumber: phone_number, otp: pin },
-      });
-    }
+      try {
 
-    setTimeout(() => {
+        await dispatch({
+          type: "OTP_POST",
+          payload: { phoneNumber: phone_number, otp: pin },
+        });
+  
     
-      navigate(`/signIn/step3`);
-      localStorage.setItem("authStep", "3");
-    }, 3000);
+        
+        if (error) {
+      
+          console.log("خطا:", error);
+          toast.error("کد وارد شده اشتباه است");
+        } else if (token) {
+    
+          navigate("/signIn/SigninRegister");
+        }
+      } catch (error) {
+    
+        console.log("خطای پیش‌بینی نشده:", error.message);
+        toast.error("خطای پیش‌بینی نشده");
+      }
+    }
   };
-
+  
   return (
     <div className="w-full max-w-md mx-auto p-4 sm:p-6 text-left">
       <button onClick={onBack} className="mb-4">

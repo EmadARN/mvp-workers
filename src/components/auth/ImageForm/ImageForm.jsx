@@ -74,6 +74,8 @@ const ImageForm = () => {
         token: cookieValue,
       },
     });
+
+    navigate('signIn/SigninFinal')
   };
 
   const handleDeletePhoto = () => {
