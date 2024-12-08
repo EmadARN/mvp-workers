@@ -1,13 +1,6 @@
-import React from "react";
+import { steps } from "../../constants";
 
 const Stepper = ({ currentStep }) => {
-  const steps = [
-    { id: 1, label: "مرحله اول" },
-    { id: 2, label: "مرحله دوم" },
-    { id: 3, label: "مرحله سوم" },
-    { id: 4, label: "مرحله چهارم" },
-  ];
-
   return (
     <div className="w-full max-w-lg mx-auto py-10">
       <div className="flex flex-row-reverse justify-between items-center">

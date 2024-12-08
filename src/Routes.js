@@ -2,7 +2,7 @@ import ImageForm from "./components/auth/ImageForm/ImageForm";
 import CheckOTPForm from "./components/auth/otpForm/CheckOTPForm";
 import SendOTPForm from "./components/auth/otpForm/SendOTPForm";
 import RegisterMain from "./components/auth/registerForm/RegisterMain";
-import SignUpFinalPage from "./components/auth/submitInformation/SignUpFinalPage";
+import SignUpFinalPage from "./components/auth/submitInformation";
 import AboutUs from "./pages/aboutUs";
 import AllWorkerPage from "./pages/allWorkerPage";
 import Home from "./pages/home";

@@ -103,3 +103,11 @@ export const buttons = [
     to: "/allWorker",
   },
 ];
+
+//stepper
+export const steps = [
+  { id: 1, label: "مرحله اول" },
+  { id: 2, label: "مرحله دوم" },
+  { id: 3, label: "مرحله سوم" },
+  { id: 4, label: "مرحله چهارم" },
+];
