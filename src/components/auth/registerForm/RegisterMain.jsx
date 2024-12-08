@@ -1,51 +1,10 @@
-import { useEffect, useState } from "react";
-import { fields } from "../../../constants";
-import { useAuth, useAuthActions } from "../../../context/AuthReducer";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useCookie } from "../../../hooks/useCookies";
-
 import Stepper from "../Stepper";
+import Loading from "../../../common/Loading";
+import { useRegisterLogic } from "./useRegisterLogic";
 
 const RegisterMain = () => {
-  const navigate = useNavigate();
-  const [cookieValue] = useCookie("auth-token");
-  const {  userInfo } = useAuth();
-  const dispatch = useAuthActions();
-
-
-
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    work_experience: "",
-    city: "زنجان",
-    job: "خدمات منزل",
-  });
-
-console.log('usrrr',userInfo);
-
-  useEffect(() => {
-    dispatch({
-      type: "FORM_GET",
-      payload: { cookieValue },
-    });
-  }, []);
-
-  const handleSubmit = (e, formData) => {
-    e.preventDefault();
-
-    dispatch({
-      type: "FORM_POST",
-      payload: { formData, cookieValue },
-    });
-
-    navigate(`/signIn/SigninImage`);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  const { formData, isLoading, fields, handleChange, handleSubmit } =
+    useRegisterLogic();
 
   return (
     <div className="flex justify-center items-center mt-20 flex-col">
@@ -93,12 +52,16 @@ console.log('usrrr',userInfo);
             </div>
           ))}
 
-          <button
-            onClick={(e) => handleSubmit(e, formData)}
-            className="w-full bg-main-1 text-white py-2 rounded-md hover:bg-[#030F27] transition-all duration-300"
-          >
-            ساخت اکانت
-          </button>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <button
+              onClick={handleSubmit}
+              className="w-full bg-main-1 text-white py-2 rounded-md hover:bg-[#030F27] transition-all duration-300"
+            >
+              ساخت اکانت
+            </button>
+          )}
         </form>
       </div>
     </div>

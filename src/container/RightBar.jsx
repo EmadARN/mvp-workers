@@ -3,20 +3,22 @@ import { FaSignInAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
 
-const RightBar = () => {
+const RightBar = ({ dipslay, height, topPositionH,signinButtonPositionH }) => {
   const [topPosition, setTopPosition] = useState("top-[13%]");
   const [signinButtonPosition, setSigninButtonPosition] = useState("block");
-
-  const savedStep = localStorage.getItem("authStep");
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
       setTopPosition(
-        scrollY > 2050 ? "hidden" : scrollY > 50 ? "top-[4%]" : "top-[13%]"
+        scrollY > topPositionH
+          ? "hidden"
+          : scrollY > 50
+          ? "top-[4%]"
+          : "top-[13%]"
       );
-      setSigninButtonPosition(scrollY > 1500 ? "absolute top-[150%]" : "block");
+      setSigninButtonPosition(scrollY > signinButtonPositionH ? "absolute top-[150%]" : "block");
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,7 +26,10 @@ const RightBar = () => {
   }, []);
 
   return (
-    <div className="relative bg-main-1 w-full h-[101.1%] pt-1 md:hidden">
+    <div
+      className={`relative bg-main-1 w-full h-[103.5%]  pt-1 md:hidden`}
+      style={{ height: height }}
+    >
       <div className={`fixed ${topPosition} transition-all z-[999]`}>
         {/* لینک‌های اصلی */}
         {navLinks.map(({ to, icon, label }) => (
@@ -40,9 +45,9 @@ const RightBar = () => {
 
         {/* لینک ثبت‌نام */}
         <div
-          className={`fixed ${signinButtonPosition} bottom-12 transform -translate-x-1/3 transition-all`}
+          className={`${dipslay} fixed ${signinButtonPosition} bottom-12 transform -translate-x-1/3 transition-all`}
         >
-          <Link to={`/signIn/step${savedStep}`} className="no-underline">
+          <Link to={`/signIn`} className="no-underline">
             <div className="flex sm:flex-row flex-col items-center pr-1">
               <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center bg-main-2 text-yellow-500 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-blue-900 border-2 border-dashed border-main-1">
                 <FaSignInAlt />

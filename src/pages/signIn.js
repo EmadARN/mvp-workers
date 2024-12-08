@@ -8,7 +8,7 @@ const SignIn = () => {
     <Layout signinBtnDisplay="invisible">
       <div className="grid grid-cols-4">
         <div className="col-span-1">
-          <RightBar />
+          <RightBar dipslay={"hidden"} height={"128%"} topPositionH={250} />
         </div>
         <div className="col-span-3 md:col-span-4">
           <Outlet />

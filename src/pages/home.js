@@ -13,16 +13,22 @@ const Home = () => {
     <Layout>
       <div className="grid grid-cols-4">
         <div className="col-span-1">
-          <RightBar />
+          <RightBar topPositionH={2050} signinButtonPositionH={1500} />
         </div>
         <div className="col-span-3 md:col-span-4 space-y-16 md:space-y-28">
           <Carousel />
           <BackToUp />
-          <WhyWorkers />
+          <div className=" mx-6 sm:mx-16">
+            <WhyWorkers />
+          </div>
           <CounterMain />
-          <Table />
+          <div className=" mx-6 sm:mx-16">
+            <Table />
+          </div>
           {serviceVisitBtn()}
-          <FAQs />
+          <div className=" mx-6 sm:mx-16">
+            <FAQs />
+          </div>
         </div>
       </div>
     </Layout>

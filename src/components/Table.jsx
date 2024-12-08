@@ -4,24 +4,17 @@ import { useAuth, useAuthActions } from "../context/AuthReducer";
 
 const Table = () => {
   const dispatch = useAuthActions();
+  const { loading, userInTable } = useAuth();
 
-  const { loading,userInTable,error} = useAuth();
-
-
-
-useEffect(()=>{
-  dispatch({
-    type: "USERS_TABLE",
-
-  });
-},[])
-
-
-
+  useEffect(() => {
+    dispatch({
+      type: "USERS_TABLE",
+    });
+  }, []);
 
   return (
     <>
-      <div>
+      <div className="my-16">
         <Title title="ثپت نامی های اخیر" />
       </div>
       <div className="overflow-x-auto ">
@@ -39,24 +32,25 @@ useEffect(()=>{
           </thead>
           <tbody>
             <tr className="bg-white hover:bg-gray-100 w-[100%]">
-              {userInTable &&userInTable.length ? 
-              <>
-              <td className="px-4 py-2 border border-gray-300">
-                <img
-                  src="https://via.placeholder.com/40"
-                  alt="Profile"
-                  className="rounded-full"
-                />
-              </td>
-              <td className="px-4 py-2 border border-gray-300">علی احمدی</td></>
-            :<div  className="w-[100%] borde m-auto flex justify-center items-center" >
-              <h3>هیج کاربری وجود ندارد</h3>
-            </div> 
-            }
-             
-            
+              {userInTable && userInTable.length ? (
+                <>
+                  <td className="px-4 py-2 border border-gray-300">
+                    <img
+                      src="https://via.placeholder.com/40"
+                      alt="Profile"
+                      className="rounded-full"
+                    />
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    علی احمدی
+                  </td>
+                </>
+              ) : (
+                <div className="w-[100%] borde m-auto flex justify-center items-center">
+                  <h3>هیج کاربری وجود ندارد</h3>
+                </div>
+              )}
             </tr>
-          
           </tbody>
         </table>
       </div>
