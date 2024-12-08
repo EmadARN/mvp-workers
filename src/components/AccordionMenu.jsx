@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Title from "../common/Tilte";
 
 function FAQs() {
   const [expanded, setExpanded] = useState("");
@@ -8,196 +9,89 @@ function FAQs() {
   };
 
   return (
-    <div className="mr-2 sm:mr-10 ">
-      <h1 className="text-2xl text-center font-semibold mb-6 mt-8">
-        سوالات شما
-      </h1>
-
-      <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+    <div>
+      <Title title="سوالات شما" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
         {/* First Column */}
         <div>
-          <div
-            className="bg-[#fcfcfc] border border-gray-300 rounded-md mb-2"
-            onClick={() => handleChange("panel1")}
+          <FAQItem
+            panel="panel1"
+            title="هدف و خدمات شرکت"
+            expanded={expanded}
+            handleChange={handleChange}
           >
-            <div
-              className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel1"
-                  ? "bg-[#030f27] text-[#fdbe33]"
-                  : "bg-[#fdbe33]"
-              }`}
-            >
-              <h2 className="text-lg md:text-xl font-medium">
-                چه چیزی درباره ما میخواهید؟
-              </h2>
-              <span
-                className={`transition-transform transform ${
-                  expanded === "panel1" ? "rotate-180" : ""
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M6 9l6 6 6-6"></path>
-                </svg>
-              </span>
-            </div>
-            {expanded === "panel1" && (
-              <div className="p-4 bg-white border-t border-gray-300 ">
-                <p className="text-lg">
-                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
-                </p>
-              </div>
-            )}
-          </div>
+            شرکت ما به دنبال استخدام کارگران ماهر در زمینه‌های مختلف مانند ساخت
+            و ساز، تاسیسات، برق‌کاری، نجاری و... است. هدف ما ارائه خدمات با
+            کیفیت و تامین نیروی کار متخصص برای پروژه‌های شما می‌باشد.
+          </FAQItem>
 
-          <div
-            className="bg-[#fcfcfc] border border-gray-300 rounded-md mb-2"
-            onClick={() => handleChange("panel2")}
+          <FAQItem
+            panel="panel2"
+            title="دلایل انتخاب کارگران ما"
+            expanded={expanded}
+            handleChange={handleChange}
           >
-            <div
-              className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel2"
-                  ? "bg-[#030f27] text-[#fdbe33]"
-                  : "bg-[#fdbe33]"
-              }`}
-            >
-              <h2 className="text-lg md:text-xl font-medium">
-                چه چیزی درباره ما میخواهید؟
-              </h2>
-              <span
-                className={`transition-transform transform ${
-                  expanded === "panel2" ? "rotate-180" : ""
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M6 9l6 6 6-6"></path>
-                </svg>
-              </span>
-            </div>
-            {expanded === "panel2" && (
-              <div className="p-4 bg-white border-t border-gray-300">
-                <p className="text-lg">
-                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
-                </p>
-              </div>
-            )}
-          </div>
+            کارگران ما به خوبی آموزش دیده و دارای تجربه در پروژه‌های مختلف
+            هستند. آنها از ابزارهای مدرن و تکنولوژی‌های روز استفاده می‌کنند تا
+            پروژه شما در کمترین زمان و با بهترین کیفیت انجام شود.
+          </FAQItem>
         </div>
 
         {/* Second Column */}
         <div>
-          <div
-            className="bg-[#fcfcfc] border border-gray-300 rounded-md mb-2"
-            onClick={() => handleChange("panel6")}
+          <FAQItem
+            panel="panel6"
+            title="روند استخدام سریع"
+            expanded={expanded}
+            handleChange={handleChange}
           >
-            <div
-              className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel6"
-                  ? "bg-[#030f27] text-[#fdbe33]"
-                  : "bg-[#fdbe33]"
-              }`}
-            >
-              <h2 className="text-lg md:text-xl font-medium">
-                چه چیزی درباره ما میخواهید؟
-              </h2>
-              <span
-                className={`transition-transform transform ${
-                  expanded === "panel6" ? "rotate-180" : ""
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M6 9l6 6 6-6"></path>
-                </svg>
-              </span>
-            </div>
-            {expanded === "panel6" && (
-              <div className="p-4 bg-white border-t border-gray-300">
-                <p className="text-lg">
-                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
-                </p>
-              </div>
-            )}
-          </div>
+            روند استخدام کارگران از طریق وب‌سایت ما ساده و سریع است. تنها کافی
+            است نیاز خود را مشخص کنید و ما بهترین افراد را برای شما پیشنهاد
+            خواهیم داد.
+          </FAQItem>
 
-          <div
-            className="bg-[#fcfcfc] border border-gray-300 rounded-md mb-2"
-            onClick={() => handleChange("panel7")}
+          <FAQItem
+            panel="panel7"
+            title="پشتیبانی و خدمات پس از استخدام"
+            expanded={expanded}
+            handleChange={handleChange}
           >
-            <div
-              className={`flex justify-between items-center p-4 cursor-pointer ${
-                expanded === "panel7"
-                  ? "bg-[#030f27] text-[#fdbe33]"
-                  : "bg-[#fdbe33]"
-              }`}
-            >
-              <h2 className="text-lg md:text-xl font-medium">
-                چه چیزی درباره ما میخواهید؟
-              </h2>
-              <span
-                className={`transition-transform transform ${
-                  expanded === "panel7" ? "rotate-180" : ""
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-6 h-6"
-                >
-                  <path d="M6 9l6 6 6-6"></path>
-                </svg>
-              </span>
-            </div>
-            {expanded === "panel7" && (
-              <div className="p-4 bg-white border-t border-gray-300">
-                <p className="text-lg">
-                  شرکت ما شرکتی موثر در تمامی عرصه های فنی این کشور می باشد.
-                </p>
-              </div>
-            )}
-          </div>
+            ما همیشه در کنار شما خواهیم بود. پس از استخدام، در صورت بروز هرگونه
+            مشکل یا نیاز به تغییرات، تیم پشتیبانی ما در دسترس است تا شما را یاری
+            کند.
+          </FAQItem>
         </div>
       </div>
     </div>
   );
 }
+const FAQItem = ({ panel, title, children, expanded, handleChange }) => {
+  return (
+    <div
+      className="bg-[#fcfcfc] border border-gray-300 rounded-md mb-2"
+      onClick={() => handleChange(panel)}
+    >
+      <div
+        className={`flex justify-between items-center p-4 cursor-pointer ${
+          expanded === panel ? "bg-main-2 text-main-1" : "bg-main-1"
+        }`}
+      >
+        <h2 className="text-lg md:text-xl font-medium">{title}</h2>
+        <span>{expanded === panel ? "⯆" : "⯈"}</span>
+      </div>
+      <div
+        className={`overflow-hidden transition-all duration-1000 ease-in-out  ${
+          expanded === panel ? "max-h-[500px]" : "max-h-0"
+        }`}
+      >
+        {expanded === panel && (
+          <div className="p-4 bg-white border-t border-gray-300">
+            <p className="text-lg">{children}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default FAQs;

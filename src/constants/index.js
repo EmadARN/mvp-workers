@@ -10,7 +10,22 @@ export const pages = [
   { id: 2, name: "درباره ما", to: "/About" },
   { id: 3, name: "سرویس ها", to: "/ServicesPage" },
 ];
+//footer
+export const quickLinks = [
+  { href: "/About", label: "درباره ما" },
+  { href: "/servicesPage", label: "خدمات" },
+];
 
+export const services = [
+  { href: "/About", label: "خدمات منزل" },
+  { href: "/About", label: "خدمات ساختمانی" },
+];
+
+export const contactInfo = [
+  { icon: "fa-map-marker-alt", text: "Your Address" },
+  { icon: "fa-phone", text: "+123 456 7890" },
+  { icon: "fa-envelope", text: "email@example.com" },
+];
 //carousel
 export const carouselData = [
   {

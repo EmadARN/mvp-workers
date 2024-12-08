@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../../common/Tilte";
 import { buttons } from "../../constants";
@@ -8,11 +7,11 @@ const OurService = () => {
 
   return (
     <>
-      <div className="mr-2 sm:mr-10">
-        <Title title="سرویس ها" width={"200px"} />
+      <div className="my-16">
+        <Title title="سرویس ها" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-15">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
         {buttons.map((item) => {
           return (
             <div key={item.id} className="relative">
@@ -31,7 +30,7 @@ const OurService = () => {
                 <img
                   src={item.img}
                   alt={item.name}
-                  className="h-[200px] sm:h-[250px] md:h-[350px] w-full object-cover"
+                  className="h-[200px] sm:h-[250px] md:h-[300px] w-full  object-cover"
                 />
               </div>
 
