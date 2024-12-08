@@ -9,7 +9,7 @@ const BtnAnimation = ({ title, color, size, ffamily, fweight }) => {
       <div className="absolute bottom-0 left-0 w-[2px] h-full bg-gradient-to-t from-[#030f27] to-[#fdbe33] animate-line3"></div>
 
       <div className="relative z-10 flex items-center justify-center px-6 py-3 text-center whitespace-nowrap">
-        <Link to="signIn">
+        <Link to="/signIn">
           <button
             className="text-white font-sans_bold"
             style={{

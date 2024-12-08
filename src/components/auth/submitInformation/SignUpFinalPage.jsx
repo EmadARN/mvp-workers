@@ -7,7 +7,7 @@ const SignUpFinalPage = () => {
 
   const handleButtonClick = () => {
     // Handling the final button click
-    navigate("/SignUpPage3");
+    navigate("/SigninRegister");
   };
 
   return (

@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 import { useReducerAsync } from "use-reducer-async";
 import { baseURL } from "../service/http";
 import toast from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext();
 const AuthContextDispatcher = createContext();
@@ -12,7 +13,7 @@ const initialState = {
   error: null,
   token: "",
   userInfo: [],
-  userInTable:[]
+  userInTable: [],
 };
 
 const reducer = (state, action) => {
@@ -112,27 +113,27 @@ const reducer = (state, action) => {
         error: action.error,
         loading: false,
       };
-      case "GET_USER_LIST_PENDING":
-        return {
-          ...state,
-          userInTable:null,
-          error: action.error,
-          loading: false,
-        };
-        case "GET_USER_LIST_SUCCESS":
-        return {
-          ...state,
-          userInTable:action.payload,
-          error: action.error,
-          loading: false,
-        };
-        case "GET_USER_LIST_REJECTED":
-          return {
-            ...state,
-            userInTable:null,
-            error: action.error,
-            loading: false,
-          };
+    case "GET_USER_LIST_PENDING":
+      return {
+        ...state,
+        userInTable: null,
+        error: action.error,
+        loading: false,
+      };
+    case "GET_USER_LIST_SUCCESS":
+      return {
+        ...state,
+        userInTable: action.payload,
+        error: action.error,
+        loading: false,
+      };
+    case "GET_USER_LIST_REJECTED":
+      return {
+        ...state,
+        userInTable: null,
+        error: action.error,
+        loading: false,
+      };
     default:
       return state;
   }
@@ -159,9 +160,7 @@ const asyncActionHandlers = {
         dispatch({ type: "PHONENUMBER_GET_REJECT", error: errorMessage });
       }
     },
-  OTP_POST:
-    ({ dispatch }) =>
-    async (action) => {
+    OTP_POST: ({ dispatch }) => async (action) => {
       dispatch({ type: "OTP_POST_PENDING" });
       try {
         const response = await fetch(
@@ -177,22 +176,24 @@ const asyncActionHandlers = {
             }),
           }
         );
-
+    
         const data = await response.json();
-
+    
         if (data.status === 200) {
           dispatch({
             type: "OTP_POST_SUCCESS",
             payload: data.token,
           });
+    
           toast.success("کد تایید با موفقیت ثبت شد");
+    
+          // بازگرداندن سطح ثبت‌نام برای مدیریت ناوبری در کامپوننت
+          return data.signup_level;
         } else if (data.status === 300) {
           throw new Error("کد وارد شده اشتباه است");
         } else {
           throw new Error("خطای ناشناخته");
         }
-
-        console.log("otpd data", data);
       } catch (error) {
         console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
@@ -200,6 +201,7 @@ const asyncActionHandlers = {
         dispatch({ type: "OTP_POST_REJECT", error: errorMessage });
       }
     },
+    
   FORM_POST:
     ({ dispatch }) =>
     async (action) => {
@@ -287,8 +289,6 @@ const asyncActionHandlers = {
       }
     },
 
-
-
   FORM_GET:
     ({ dispatch }) =>
     async (action) => {
@@ -315,31 +315,30 @@ const asyncActionHandlers = {
       }
     },
 
-    USERS_TABLE:
-    ({dispatch})=>
-      async (action)=>{
-        dispatch({type:"GET_USER_LIST_PENDING"});
-        try {
-          const response = await fetch(`${baseURL}/UserInf/user/list/`, {
-            method: "GET",
-            headers: {
-              Authorization: "Barear 1",
-            },
-          });
-  
-          const data = await response.json();
-  
-          dispatch({ type: "GET_USER_LIST_SUCCESS", payload: data.data });
-  
-          console.log("tabel success", data);
-        } catch (error) {
-          console.log("table error", error);
-          const errorMessage = error.message || "خطایی رخ داده است";
-          toast.error(errorMessage);
-          dispatch({ type: "GET_USER_LIST_REJECT", error: errorMessage });
-        }
+  USERS_TABLE:
+    ({ dispatch }) =>
+    async (action) => {
+      dispatch({ type: "GET_USER_LIST_PENDING" });
+      try {
+        const response = await fetch(`${baseURL}/UserInf/user/list/`, {
+          method: "GET",
+          headers: {
+            Authorization: "Barear 1",
+          },
+        });
+
+        const data = await response.json();
+
+        dispatch({ type: "GET_USER_LIST_SUCCESS", payload: data.data });
+
+        console.log("tabel success", data);
+      } catch (error) {
+        console.log("table error", error);
+        const errorMessage = error.message || "خطایی رخ داده است";
+        toast.error(errorMessage);
+        dispatch({ type: "GET_USER_LIST_REJECT", error: errorMessage });
       }
-    
+    },
 };
 
 export const AuthReducer = ({ children }) => {

@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fields } from "../../../constants";
-import { useAuthActions } from "../../../context/AuthReducer";
+import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useCookie } from "../../../hooks/useCookies";
-import toast from "react-hot-toast";
+
 import Stepper from "../Stepper";
 
 const RegisterMain = () => {
   const navigate = useNavigate();
   const [cookieValue] = useCookie("auth-token");
-
+  const {  userInfo } = useAuth();
   const dispatch = useAuthActions();
+
+
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -20,7 +22,15 @@ const RegisterMain = () => {
     job: "خدمات منزل",
   });
 
-  console.log("Token being sent:", cookieValue);
+console.log('usrrr',userInfo);
+
+  useEffect(() => {
+    dispatch({
+      type: "FORM_GET",
+      payload: { cookieValue },
+    });
+  }, []);
+
   const handleSubmit = (e, formData) => {
     e.preventDefault();
 
@@ -38,7 +48,7 @@ const RegisterMain = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-20">
+    <div className="flex justify-center items-center mt-20 flex-col">
       <Stepper currentStep={2} />
 
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
@@ -60,7 +70,7 @@ const RegisterMain = () => {
                   type="text"
                   id={field.id}
                   name={field.id}
-                  value={formData[field.id]}
+                  value={formData[field.id] }
                   onChange={handleChange}
                   className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-1"
                   placeholder={field.placeholder}
