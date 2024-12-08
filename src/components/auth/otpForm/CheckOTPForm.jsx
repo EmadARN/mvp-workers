@@ -31,16 +31,29 @@ function CheckOTPForm({ length = 6 }) {
     e.preventDefault();
     if (phone_number) {
       try {
-        await dispatch({
+        const signupLevel = await dispatch({
           type: "OTP_POST",
           payload: { phoneNumber: phone_number, otp: pin },
         });
+  
+        console.log("Signup Level:", signupLevel);
+  
+        if (signupLevel === 2) {
+          navigate("/SigninRegister");
+        } else if (signupLevel === 3) {
+          navigate("/SigninImage");
+        } else if (signupLevel === 4) {
+          navigate("/SigninFinal");
+        } else {
+          navigate("/");
+        }
       } catch (error) {
-        toast.error("خطای پیش‌بینی نشده");
+        console.error("Error during OTP verification:", error);
+        toast.error(error.message || "خطای پیش‌بینی نشده");
       }
     }
   };
-
+  
   return (
     <div className="w-full max-w-md mx-auto p-4 sm:p-6 text-left">
       <Stepper currentStep={1} />
