@@ -1,10 +1,16 @@
 import Stepper from "../Stepper";
 import Loading from "../../../common/Loading";
 import { useRegisterLogic } from "./useRegisterLogic";
+import { useFormState } from "../../../context/StateContext";
+
 
 const RegisterMain = () => {
   const { formData, isLoading, fields, handleChange, handleSubmit } =
     useRegisterLogic();
+
+    const {formState} = useFormState()
+
+    
 
   return (
     <div className="flex justify-center items-center mt-20 flex-col">
@@ -59,7 +65,7 @@ const RegisterMain = () => {
               onClick={handleSubmit}
               className="w-full bg-main-1 text-white py-2 rounded-md hover:bg-[#030F27] transition-all duration-300"
             >
-              ساخت اکانت
+          {formState ? "ویرایش":"ساخت اکانت" }
             </button>
           )}
         </form>

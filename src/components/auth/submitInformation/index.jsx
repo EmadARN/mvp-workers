@@ -3,23 +3,31 @@ import SubmitInputs from "./SubmitInputs";
 import Stepper from "../Stepper";
 import { useCookie } from "../../../hooks/useCookies";
 import { useAuthActions } from "../../../context/AuthReducer";
+import { useFormState } from "../../../context/StateContext";
 
 const SignUpFinalPage = () => {
   const navigate = useNavigate();
   const dispatch = useAuthActions();
   const [cookieValue] = useCookie("auth-token");
+  const {setFormState} = useFormState()
 
-  const handleButtonClick = (isFinalized) => {
-    if (isFinalized) {
+ 
+  
+
+  const handleButtonClick = () => {
+   
       dispatch({
         type: "FINALIZATION_SIGNUP_GET",
         payload: { cookieValue },
       });
       navigate("/");
-    } else {
-      navigate("/signIn/SigninRegister");
-    }
+     
   };
+
+  const editButtonClick = ()=>{
+    setFormState(true)
+    navigate("/signIn/SigninRegister");
+  }
 
   return (
     <div className="mt-8 w-[100%]">
@@ -34,14 +42,14 @@ const SignUpFinalPage = () => {
       </div>
       <div className="flex justify-center mb-8">
         <button
-          onClick={() => handleButtonClick(false)}
+          onClick={() => editButtonClick()}
           className="ml-5 transition duration-500 bg-main-1 text-gray-800 font-bold py-3 px-8 rounded-md hover:bg-gray-800 hover:text-main-1 hover:shadow-xl"
         >
           ویرایش
         </button>
 
         <button
-          onClick={() => handleButtonClick(true)}
+          onClick={() => handleButtonClick()}
           className="transition duration-500 bg-main-1 text-gray-800 font-bold py-3 px-8 rounded-md hover:bg-gray-800 hover:text-main-1 hover:shadow-xl"
         >
           ثبت اطلاعات حساب

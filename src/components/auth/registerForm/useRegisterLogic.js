@@ -5,8 +5,17 @@ import { useCookie } from "../../../hooks/useCookies";
 import { fields } from "../../../constants";
 import { includeObj } from "../../../utils/objectUtils";
 import toast from "react-hot-toast";
+import { useFormState } from "../../../context/StateContext";
+
 
 export const useRegisterLogic = () => {
+
+
+  
+
+  const {formState} = useFormState()
+
+  console.log('ffff',formState);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     first_name: "",
@@ -30,7 +39,7 @@ export const useRegisterLogic = () => {
   ];
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && formState) {
       const filteredData = includeObj(userInfo, includesKey);
       setFormData((prevData) => ({ ...prevData, ...filteredData }));
     }
@@ -57,7 +66,7 @@ export const useRegisterLogic = () => {
         payload: { formData, cookieValue },
       });
       toast.success("اطلاعات با موفقیت ثبت شد!");
-      navigate(`/signIn/SigninImage`);
+      {formState ?navigate(`/signIn/SigninFinal`):navigate(`/signIn/SigninImage`)}
     } catch (error) {
       toast.error("خطایی رخ داد. لطفاً دوباره تلاش کنید.");
     } finally {
