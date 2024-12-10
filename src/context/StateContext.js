@@ -1,20 +1,17 @@
-
 import { createContext, useContext, useState } from "react";
 
-export const FormState= createContext()
+export const FormState = createContext();
 
-
-const StateContext = ({children}) => {
-
-const [formState,setFormState] = useState(true)
+const StateContext = ({ children }) => {
+  const [formState, setFormState] = useState(false);
 
   return (
-    <FormState.Provider value={{formState,setFormState}}>
-     {children}
+    <FormState.Provider value={{ formState, setFormState }}>
+      {children}
     </FormState.Provider>
-  )
-}
+  );
+};
 
-export default StateContext
+export default StateContext;
 
-export const useFormState = ()=> useContext(FormState)
+export const useFormState = () => useContext(FormState);

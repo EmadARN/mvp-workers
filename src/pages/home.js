@@ -26,7 +26,7 @@ const Home = () => {
             <Table />
           </div>
           {serviceVisitBtn()}
-          <div className=" mx-6 sm:mx-16">
+          <div className=" mx-6 sm:mx-16 pb-12">
             <FAQs />
           </div>
         </div>

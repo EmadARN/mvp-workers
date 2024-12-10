@@ -1,36 +1,65 @@
 import TextField from "../../../common/TextField";
-import Loading from "../../../common/Loading";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/AuthReducer";
+import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 import Stepper from "../Stepper";
-import useSendOtpForm from "./useSendOtpForm";
+import CustomeBtn from "../../../common/CustomeBtn";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 const SendOTPForm = () => {
   const { loading } = useAuth();
   const navigate = useNavigate();
+  const dispatch = useAuthActions();
 
-  const { phoneNumberHandler, sendOtpHandler, phoneNumber } =
-    useSendOtpForm(navigate);
+  // تعریف اعتبارسنجی با Yup
+  const validationSchema = Yup.object().shape({
+    phoneNumber: Yup.string()
+      .matches(/^09\d{9}$/, "شماره موبایل باید با 09 شروع شود و 11 رقم باشد")
+      .required("شماره موبایل اجباری است"),
+  });
+
+  const sendOtpHandler = async (values) => {
+    dispatch({
+      type: "PHONENUMBER_GET",
+      payload: values.phoneNumber,
+    });
+
+    setTimeout(() => {
+      if (!loading) {
+        navigate("SigninOtp");
+      }
+    }, 3000);
+  };
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10">
       <Stepper currentStep={1} />
-      <form className="space-y-10" onSubmit={sendOtpHandler}>
-        <TextField
-          label="شماره موبایل"
-          name="phoneNumber"
-          value={phoneNumber}
-          onChange={phoneNumberHandler}
-        />
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="btn w-full sm:w-[70%] md:w-[50%] lg:w-[40%] bg-main-1 rounded-md text-main-2 py-2 transition-all duration-300"
-          >
-            {loading ? <Loading /> : "ارسال کد تایید"}
-          </button>
-        </div>
-      </form>
+      <Formik
+        initialValues={{ phoneNumber: "" }}
+        validationSchema={validationSchema}
+        onSubmit={sendOtpHandler}
+      >
+        {({ errors, touched, isValid, dirty }) => (
+          <Form className="space-y-10">
+            <div className="w-full sm:w-96 mx-auto">
+              <Field
+                name="phoneNumber"
+                as={TextField}
+                label="شماره موبایل"
+                error={touched.phoneNumber && errors.phoneNumber}
+              />
+            </div>
+            <div className="flex justify-center">
+              <CustomeBtn
+                loading={loading}
+                content="ارسال تایید کد"
+                type="submit"
+                disabled={!dirty || !isValid} // دکمه غیرفعال در صورت نادرست بودن فرم
+              />
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const FooterLink = ({ href, label }) => (
 
 const Footer = () => {
   return (
-    <div className="mt-20 w-full  bg-main-2 ">
+    <div className=" w-full  bg-main-2 ">
       <footer className="">
         <div className="flex flex-wrap justify-evenly py-12 ">
           {/* Useful Pages */}

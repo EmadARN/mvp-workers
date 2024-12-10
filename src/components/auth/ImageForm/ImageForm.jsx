@@ -6,6 +6,7 @@ import { useCookie } from "../../../hooks/useCookies";
 import useUploadImageForm from "./useUploadImageForm";
 import useCaptureImage from "./useCaptureImage";
 import Stepper from "../Stepper";
+import CustomeBtn from "../../../common/CustomeBtn";
 
 const ImageForm = () => {
   const [previewImage, setPreviewImage] = useState(null); // visiable upload img
@@ -205,13 +206,7 @@ const ImageForm = () => {
           باز شدن دوربین
         </button>
       </div>
-
-      <button
-        onClick={confirmCameraHandler}
-        className="w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105"
-      >
-        تایید
-      </button>
+      <CustomeBtn clickHandler={confirmCameraHandler} content="تایید" />
 
       <canvas
         ref={canvasRef}

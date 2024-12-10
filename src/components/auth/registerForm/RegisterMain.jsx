@@ -2,26 +2,30 @@ import Stepper from "../Stepper";
 import Loading from "../../../common/Loading";
 import { useRegisterLogic } from "./useRegisterLogic";
 import { useFormState } from "../../../context/StateContext";
-
+import CustomeBtn from "../../../common/CustomeBtn";
 
 const RegisterMain = () => {
-  const { formData, isLoading, fields, handleChange, handleSubmit } =
-    useRegisterLogic();
+  const {
+    formData,
+    isLoading,
+    fields,
+    handleChange,
+    handleSubmit,
+    isFormValid,
+  } = useRegisterLogic();
 
-    const {formState} = useFormState()
-
-    
+  const { formState } = useFormState();
 
   return (
-    <div className="flex justify-center items-center mt-20 flex-col">
+    <div className="flex justify-center items-center flex-col px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-6">
       <Stepper currentStep={2} />
 
-      <div className="bg-white p-6 rounded-lg shadow-md w-96">
+      <div className="bg-white p-6 rounded-lg shadow-md max-w-full w-full sm:max-w-screen-sm lg:max-w-screen-md">
         <h2 className="text-center text-2xl text-main-1 font-bold mb-6">
           ساخت اکانت جدید
         </h2>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           {fields.map((field) => (
             <div className="mb-4" key={field.id}>
               <label
@@ -35,7 +39,7 @@ const RegisterMain = () => {
                   type="text"
                   id={field.id}
                   name={field.id}
-                  value={formData[field.id] }
+                  value={formData[field.id]}
                   onChange={handleChange}
                   className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-1"
                   placeholder={field.placeholder}
@@ -61,12 +65,10 @@ const RegisterMain = () => {
           {isLoading ? (
             <Loading />
           ) : (
-            <button
-              onClick={handleSubmit}
-              className="w-full bg-main-1 text-white py-2 rounded-md hover:bg-[#030F27] transition-all duration-300"
-            >
-          {formState ? "ویرایش":"ساخت اکانت" }
-            </button>
+            <CustomeBtn
+              content={formState ? "ویرایش" : "ساخت اکانت"}
+              disabled={!formState && !isFormValid()}
+            />
           )}
         </form>
       </div>
