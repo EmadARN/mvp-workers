@@ -2,9 +2,11 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import Stepper from "../Stepper";
 import useCheckOTP from "./useCheckOTP";
+import CustomeBtn from "../../../common/CustomeBtn";
 
 function CheckOTPForm({ length = 6 }) {
   const {
+    pin,
     phone_number,
     time,
     getInputProps,
@@ -21,7 +23,7 @@ function CheckOTPForm({ length = 6 }) {
       </button>
 
       {phone_number && (
-        <p className="text-center sm:text-right">
+        <p className="text-center text-right">
           {phone_number}
           <button onClick={onBack}>
             <CiEdit className="text-xs text-primary-900" />
@@ -30,7 +32,7 @@ function CheckOTPForm({ length = 6 }) {
       )}
 
       <form className="space-y-10" onSubmit={checkOtpHandler}>
-        <p className="font-bold sm:text-right">کد تایید را وارد کنید</p>
+        <p className="font-bold text-right">کد تایید را وارد کنید</p>
         <div className="flex justify-center items-center gap-x-2" dir="ltr">
           {Array.from({ length }).map((_, index) => (
             <input
@@ -42,20 +44,15 @@ function CheckOTPForm({ length = 6 }) {
           ))}
         </div>
 
-        <div className="mb-4 sm:text-right text-secondary-500">
+        <div className="mb-4 text-right text-secondary-500">
           {time > 0 ? (
             <p>{time} ثانیه تا ارسال مجدد کد</p>
           ) : (
             <button onClick={onResendOtp}>ارسال مجدد کد؟</button>
           )}
         </div>
-        <div className="flex justify-center sm:justify-start">
-          <button
-            type="submit"
-            className="w-full sm:w-40 h-12 bg-main-1 text-white rounded-md mt-4 transition-all duration-300 transform hover:scale-105 pt-1"
-          >
-            تایید
-          </button>
+        <div className="flex justify-center ">
+          <CustomeBtn content="تایید" disabled={pin.length !== 6} />
         </div>
       </form>
     </div>

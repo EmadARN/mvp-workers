@@ -4,24 +4,22 @@ const SubmitInputs = () => {
   const { user, handleChange, userData, loading } = useUserForm();
 
   return (
-    <div className="flex flex-col items-center w-full justify-center px-4 sm:px-0">
+    <div className="flex flex-col items-center w-full justify-center px-4 sm:px-6 md:px-8">
       {/* Profile Image */}
-      <div className="flex justify-center mb-5 p-2 rounded-sm border border-1 border-main-1">
+      <div className="flex justify-center mb-5 p-2 rounded-sm border border-1 border-main-1 w-full max-w-[270px]">
         <img
-          className="p-2 border-2 border-main-1 rounded-sm"
+          className="p-2 border-2 border-main-1 rounded-sm w-full h-auto"
           src={!loading ? userData.profile_image : ""}
           alt="Profile"
-          height="270"
-          width="270"
         />
       </div>
 
       {/* User Info Form */}
-      <div className=" mx-auto p-4">
-        <div className="grid  sm:grid-cols-2 gap-6">
+      <div className="mx-auto p-4 w-full max-w-3xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Name */}
           {["first_name", "last_name", "job", "city"].map((field, idx) => (
-            <div className="col-span-2 sm:col-span-1" key={idx}>
+            <div className="col-span-1" key={idx}>
               <input
                 type="text"
                 readOnly
@@ -42,7 +40,7 @@ const SubmitInputs = () => {
           ))}
 
           {/* Work Experience */}
-          <div className="col-span-2">
+          <div className="col-span-1 sm:col-span-2">
             <input
               type="text"
               readOnly

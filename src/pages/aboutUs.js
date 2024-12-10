@@ -9,14 +9,16 @@ const AboutUs = () => {
       <div className="grid grid-cols-4">
         <div className="col-span-1">
           <RightBar
-            height={"106.4%"}
+            height={"100%"}
             topPositionH={1050}
             signinButtonPositionH={500}
           />
         </div>
         <div className="col-span-3 md:col-span-4 space-y-16 md:space-y-28 mt-20">
           <WhyWorkers />
-          <CounterMain />
+          <div className=" pb-20">
+            <CounterMain />
+          </div>
         </div>
       </div>
     </Layout>

@@ -3,7 +3,7 @@ import { FaSignInAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
 
-const RightBar = ({ dipslay, height, topPositionH,signinButtonPositionH }) => {
+const RightBar = ({ dipslay, height, topPositionH, signinButtonPositionH }) => {
   const [topPosition, setTopPosition] = useState("top-[13%]");
   const [signinButtonPosition, setSigninButtonPosition] = useState("block");
 
@@ -18,7 +18,9 @@ const RightBar = ({ dipslay, height, topPositionH,signinButtonPositionH }) => {
           ? "top-[4%]"
           : "top-[13%]"
       );
-      setSigninButtonPosition(scrollY > signinButtonPositionH ? "absolute top-[150%]" : "block");
+      setSigninButtonPosition(
+        scrollY > signinButtonPositionH ? "absolute top-[150%]" : "block"
+      );
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -27,7 +29,7 @@ const RightBar = ({ dipslay, height, topPositionH,signinButtonPositionH }) => {
 
   return (
     <div
-      className={`relative bg-main-1 w-full h-[103.5%]  pt-1 md:hidden`}
+      className={`relative bg-main-1 w-full h-[100%]  pt-1 md:hidden`}
       style={{ height: height }}
     >
       <div className={`fixed ${topPosition} transition-all z-[999]`}>
