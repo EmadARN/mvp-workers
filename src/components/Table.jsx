@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Title from "../common/Tilte";
 import { useAuth, useAuthActions } from "../context/AuthReducer";
+import { CiSearch } from "react-icons/ci";
 
 const Table = () => {
   const dispatch = useAuthActions();
-  const { loading, userInTable } = useAuth();
+  const {  userInTable } = useAuth();
 
   useEffect(() => {
     dispatch({
@@ -12,12 +13,39 @@ const Table = () => {
     });
   }, []);
 
+  const [searchState, setSearchState] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  useEffect(() => {
+    if (userInTable) {
+      const filtered = userInTable.filter((user) => {
+        const searchQuery = searchState.toLowerCase();
+        return (
+          user.first_name.toLowerCase().includes(searchQuery) ||
+          user.last_name.toLowerCase().includes(searchQuery) ||
+          user.job.toLowerCase().includes(searchQuery)
+        );
+      });
+      setFilteredUsers(filtered);
+    }
+  }, [searchState, userInTable]);
+
   return (
     <>
       <div className="my-16">
-        <Title title="ثپت نامی های اخیر" />
+        <Title title="ثبت نامی های اخیر" />
       </div>
-      <div className="overflow-x-auto ">
+      <div className="overflow-x-auto">
+        <div className="w-full relative flex justify-start mb-7">
+          <input
+            onChange={(e) => setSearchState(e.target.value)}
+            placeholder="جستجو"
+            className="border-b-2 border-black outline-0 text-center"
+          />
+          <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
+            <CiSearch size={"20px"} fontWeight={"bold"} />
+          </div>
+        </div>
         <table className="w-[100%] min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-main-2 text-white">
@@ -31,26 +59,42 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white hover:bg-gray-100 w-[100%]">
-              {userInTable && userInTable.length ? (
-                <>
+            {filteredUsers && filteredUsers.length > 0 ? (
+              filteredUsers.map((user, index) => (
+                <tr key={index} className="bg-white hover:bg-gray-100 w-[100%]">
                   <td className="px-4 py-2 border border-gray-300">
                     <img
-                      src="https://via.placeholder.com/40"
+                      src={
+                        user.profile_image || "https://via.placeholder.com/40"
+                      }
                       alt="Profile"
-                      className="rounded-full"
+                      className="rounded-full w-10 h-10"
                     />
                   </td>
                   <td className="px-4 py-2 border border-gray-300">
-                    علی احمدی
+                    {user.first_name} {user.last_name}
                   </td>
-                </>
-              ) : (
-                <div className="w-[100%] borde m-auto flex justify-center items-center">
-                  <h3>هیج کاربری وجود ندارد</h3>
-                </div>
-              )}
-            </tr>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {user.job}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {user.work_experience} سال
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {user.phone_number}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={5}
+                  className="text-center px-4 py-2 border border-gray-300"
+                >
+                  هیچ کاربری یافت نشد
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
