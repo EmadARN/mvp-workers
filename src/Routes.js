@@ -3,7 +3,6 @@ import CheckOTPForm from "./components/auth/otpForm/CheckOTPForm";
 import SendOTPForm from "./components/auth/otpForm/SendOTPForm";
 import RegisterMain from "./components/auth/registerForm/RegisterMain";
 import SignUpFinalPage from "./components/auth/submitInformation";
-import { SignupProvider } from "./context/signupProvider";
 import AboutUs from "./pages/aboutUs";
 import AllWorkerPage from "./pages/allWorkerPage";
 import Home from "./pages/home";
@@ -25,11 +24,7 @@ const routes = [
   },
   {
     path: "/signIn/",
-    element: (
-      <SignupProvider>
-        <SignIn />
-      </SignupProvider>
-    ),
+    element: <SignIn />,
     children: [
       {
         index: true,
