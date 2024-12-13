@@ -1,5 +1,6 @@
 import { FaAngleRight } from "react-icons/fa6";
-import { contactInfo, quickLinks, services } from "../constants";
+import { contactInfo, navLinks, quickLinks, services } from "../constants";
+import { Link } from "react-router-dom";
 
 const FooterLink = ({ href, label }) => (
   <div className="flex items-center mt-4 group">
@@ -16,10 +17,10 @@ const FooterLink = ({ href, label }) => (
 const Footer = () => {
   return (
     <div className=" w-full  bg-main-2 ">
-      <footer className="">
+      <footer className="hidden md:block">
         <div className="flex flex-wrap justify-evenly py-12 ">
           {/* Useful Pages */}
-          <div className="flex flex-col items-start justify-center w-full  sm:w-1/2 md:w-1/4">
+          <div className="flex flex-col items-center justify-center w-full  sm:w-1/2 md:w-1/4">
             <h5 className="text-main-1 whitespace-nowrap text-xl mb-4">
               دسترسی سریع
             </h5>
@@ -35,7 +36,7 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div className="flex flex-col items-start justify-center w-full  sm:w-1/2 md:w-1/4">
+          <div className="flex flex-col items-center justify-center w-full  sm:w-1/2 md:w-1/4">
             <h5 className="text-main-1 text-xl mb-4 ">خدمات قابل ارائه</h5>
             <div className="h-48 ">
               {services.map((service) => (
@@ -54,7 +55,7 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="flex flex-col items-start justify-center w-full sm:w-1/2 md:w-1/4">
+          <div className="flex flex-col items-center justify-center w-full sm:w-1/2 md:w-1/4">
             <h5 className="text-main-1 text-xl mb-4">راه های ارتباطی با ما</h5>
             <div className="h-48">
               {contactInfo.map((info, index) => (
@@ -69,9 +70,22 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <div className="flex items-center justify-center py-4 border-t-[1px] border-t-main-1 ">
-        <p className="text-white text-xl">ساخته شده توسط</p>
-        <p className="ml-2 text-main-1 text-xl pr-2 bold">آدلی کارا</p>
+
+      <div className=" flex md:hidden  justify-evenly py-4 border-t-[1px] border-t-main-1 w-full ">
+        {navLinks.map(({ to, icon, label }) => (
+          <>
+            <div className="flex justify-center w-full  border-r-2 border-main-1">
+              <Link
+                key={to}
+                to={to}
+                title={label}
+                className="text-white text-xl no-underline"
+              >
+                <span>{icon}</span>
+              </Link>
+            </div>
+          </>
+        ))}
       </div>
     </div>
   );

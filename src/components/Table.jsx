@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import Title from "../common/Tilte";
 import { useAuth, useAuthActions } from "../context/AuthReducer";
 import { CiSearch } from "react-icons/ci";
+import { useLocation } from "react-router-dom";
 
 const Table = () => {
+  const location = useLocation();
+  console.log("loc", location);
+
   const dispatch = useAuthActions();
-  const {  userInTable } = useAuth();
+  const { userInTable } = useAuth();
 
   useEffect(() => {
     dispatch({
@@ -36,16 +40,19 @@ const Table = () => {
         <Title title="ثبت نامی های اخیر" />
       </div>
       <div className="overflow-x-auto">
-        <div className="w-full relative flex justify-start mb-7">
-          <input
-            onChange={(e) => setSearchState(e.target.value)}
-            placeholder="جستجو"
-            className="border-b-2 border-black outline-0 text-center"
-          />
-          <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
-            <CiSearch size={"20px"} fontWeight={"bold"} />
+        {location.pathname === "/allWorker" ? (
+          <div className="w-full relative flex justify-start mb-7">
+            <input
+              onChange={(e) => setSearchState(e.target.value)}
+              placeholder="جستجو"
+              className="border-b-2 border-black outline-0 text-center"
+            />
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
+              <CiSearch size={"20px"} fontWeight={"bold"} />
+            </div>
           </div>
-        </div>
+        ) : null}
+
         <table className="w-[100%] min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-main-2 text-white">
