@@ -5,14 +5,17 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthReducer } from "./context/AuthReducer.js";
 import { Toaster } from "react-hot-toast";
 import StateContext from "./context/StateContext.js";
+import { SignupProvider } from "./context/signupProvider.js";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthReducer>
-      <StateContext>
-      <App />
-      <Toaster />
-      </StateContext>
-    </AuthReducer>
+    <SignupProvider>
+      <AuthReducer>
+        <StateContext>
+          <App />
+          <Toaster />
+        </StateContext>
+      </AuthReducer>
+    </SignupProvider>
   </BrowserRouter>
 );

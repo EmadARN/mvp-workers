@@ -5,11 +5,13 @@ import Stepper from "../Stepper";
 import CustomeBtn from "../../../common/CustomeBtn";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useSignup } from "../../../context/signupProvider";
 
 const SendOTPForm = () => {
   const { loading } = useAuth();
   const navigate = useNavigate();
   const dispatch = useAuthActions();
+  const { setCurrentStep } = useSignup();
 
   // تعریف اعتبارسنجی با Yup
   const validationSchema = Yup.object().shape({
@@ -26,6 +28,7 @@ const SendOTPForm = () => {
 
     setTimeout(() => {
       if (!loading) {
+        setCurrentStep(2);
         navigate("SigninOtp");
       }
     }, 3000);

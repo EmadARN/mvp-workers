@@ -4,11 +4,13 @@ import usePinInput from "./usePinInput";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useCookie } from "../../../hooks/useCookies";
+import { useSignup } from "../../../context/signupProvider";
 
 const RESEND_TIME = 90;
 function useCheckOTP(length = 6) {
   const [time, setTime] = useState(RESEND_TIME);
   const navigate = useNavigate();
+  const { setCurrentStep } = useSignup();
 
   const [cookieValue, setBrowserCookie] = useCookie("auth-token");
   const { phone_number, token } = useAuth();
@@ -18,6 +20,7 @@ function useCheckOTP(length = 6) {
   useEffect(() => {
     if (token) {
       setBrowserCookie(token, "auth-token");
+      setCurrentStep(3);
       navigate("/signIn/SigninRegister");
     }
   }, [token, navigate, setBrowserCookie]);
