@@ -78,7 +78,7 @@ export const fields = [
     id: "job",
     label: "شغل:",
     type: "select",
-    options: ["خدمات منزل", "خدمات ساختمانی"], // لیست شغل‌ها
+    options: ["یکی را انتخاب کنید", "خدمات منزل", "خدمات ساختمانی"], // لیست شغل‌ها
   },
 ];
 
@@ -86,17 +86,17 @@ export const fields = [
 export const navLinks = [
   {
     to: "/",
-    icon: <FaHome />,
+    icon: <FaHome size={"26px"} />,
     label: "خانه",
   },
   {
     to: "/About",
-    icon: <LuShieldAlert />,
+    icon: <LuShieldAlert size={"26px"} />,
     label: "درباره ما",
   },
   {
     to: "/ServicesPage",
-    icon: <MdOutlineMiscellaneousServices />,
+    icon: <MdOutlineMiscellaneousServices  size={"26px"}/>,
     label: "سرویس ها",
   },
 ];

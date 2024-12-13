@@ -53,9 +53,11 @@ const RegisterMain = () => {
                   className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main-1"
                 >
                   {field.options.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
+                    <>
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    </>
                   ))}
                 </select>
               ) : null}

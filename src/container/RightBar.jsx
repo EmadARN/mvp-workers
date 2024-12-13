@@ -29,7 +29,7 @@ const RightBar = ({ dipslay, height, topPositionH, signinButtonPositionH }) => {
 
   return (
     <div
-      className={`relative bg-main-1 w-full h-[100%]  pt-1 md:hidden`}
+      className={` relative  w-full h-[100%]  pt-1 md:hidden`}
       style={{ height: height }}
     >
       <div className={`fixed ${topPosition} transition-all z-[999]`}>

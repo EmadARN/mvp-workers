@@ -6,15 +6,15 @@ import CounterMain from "../components/counterMain/CounterMain";
 const AboutUs = () => {
   return (
     <Layout>
-      <div className="grid grid-cols-4">
-        <div className="col-span-1">
+      <div className="grid grid-cols-3">
+        {/* <div className="col-span-1">
           <RightBar
             height={"100%"}
             topPositionH={1050}
             signinButtonPositionH={500}
           />
-        </div>
-        <div className="col-span-3 md:col-span-4 space-y-16 md:space-y-28 mt-20">
+        </div> */}
+        <div className="col-span-3 md:col-span-4 space-y-16 md:space-y-28 ">
           <WhyWorkers />
           <div className=" pb-20">
             <CounterMain />

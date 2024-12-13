@@ -7,9 +7,9 @@ const AllWorkerPage = () => {
   return (
     <Layout>
       <div className="grid grid-cols-4">
-        <div className="col-span-1">
+        {/* <div className="col-span-1">
           <RightBar />
-        </div>
+        </div> */}
         <div className="col-span-3 md:col-span-4 space-y-16 mx-16 ">
           <Table />
           <div className="w-full flex justify-center">

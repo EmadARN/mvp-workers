@@ -16,7 +16,7 @@ export const useRegisterLogic = () => {
     last_name: "",
     work_experience: "",
     city: "زنجان",
-    job: "خدمات منزل",
+    job: " ",
   });
 
   const navigate = useNavigate();
@@ -54,6 +54,7 @@ export const useRegisterLogic = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+   
     try {
       dispatch({
         type: "FORM_POST",
