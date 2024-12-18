@@ -76,7 +76,7 @@ const FAQItem = ({ panel, title, children, expanded, handleChange }) => {
           expanded === panel ? "bg-main-2 text-main-1" : "bg-main-1"
         }`}
       >
-        <h2 className="text-lg md:text-xl font-medium">{title}</h2>
+        <h2 className="text-lg md:text-xl font-medium whitespace-nowrap">{title}</h2>
         <span>{expanded === panel ? "⯆" : "⯈"}</span>
       </div>
       <div

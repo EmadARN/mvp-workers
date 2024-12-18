@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 const Table = () => {
   const location = useLocation();
-  console.log("loc", location);
+
 
   const dispatch = useAuthActions();
   const { userInTable } = useAuth();

@@ -38,7 +38,7 @@ function Carousel() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-full mx-auto overflow-hidden">
+    <div className="mt-20 md:mt-0 relative w-full max-w-full mx-auto overflow-hidden">
       {/* اسلاید با عکس */}
       <div
         className={`relative w-full ${getSlideHeight(

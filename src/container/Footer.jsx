@@ -3,7 +3,7 @@ import { contactInfo, navLinks, quickLinks, services } from "../constants";
 import { Link } from "react-router-dom";
 
 const FooterLink = ({ href, label }) => (
-  <div className="flex items-center mt-4 group">
+  <div className="flex items-center justify-center mt-4 group">
     <FaAngleRight className="text-white text-lg group-hover:text-main-1 transition duration-500 ease-in-out" />
     <a
       href={href}
@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div className="flex flex-col items-center justify-center w-full  sm:w-1/2 md:w-1/4">
+          <div className="flex flex-col items-center  w-full  sm:w-1/2 md:w-1/4">
             <h5 className="text-main-1 text-xl mb-4 ">خدمات قابل ارائه</h5>
             <div className="h-48 ">
               {services.map((service) => (
@@ -59,7 +59,7 @@ const Footer = () => {
             <h5 className="text-main-1 text-xl mb-4">راه های ارتباطی با ما</h5>
             <div className="h-48">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-center mt-4">
+                <div key={index} className="flex items-center mt-4 justify-center">
                   <span className="text-white text-lg">
                     <i className={`fas ${info.icon}`}></i>
                   </span>
@@ -70,8 +70,8 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-
-      <div className=" flex md:hidden  justify-evenly py-4 border-t-[1px] border-t-main-1 w-full ">
+      {/* mobile ui */}
+      <div className=" flex md:hidden justify-evenly py-4 border-t-[1px] border-t-main-1 w-full fixed bottom-0 left-0 bg-main-2 z-50">
         {navLinks.map(({ to, icon, label }) => (
           <>
             <div className="flex justify-center w-full  border-r-2 border-main-1">

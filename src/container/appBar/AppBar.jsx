@@ -2,16 +2,29 @@ import { MdForwardToInbox, MdOutlinePhoneCallback } from "react-icons/md";
 import NavBar from "./NavBar";
 import { toPersianDigits } from "../../utils/toPersianDigits";
 import { FaRegAddressBook } from "react-icons/fa";
+import BtnAnimation from "../../common/BtnAnimation";
+import { useLocation } from "react-router-dom";
 
 const AppBar = ({ signinBtnDisplay }) => {
+
+  const location = useLocation();
   return (
-    <div className="w-full bg-main-1">
-      <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
+    <div className=" w-full bg-main-1 fixed top-0 left-0 z-50 md:relative">
+      <div className="container mx-auto flex flex-wrap items-center justify-between py-2">
         {/* Title Section */}
-        <div className="w-full md:w-1/3 text-center md:text-left mt-3">
+        <div className={`flex ${location.pathname.startsWith("/signIn") ? "justify-center" : "justify-between"} w-full md:w-1/3 md:text-left mt-3`}>
           <h1 className="text-4xl md:text-6xl font-bold font-sans_bold">
             سازندگان
           </h1>
+          
+          <div className={`pl-3 flex items-center block md:hidden ${signinBtnDisplay}`}>
+          <BtnAnimation
+            title="ثبت نام کارجو"
+            color="#fff"
+            size="18px"
+            fweight="700"
+          />
+        </div>
         </div>
 
         {/* Info Section */}
