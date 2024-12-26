@@ -6,7 +6,8 @@ import { useLocation } from "react-router-dom";
 
 const Table = () => {
   const location = useLocation();
-
+  const [searchState, setSearchState] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const dispatch = useAuthActions();
   const { userInTable } = useAuth();
@@ -17,22 +18,32 @@ const Table = () => {
     });
   }, []);
 
-  const [searchState, setSearchState] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState([]);
+
 
   useEffect(() => {
     if (userInTable) {
+      const searchQuery = searchState.toLowerCase();
       const filtered = userInTable.filter((user) => {
-        const searchQuery = searchState.toLowerCase();
+       
+        const isMatchingJob =
+          (location.pathname === "/constructionServices" &&
+            user.job === "خدمات ساختمانی") ||
+          (location.pathname === "/homeServices" &&
+            user.job === "خدمات منزل") ||
+          (location.pathname !== "/constructionServices" &&
+            location.pathname !== "/homeServices");
+
+    
         return (
-          user.first_name.toLowerCase().includes(searchQuery) ||
-          user.last_name.toLowerCase().includes(searchQuery) ||
-          user.job.toLowerCase().includes(searchQuery)
+          isMatchingJob &&
+          (user.first_name.toLowerCase().includes(searchQuery) ||
+            user.last_name.toLowerCase().includes(searchQuery) ||
+            user.job.toLowerCase().includes(searchQuery))
         );
       });
       setFilteredUsers(filtered);
     }
-  }, [searchState, userInTable]);
+  }, [searchState, userInTable, location.pathname]);
 
   return (
     <>
@@ -40,7 +51,7 @@ const Table = () => {
         <Title title="ثبت نامی های اخیر" />
       </div>
       <div className="overflow-x-auto">
-        {location.pathname === "/allWorker" ? (
+        {location.pathname === "/allWorker" || location.pathname==="/constructionServices" || location.pathname==="/homeServices" ? (
           <div className="w-full relative flex justify-start mb-7">
             <input
               onChange={(e) => setSearchState(e.target.value)}

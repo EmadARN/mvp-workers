@@ -5,7 +5,9 @@ import RegisterMain from "./components/auth/registerForm/RegisterMain";
 import SignUpFinalPage from "./components/auth/submitInformation";
 import AboutUs from "./pages/aboutUs";
 import AllWorkerPage from "./pages/allWorkerPage";
+import ConstructureServices from "./pages/ConstructureServices";
 import Home from "./pages/home";
+import HomeServices from "./pages/HomeServices";
 import ServicesUs from "./pages/servicesUs";
 import SignIn from "./pages/signIn";
 import StepProtectedRoute from "./ProtectedRoute";
@@ -21,6 +23,14 @@ const routes = [
   {
     path: "/allWorker",
     element: <AllWorkerPage />,
+  },
+  {
+    path: "/constructionServices",
+    element: <ConstructureServices />,
+  },
+  {
+    path: "/homeServices",
+    element: <HomeServices />,
   },
   {
     path: "/signIn/",
