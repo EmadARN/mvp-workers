@@ -12,7 +12,7 @@ const AllWorkerPage = () => {
         </div> */}
         <div className="col-span-3 md:col-span-4 space-y-16 mx-16 ">
           <Table />
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center mb-10 ">
             <BtnAnimation
               title="ثبت نام کارجو"
               color="#111"

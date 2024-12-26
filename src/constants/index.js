@@ -108,14 +108,14 @@ export const buttons = [
     name: "خدمات  ساختمانی",
     img: builder,
     desc: "نیروی کارگر ساختمان",
-    to: "/allWorker",
+    to: "/constructionServices",
   },
   {
     id: 2,
     name: "خدمات منزل",
     img: mechanic,
     desc: " خدمات منزل",
-    to: "/allWorker",
+    to: "/homeServices",
   },
 ];
 
