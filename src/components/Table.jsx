@@ -12,6 +12,8 @@ const Table = () => {
   const dispatch = useAuthActions();
   const { userInTable } = useAuth();
 
+
+  
   useEffect(() => {
     dispatch({
       type: "USERS_TABLE",

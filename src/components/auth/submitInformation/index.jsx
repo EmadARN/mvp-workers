@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import SubmitInputs from "./SubmitInputs";
 import Stepper from "../Stepper";
 import { useCookie } from "../../../hooks/useCookies";
-import { useAuthActions } from "../../../context/AuthReducer";
+import { useAuth, useAuthActions } from "../../../context/AuthReducer";
 import { useFormState } from "../../../context/StateContext";
 import CustomeBtn from "../../../common/CustomeBtn";
 
@@ -11,6 +11,7 @@ const SignUpFinalPage = () => {
   const dispatch = useAuthActions();
   const [cookieValue] = useCookie("auth-token");
   const { setFormState } = useFormState();
+  const { userInTable,userInfo } = useAuth();
 
   const handleButtonClick = () => {
     dispatch({
@@ -24,6 +25,8 @@ const SignUpFinalPage = () => {
     setFormState(true);
     navigate("/signIn/SigninRegister");
   };
+
+  console.log('sssssss',userInTable);
 
   return (
     <div className="mt-8 w-full px-4  px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">

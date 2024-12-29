@@ -3,11 +3,11 @@ import { contactInfo, navLinks, quickLinks, services } from "../constants";
 import { Link } from "react-router-dom";
 
 const FooterLink = ({ href, label }) => (
-  <div className="flex items-center justify-center mt-4 group">
-    <FaAngleRight className="text-white text-lg group-hover:text-main-1 transition duration-500 ease-in-out" />
+  <div className="flex justify-start text-center mt-4 group ">
+    <FaAngleRight className="text-white text-lg group-hover:text-main-1 transition duration-500 ease-in-out ml-3" />
     <a
       href={href}
-      className="text-white text-lg hover:text-main-1 transition duration-500 ease-in-out ml-2 group-hover:text-main-1"
+      className="text-white text-center text-lg hover:text-main-1 transition duration-500 ease-in-out ml-2 group-hover:text-main-1"
     >
       {label}
     </a>
@@ -16,7 +16,7 @@ const FooterLink = ({ href, label }) => (
 
 const Footer = () => {
   return (
-    <div className=" w-full  bg-main-2 ">
+    <div className=" w-full  bg-main-2 pt-6">
       <footer className="hidden md:block">
         <div className="flex flex-wrap justify-evenly py-12 ">
           {/* Useful Pages */}
@@ -36,9 +36,9 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div className="flex flex-col items-center  w-full  sm:w-1/2 md:w-1/4">
-            <h5 className="text-main-1 text-xl mb-4 ">خدمات قابل ارائه</h5>
-            <div className="h-48 ">
+          <div className="flex flex-col items-center   w-full  sm:w-1/2 md:w-1/4 text-justify">
+            <h5 className="text-main-1 text-xl mb-4 ml-6">خدمات قابل ارائه</h5>
+            <div className="h-48  ">
               {services.map((service) => (
                 <FooterLink
                   key={service.href}
@@ -59,7 +59,10 @@ const Footer = () => {
             <h5 className="text-main-1 text-xl mb-4">راه های ارتباطی با ما</h5>
             <div className="h-48">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-center mt-4 justify-center">
+                <div
+                  key={index}
+                  className="flex items-center mt-4 justify-center"
+                >
                   <span className="text-white text-lg">
                     <i className={`fas ${info.icon}`}></i>
                   </span>

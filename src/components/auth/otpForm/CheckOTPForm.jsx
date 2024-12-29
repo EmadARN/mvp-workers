@@ -39,7 +39,7 @@ function CheckOTPForm({ length = 6 }) {
               key={index}
               {...getInputProps(index)} // پراپ‌های مدیریت‌شده توسط هوک
               autoFocus={index === 0} // فوکوس روی آخرین خانه
-              className="w-6 h-6 md:w-12 md:h-12 border-2 border-gray-300 text-center text-xl font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-main-2 transition duration-300 ease-in-out "
+              className="w-10 py-4 h-6  md:w-12 md:h-12 border-2 border-gray-300 text-center text-xl font-bold rounded-md focus:outline-none focus:ring-2 focus:ring-main-2 transition duration-300 ease-in-out "
             />
           ))}
         </div>
