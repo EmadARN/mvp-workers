@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const BtnAnimation = ({ title, color, size, ffamily, fweight }) => {
   return (
-    <div className="relative overflow-hidden mb-10">
+    <div className="relative overflow-hidden ">
       {/* انیمیشن خطوط */}
       <div className="absolute top-0 right-0 w-[2px] h-full bg-gradient-to-b from-[#030f27] to-[#fdbe33] animate-line1"></div>
       <div className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#030f27] to-[#fdbe33] animate-line2"></div>

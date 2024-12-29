@@ -12,8 +12,8 @@ const AppBar = ({ signinBtnDisplay }) => {
     <div className=" w-full bg-main-1 fixed top-0 left-0 z-50 md:relative">
       <div className="container mx-auto flex flex-wrap items-center justify-between py-2">
         {/* Title Section */}
-        <div className={`flex ${location.pathname.startsWith("/signIn") ? "justify-center" : "justify-between"} w-full md:w-1/3 md:text-left mt-3`}>
-          <h1 className="text-4xl md:text-6xl font-bold font-sans_bold">
+        <div className={`flex ${location.pathname.startsWith("/signIn") ? "justify-center" : "justify-between"}  w-full md:w-1/3 md:text-left mt-3`}>
+          <h1 className="text-3xl md:text-6xl font-bold font-sans_bold p-2">
             سازندگان
           </h1>
           

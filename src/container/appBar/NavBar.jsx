@@ -20,7 +20,7 @@ function NavBar({ signinBtnDisplay }) {
         className={`${
           isScrolled
             ? "bg-main-2  fixed top-0 w-full z-50 flex justify-between items-center px-4 py-2 transition-all duration-1000"
-            : "bg-main-2 w-11/12 mx-auto flex justify-between items-center px-4 py-2 transition-all duration-1000"
+            : " bg-main-2 w-11/12 mx-auto flex justify-between items-center px-4 py-2 transition-all duration-1000"
         }`}
       >
         {/* Navigation Links */}
@@ -41,7 +41,7 @@ function NavBar({ signinBtnDisplay }) {
         </div>
 
         {/* Signup Button */}
-        <div className={`pl-3 flex items-center ${signinBtnDisplay}`}>
+        <div className={`pl-3 flex items-center py-5 ${signinBtnDisplay}`}>
           <BtnAnimation
             title="ثبت نام کارجو"
             color="#fff"

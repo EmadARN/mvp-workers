@@ -12,18 +12,18 @@ const Home = () => {
   return (
     <Layout>
       <div className="grid grid-cols-3 flex-grow">
-        <div className="col-span-3 md:col-span-4 space-y-16 md:space-y-28">
+        <div className="col-span-3 md:col-span-4 md:space-y-28">
           <Carousel />
           <BackToUp />
-          <div className=" mx-6 sm:mx-16">
+          <div className=" mx-6 sm:mx-16 my-16 md:my-6">
             <WhyWorkers />
           </div>
           <CounterMain />
-          <div className=" mx-6 sm:mx-16">
+          <div className=" mx-6 sm:mx-16 my-16 md:my-6" >
             <Table />
           </div>
           {serviceVisitBtn()}
-          <div className=" mx-6 sm:mx-16 pb-12">
+          <div className=" mx-6 sm:mx-16 pb-12 my-16 md:my-6">
             <FAQs />
           </div>
         </div>
