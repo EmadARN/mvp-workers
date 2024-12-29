@@ -86,17 +86,17 @@ export const fields = [
 export const navLinks = [
   {
     to: "/",
-    icon: <FaHome size={"26px"} />,
+    icon: <FaHome className="text-2xl sm:text-3xl " />,
     label: "خانه",
   },
   {
     to: "/About",
-    icon: <LuShieldAlert size={"26px"} />,
+    icon: <LuShieldAlert className="text-2xl sm:text-3xl " />,
     label: "درباره ما",
   },
   {
     to: "/ServicesPage",
-    icon: <MdOutlineMiscellaneousServices  size={"26px"}/>,
+    icon: <MdOutlineMiscellaneousServices className="text-2xl sm:text-3xl "/>,
     label: "سرویس ها",
   },
 ];
