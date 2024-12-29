@@ -1,8 +1,7 @@
 import Layout from "../container";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const SignIn = () => {
-
   return (
     <Layout signinBtnDisplay="invisible">
       <div className="flex flex-col items-center justify-center min-h-screen  bg-gray-100 px-4">

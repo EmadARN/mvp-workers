@@ -35,7 +35,7 @@ const SendOTPForm = () => {
   };
 
   return (
-    <div  className="px-4 sm:px-6 md:px-8 lg:px-10 ">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-10 ">
       <Stepper currentStep={1} />
       <Formik
         initialValues={{ phoneNumber: "" }}
@@ -46,9 +46,7 @@ const SendOTPForm = () => {
           <Form className="space-y-10">
             <div className="w-full sm:w-96 mx-auto ">
               <Field
-              className={"w-full px-4 py-2 border rounded-md border-black" 
-              
-              }
+                className={"w-full px-4 py-2 border rounded-md border-black"}
                 name="phoneNumber"
                 as={TextField}
                 label="شماره موبایل"

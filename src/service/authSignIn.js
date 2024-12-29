@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import { baseURL } from "./http";
+import { API_URLS } from "./http";
 
 export const asyncActionHandlers = {
   PHONENUMBER_GET:
@@ -8,14 +8,12 @@ export const asyncActionHandlers = {
       dispatch({ type: "PHONENUMBER_GET_PENDING" });
       try {
         const response = await fetch(
-          `${baseURL}/Auth/signup/phone_number=${action.payload}/`
+          API_URLS.signupPhoneNumber(action.payload)
         );
-        const data = await response.json();
+        await response.json();
         toast.success("شماره همراه با موفقیت ثبت شد");
         dispatch({ type: "PHONENUMBER_GET_SUCCESS", payload: action.payload });
-        console.log(data);
       } catch (error) {
-        console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
         dispatch({ type: "PHONENUMBER_GET_REJECT", error: errorMessage });
@@ -27,28 +25,24 @@ export const asyncActionHandlers = {
     async (action) => {
       dispatch({ type: "OTP_POST_PENDING" });
       try {
-        const response = await fetch(
-          `${baseURL}/Auth/validate/signup/phone_number/`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              phone_number: action.payload.phoneNumber,
-              code: action.payload.otp,
-            }),
-          }
-        );
+        const response = await fetch(API_URLS.validateOTP, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            phone_number: action.payload.phoneNumber,
+            code: action.payload.otp,
+          }),
+        });
         const data = await response.json();
         if (data.status === 200) {
           dispatch({ type: "OTP_POST_SUCCESS", payload: data.token });
           toast.success("کد تایید با موفقیت ثبت شد");
         } else {
-          throw new Error("کد وارد شده اشتباه است");
+          toast.error("کد وارد شده صحیح نمیباشد");
         }
       } catch (error) {
-        console.log(error);
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
         dispatch({ type: "OTP_POST_REJECT", error: errorMessage });
@@ -60,21 +54,17 @@ export const asyncActionHandlers = {
     async (action) => {
       dispatch({ type: "FORM_POST_PENDING" });
       try {
-        const response = await fetch(
-          `${baseURL}/AddUserInf/send/first_level/inf/`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${action.payload.cookieValue}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(action.payload.formData),
-          }
-        );
-        const data = await response.json();
+        const response = await fetch(API_URLS.addUserInfo, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${action.payload.cookieValue}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(action.payload.formData),
+        });
+        await response.json();
         toast.success("اطلاعات با موفقیت ثبت شد");
         dispatch({ type: "FORM_POST_SUCCESS" });
-        console.log("form success", data);
       } catch (error) {
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
@@ -87,7 +77,7 @@ export const asyncActionHandlers = {
     async (action) => {
       dispatch({ type: "UPLOAD_IMG_POST_PENDING" });
       try {
-        const response = await fetch(`${baseURL}/AddUserInf/upload/image/`, {
+        const response = await fetch(API_URLS.uploadImage, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${action.payload.token}`,
@@ -109,19 +99,15 @@ export const asyncActionHandlers = {
     async (action) => {
       dispatch({ type: "CAPTURE_IMG_POST_PENDING" });
       try {
-        const response = await fetch(
-          `${baseURL}/AddUserInf/upload/image/camera/`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${action.payload.token}`,
-            },
-            body: action.payload.formData,
-          }
-        );
+        const response = await fetch(API_URLS.uploadCameraImage, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${action.payload.token}`,
+          },
+          body: action.payload.formData,
+        });
         dispatch({ type: "CAPTURE_IMG_POST_SUCCESS" });
         toast.success("تصویر با موفقیت گرفته شد!");
-        console.log(await response.json());
       } catch (error) {
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
@@ -134,7 +120,7 @@ export const asyncActionHandlers = {
     async (action) => {
       dispatch({ type: "FORM_GET_PENDING" });
       try {
-        const response = await fetch(`${baseURL}/UserInf/account/inf/`, {
+        const response = await fetch(API_URLS.getUserInfo, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${action.payload.cookieValue}`,
@@ -143,7 +129,6 @@ export const asyncActionHandlers = {
         });
         const data = await response.json();
         dispatch({ type: "FORM_GET_SUCCESS", payload: data.user_inf });
-        console.log("form success", data);
       } catch (error) {
         const errorMessage = error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
@@ -155,17 +140,15 @@ export const asyncActionHandlers = {
     ({ dispatch }) =>
     async (action) => {
       dispatch({ type: "FINALIZATION_SIGNUP_GET_PENDING" });
+
       try {
-        const response = await fetch(
-          `${baseURL}/AddUserInf/finalization/signup/`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${action.payload.cookieValue}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(API_URLS.finalizeSignup, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${action.payload.cookieValue}`,
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         dispatch({ type: "FINALIZATION_SIGNUP_GET_SUCCESS" });
         console.log("form success", data);
@@ -182,19 +165,22 @@ export const asyncActionHandlers = {
   USERS_TABLE:
     ({ dispatch }) =>
     async (action) => {
-      dispatch({ type: "GET_USER_LIST_PENDING" });
       try {
-        const response = await fetch(`${baseURL}/UserInf/user/list/`, {
+        const response = await fetch(API_URLS.getUserList, {
           method: "GET",
           headers: {
-            Authorization: "Barear 1",
+            Authorization: `Bearer ${action.token}`,
+            "Content-Type": "application/json",
           },
         });
+
         const data = await response.json();
+
         dispatch({ type: "GET_USER_LIST_SUCCESS", payload: data.data });
-        console.log("tabel success", data);
+        console.log("لیست کاربران با موفقیت دریافت شد:", data);
       } catch (error) {
-        const errorMessage = error.message || "خطایی رخ داده است";
+        const errorMessage =
+          error.response?.data?.message || error.message || "خطایی رخ داده است";
         toast.error(errorMessage);
         dispatch({ type: "GET_USER_LIST_REJECT", error: errorMessage });
       }

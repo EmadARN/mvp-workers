@@ -25,12 +25,8 @@ const Footer = () => {
               دسترسی سریع
             </h5>
             <div className="h-48">
-              {quickLinks.map((link) => (
-                <FooterLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                />
+              {quickLinks.map((link, index) => (
+                <FooterLink key={index} href={link.href} label={link.label} />
               ))}
             </div>
           </div>
@@ -39,9 +35,9 @@ const Footer = () => {
           <div className="flex flex-col items-center  w-full  sm:w-1/2 md:w-1/4">
             <h5 className="text-main-1 text-xl mb-4 ">خدمات قابل ارائه</h5>
             <div className="h-48 ">
-              {services.map((service) => (
+              {services.map((service, index) => (
                 <FooterLink
-                  key={service.href}
+                  key={index}
                   href={service.href}
                   label={service.label}
                 />
@@ -59,7 +55,10 @@ const Footer = () => {
             <h5 className="text-main-1 text-xl mb-4">راه های ارتباطی با ما</h5>
             <div className="h-48">
               {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-center mt-4 justify-center">
+                <div
+                  key={index}
+                  className="flex items-center mt-4 justify-center"
+                >
                   <span className="text-white text-lg">
                     <i className={`fas ${info.icon}`}></i>
                   </span>
@@ -73,10 +72,9 @@ const Footer = () => {
       {/* mobile ui */}
       <div className=" flex md:hidden justify-evenly py-4 border-t-[1px] border-t-main-1 w-full fixed bottom-0 left-0 bg-main-2 z-50">
         {navLinks.map(({ to, icon, label }) => (
-          <>
+          <div key={to}>
             <div className="flex justify-center w-full  border-r-2 border-main-1">
               <Link
-                key={to}
                 to={to}
                 title={label}
                 className="text-white text-xl no-underline"
@@ -84,7 +82,7 @@ const Footer = () => {
                 <span>{icon}</span>
               </Link>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>

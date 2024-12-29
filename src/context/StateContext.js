@@ -6,7 +6,9 @@ const StateContext = ({ children }) => {
   const [formState, setFormState] = useState(false);
 
   return (
-    <FormState.Provider value={{ formState, setFormState }}>
+    <FormState.Provider
+      value={{ formState, setFormState}}
+    >
       {children}
     </FormState.Provider>
   );

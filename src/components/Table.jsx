@@ -1,48 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Title from "../common/Tilte";
 import { useAuth, useAuthActions } from "../context/AuthReducer";
 import { CiSearch } from "react-icons/ci";
 import { useLocation } from "react-router-dom";
+import { useCookie } from "../hooks/useCookies";
 
 const Table = () => {
   const location = useLocation();
   const [searchState, setSearchState] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState([]);
 
   const dispatch = useAuthActions();
   const { userInTable } = useAuth();
+  const [cookieValue] = useCookie("auth-token");
 
+  const request = () => {
+    dispatch({
+      type: "USERS_TABLE",
+      token: cookieValue,
+    });
+  };
   useEffect(() => {
     dispatch({
       type: "USERS_TABLE",
+      token: cookieValue,
     });
-  }, []);
+  }, [dispatch, cookieValue]);
 
+  const filteredUsers = useMemo(() => {
+    if (!userInTable) return [];
 
+    const searchQuery = searchState.toLowerCase();
+    return userInTable.filter((user) => {
+      const isMatchingJob =
+        (location.pathname === "/constructionServices" &&
+          user.job === "خدمات ساختمانی") ||
+        (location.pathname === "/homeServices" && user.job === "خدمات منزل") ||
+        (location.pathname !== "/constructionServices" &&
+          location.pathname !== "/homeServices");
 
-  useEffect(() => {
-    if (userInTable) {
-      const searchQuery = searchState.toLowerCase();
-      const filtered = userInTable.filter((user) => {
-       
-        const isMatchingJob =
-          (location.pathname === "/constructionServices" &&
-            user.job === "خدمات ساختمانی") ||
-          (location.pathname === "/homeServices" &&
-            user.job === "خدمات منزل") ||
-          (location.pathname !== "/constructionServices" &&
-            location.pathname !== "/homeServices");
-
-    
-        return (
-          isMatchingJob &&
-          (user.first_name.toLowerCase().includes(searchQuery) ||
-            user.last_name.toLowerCase().includes(searchQuery) ||
-            user.job.toLowerCase().includes(searchQuery))
-        );
-      });
-      setFilteredUsers(filtered);
-    }
+      return (
+        isMatchingJob &&
+        (user.first_name.toLowerCase().includes(searchQuery) ||
+          user.last_name.toLowerCase().includes(searchQuery) ||
+          user.job.toLowerCase().includes(searchQuery))
+      );
+    });
   }, [searchState, userInTable, location.pathname]);
 
   return (
@@ -51,7 +53,9 @@ const Table = () => {
         <Title title="ثبت نامی های اخیر" />
       </div>
       <div className="overflow-x-auto">
-        {location.pathname === "/allWorker" || location.pathname==="/constructionServices" || location.pathname==="/homeServices" ? (
+        {location.pathname === "/allWorker" ||
+        location.pathname === "/constructionServices" ||
+        location.pathname === "/homeServices" ? (
           <div className="w-full relative flex justify-start mb-7">
             <input
               onChange={(e) => setSearchState(e.target.value)}
@@ -116,6 +120,9 @@ const Table = () => {
           </tbody>
         </table>
       </div>
+      <button className="bg-slate-600 mx-auto" onClick={request}>
+        ریفرش
+      </button>
     </>
   );
 };

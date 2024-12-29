@@ -133,7 +133,7 @@ const reducer = (state, action) => {
         ...state,
         userInTable: null,
         error: action.error,
-        loading: false,
+        loading: true,
       };
     case "GET_USER_LIST_SUCCESS":
       return {
@@ -142,7 +142,7 @@ const reducer = (state, action) => {
         error: action.error,
         loading: false,
       };
-    case "GET_USER_LIST_REJECTED":
+    case "GET_USER_LIST_REJECT":
       return {
         ...state,
         userInTable: null,
