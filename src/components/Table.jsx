@@ -32,11 +32,12 @@ const Table = () => {
     const searchQuery = searchState.toLowerCase();
     return userInTable.filter((user) => {
       const isMatchingJob =
-        (location.pathname === "/constructionServices" &&
+        (location.pathname === "/services/construction" &&
           user.job === "خدمات ساختمانی") ||
-        (location.pathname === "/homeServices" && user.job === "خدمات منزل") ||
-        (location.pathname !== "/constructionServices" &&
-          location.pathname !== "/homeServices");
+        (location.pathname === "/services/homeService" &&
+          user.job === "خدمات منزل") ||
+        (location.pathname !== "/services/construction" &&
+          location.pathname !== "/services/homeService");
 
       return (
         isMatchingJob &&
@@ -54,8 +55,8 @@ const Table = () => {
       </div>
       <div className="overflow-x-auto">
         {location.pathname === "/allWorker" ||
-        location.pathname === "/constructionServices" ||
-        location.pathname === "/homeServices" ? (
+        location.pathname === "/services/construction" ||
+        location.pathname === "services/homeService" ? (
           <div className="w-full relative flex justify-start mb-7">
             <input
               onChange={(e) => setSearchState(e.target.value)}

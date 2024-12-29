@@ -3,11 +3,10 @@ import CheckOTPForm from "./components/auth/otpForm/CheckOTPForm";
 import SendOTPForm from "./components/auth/otpForm/SendOTPForm";
 import RegisterMain from "./components/auth/registerForm/RegisterMain";
 import SignUpFinalPage from "./components/auth/submitInformation";
+import ServicesPage from "./components/ourServices/ServicesPage";
 import AboutUs from "./pages/aboutUs";
 import AllWorkerPage from "./pages/allWorkerPage";
-import ConstructureServices from "./pages/ConstructureServices";
 import Home from "./pages/home";
-import HomeServices from "./pages/HomeServices";
 import ServicesUs from "./pages/servicesUs";
 import SignIn from "./pages/signIn";
 import StepProtectedRoute from "./ProtectedRoute";
@@ -25,12 +24,17 @@ const routes = [
     element: <AllWorkerPage />,
   },
   {
-    path: "/constructionServices",
-    element: <ConstructureServices />,
-  },
-  {
-    path: "/homeServices",
-    element: <HomeServices />,
+    path: "/services",
+    children: [
+      {
+        path: "homeService",
+        element: <ServicesPage pageType="home" />,
+      },
+      {
+        path: "construction",
+        element: <ServicesPage pageType="construction" />,
+      },
+    ],
   },
   {
     path: "/signIn/",

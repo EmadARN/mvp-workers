@@ -17,8 +17,8 @@ export const quickLinks = [
 ];
 
 export const services = [
-  { href: "/About", label: "خدمات منزل" },
-  { href: "/About", label: "خدمات ساختمانی" },
+  { href: "/homeServices", label: "خدمات منزل" },
+  { href: "/constructionServices", label: "خدمات ساختمانی" },
 ];
 
 export const contactInfo = [
@@ -96,7 +96,7 @@ export const navLinks = [
   },
   {
     to: "/ServicesPage",
-    icon: <MdOutlineMiscellaneousServices className="text-2xl sm:text-3xl "/>,
+    icon: <MdOutlineMiscellaneousServices className="text-2xl sm:text-3xl " />,
     label: "سرویس ها",
   },
 ];
@@ -108,14 +108,14 @@ export const buttons = [
     name: "خدمات  ساختمانی",
     img: builder,
     desc: "نیروی کارگر ساختمان",
-    to: "/constructionServices",
+    to: "/services/construction",
   },
   {
     id: 2,
     name: "خدمات منزل",
     img: mechanic,
     desc: " خدمات منزل",
-    to: "/homeServices",
+    to: "/services/homeService",
   },
 ];
 

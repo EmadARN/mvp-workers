@@ -41,7 +41,7 @@ function NavBar({ signinBtnDisplay }) {
         </div>
 
         {/* Signup Button */}
-        <div className={`pl-3 flex items-center py-5 ${signinBtnDisplay}`}>
+        <div className={`pl-3 flex items-center py-5  ${signinBtnDisplay}`}>
           <BtnAnimation
             title="ثبت نام کارجو"
             color="#fff"
