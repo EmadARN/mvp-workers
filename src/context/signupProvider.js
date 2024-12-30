@@ -6,12 +6,14 @@ export const useSignup = () => useContext(SignupContext);
 
 export const SignupProvider = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(() => {
-    // مقدار اولیه از localStorage
-    return parseInt(localStorage.getItem("currentStep") || "1", 10);
+    const savedStep = parseInt(localStorage.getItem("currentStep") || "1", 10);
+    console.log("Initial currentStep from localStorage:", savedStep);  // بررسی مقدار اولیه
+    return savedStep;
   });
 
   useEffect(() => {
-    // ذخیره کردن currentStep در localStorage
+    // ذخیره currentStep به‌روز شده در localStorage
+    console.log("Saving currentStep to localStorage:", currentStep);  // بررسی ذخیره مقدار
     localStorage.setItem("currentStep", currentStep);
   }, [currentStep]);
 

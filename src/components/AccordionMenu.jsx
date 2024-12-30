@@ -65,27 +65,30 @@ function FAQs() {
     </div>
   );
 }
+
 const FAQItem = ({ panel, title, children, expanded, handleChange }) => {
   return (
     <div
-      className="bg-[#fcfcfc] border border-gray-300 rounded-md mb-2"
+      className="bg-[#fcfcfc] border border-gray-300 rounded-md mb-2 "
       onClick={() => handleChange(panel)}
     >
       <div
-        className={`flex justify-between items-center p-4 cursor-pointer ${
+        className={`flex justify-between items-center p-4 cursor-pointer  ${
           expanded === panel ? "bg-main-2 text-main-1" : "bg-main-1"
         }`}
       >
-        <h2 className="text-lg md:text-xl font-medium whitespace-nowrap">{title}</h2>
+        <h2 className="text-lg md:text-xl font-medium whitespace-nowrap ">
+          {title}
+        </h2>
         <span>{expanded === panel ? "⯆" : "⯈"}</span>
       </div>
       <div
-        className={`overflow-hidden transition-all duration-1000 ease-in-out  ${
-          expanded === panel ? "max-h-[500px]" : "max-h-0"
+        className={`overflow-hidden transition-all duration-500 ease-in-out  ${
+          expanded === panel ? "max-h-[600px]" : "max-h-0"
         }`}
       >
         {expanded === panel && (
-          <div className="p-4 bg-white border-t border-gray-300">
+          <div className="p-4 bg-white border-t border-gray-300 ">
             <p className="text-lg">{children}</p>
           </div>
         )}

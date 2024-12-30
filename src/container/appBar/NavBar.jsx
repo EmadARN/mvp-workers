@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BtnAnimation from "../../common/BtnAnimation";
 import { pages } from "../../constants";
 
-function NavBar({ signinBtnDisplay }) {
+function NavBar({ signinBtnVisable }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function NavBar({ signinBtnDisplay }) {
         </div>
 
         {/* Signup Button */}
-        <div className={`pl-3 flex items-center py-5  ${signinBtnDisplay}`}>
+        <div className={`pl-3  flex items-center py-5  ${signinBtnVisable} `}>
           <BtnAnimation
             title="ثبت نام کارجو"
             color="#fff"

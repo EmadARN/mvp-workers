@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const serviceVisitBtn = () => {
   return (
-    <Link to="/allWorker" className="flex justify-center">
+    <Link to="/services/allWorker" className="flex justify-center">
       <button
         className="px-9 py-3 h-15 text-lg font-bold font-sans_bold text-[#030f27] bg-[#fdbe33] 
                  border-2 border-[#fdbe33] rounded-sm transition-all duration-500 ease-in-out 

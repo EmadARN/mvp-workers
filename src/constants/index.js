@@ -10,6 +10,7 @@ export const pages = [
   { id: 2, name: "درباره ما", to: "/About" },
   { id: 3, name: "سرویس ها", to: "/ServicesPage" },
 ];
+
 //footer
 export const quickLinks = [
   { href: "/About", label: "درباره ما" },
@@ -26,6 +27,7 @@ export const contactInfo = [
   { icon: "fa-phone", text: "+123 456 7890" },
   { icon: "fa-envelope", text: "email@example.com" },
 ];
+
 //carousel
 export const carouselData = [
   {
@@ -78,7 +80,7 @@ export const fields = [
     id: "job",
     label: "شغل:",
     type: "select",
-    options: ["یکی را انتخاب کنید", "خدمات منزل", "خدمات ساختمانی"], // لیست شغل‌ها
+    options: ["خدمات منزل", "خدمات ساختمانی"], // لیست شغل‌ها
   },
 ];
 

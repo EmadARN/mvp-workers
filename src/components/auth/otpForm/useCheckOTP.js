@@ -39,6 +39,10 @@ function useCheckOTP(length = 6) {
     }
   };
   const onResendOtp = useCallback(() => {
+    dispatch({
+      type: "PHONENUMBER_GET",
+      payload: phone_number,
+    });
     setTime(RESEND_TIME);
     // ارسال مجدد OTP را اینجا اضافه کنید
   }, []);

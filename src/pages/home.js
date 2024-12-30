@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import BackToUp from "../common/BackToUp";
 import FAQs from "../components/AccordionMenu";
 import Carousel from "../components/Carousel";
 import CounterMain from "../components/counterMain/CounterMain";
-import Table from "../components/Table";
+import Table from "../components/table/Table";
 import WhyWorkers from "../components/whyWorkers/WhyWorkers";
 import Layout from "../container";
 import { serviceVisitBtn } from "../widget/ServiceVisitBtn";
@@ -11,7 +10,7 @@ import { serviceVisitBtn } from "../widget/ServiceVisitBtn";
 const Home = () => {
   return (
     <Layout>
-      <div className="grid grid-cols-3 flex-grow">
+      <div className="flex-grow">
         <div className="col-span-3 md:col-span-4 md:space-y-28">
           <Carousel />
           <BackToUp />
@@ -19,10 +18,10 @@ const Home = () => {
             <WhyWorkers />
           </div>
           <CounterMain />
-          <div className=" mx-6 sm:mx-16 my-16 md:my-6" >
-            <Table />
+          <div className=" mx-6 sm:mx-16 my-16 md:my-6">
+            <Table title="ثپت نامی های اخیر" />
+            <div className="mt-6"> {serviceVisitBtn()}</div>
           </div>
-          {serviceVisitBtn()}
           <div className=" mx-6 sm:mx-16 pb-12 my-16 md:my-6">
             <FAQs />
           </div>

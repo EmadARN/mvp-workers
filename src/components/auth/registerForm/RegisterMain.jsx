@@ -26,7 +26,7 @@ const RegisterMain = () => {
         </h2>
 
         <form onSubmit={handleSubmit}>
-          {fields.map((field,index) => (
+          {fields.map((field, index) => (
             <div className="mb-4" key={index}>
               <label
                 htmlFor={field.id}

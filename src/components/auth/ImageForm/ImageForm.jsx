@@ -101,7 +101,7 @@ const ImageForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full my-28 md:my-10">
       <Stepper currentStep={3} />
 
       <h4 className="text-3xl font-bold text-center sm:text-2xl md:text-3xl mt-8 mb-4">

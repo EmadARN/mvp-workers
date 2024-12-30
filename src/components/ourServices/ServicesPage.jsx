@@ -1,6 +1,6 @@
 import BtnAnimation from "../../common/BtnAnimation";
 import Layout from "../../container";
-import Table from "../Table";
+import Table from "../table/Table";
 
 const ServicesPage = ({ pageType }) => {
   const pageConfig = {
@@ -10,6 +10,10 @@ const ServicesPage = ({ pageType }) => {
     },
     construction: {
       title: "خدمات ساختمانی",
+      buttonTitle: "ثبت نام کارجو",
+    },
+    allWorker: {
+      title: "همه سرویس ها",
       buttonTitle: "ثبت نام کارجو",
     },
   };
@@ -30,11 +34,10 @@ const ServicesPage = ({ pageType }) => {
 
   return (
     <Layout>
-      <div className="container mx-auto flex items-center justify-center h-screen px-4">
+      <div className="container mx-auto flex items-center justify-center h-screen px-4 my-20 md:my-4 ">
         <div className="w-full md:w-3/4 lg:w-2/3">
-          <h1 className="text-2xl font-bold text-center mb-8">{title}</h1>
-          <Table />
-          <div className="w-full flex justify-center mb-24 md:my-4">
+          <Table title={title} />
+          <div className="w-full flex justify-center mt-4 md:my-4">
             <BtnAnimation
               title={buttonTitle}
               color="#111"

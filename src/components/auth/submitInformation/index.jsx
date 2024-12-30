@@ -11,7 +11,7 @@ const SignUpFinalPage = () => {
   const dispatch = useAuthActions();
   const [cookieValue] = useCookie("auth-token");
   const { setFormState } = useFormState();
-  const { userInTable,userInfo } = useAuth();
+  const { userInTable, userInfo } = useAuth();
 
   const handleButtonClick = () => {
     dispatch({
@@ -22,16 +22,15 @@ const SignUpFinalPage = () => {
     navigate("/");
   };
 
-
   const editButtonClick = () => {
     setFormState(true);
     navigate("/signIn/SigninRegister");
   };
 
-  console.log('sssssss',userInTable);
+  console.log("sssssss", userInTable);
 
   return (
-    <div className="mt-8 w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+    <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 my-28 md:my-10">
       <Stepper currentStep={4} />
 
       <div className="container mx-auto text-center w-full mb-5">

@@ -5,7 +5,6 @@ import RegisterMain from "./components/auth/registerForm/RegisterMain";
 import SignUpFinalPage from "./components/auth/submitInformation";
 import ServicesPage from "./components/ourServices/ServicesPage";
 import AboutUs from "./pages/aboutUs";
-import AllWorkerPage from "./pages/allWorkerPage";
 import Home from "./pages/home";
 import ServicesUs from "./pages/servicesUs";
 import SignIn from "./pages/signIn";
@@ -19,10 +18,7 @@ const routes = [
     path: "/servicesPage",
     element: <ServicesUs />,
   },
-  {
-    path: "/allWorker",
-    element: <AllWorkerPage />,
-  },
+
   {
     path: "/services",
     children: [
@@ -34,8 +30,13 @@ const routes = [
         path: "construction",
         element: <ServicesPage pageType="construction" />,
       },
+      {
+        path: "allWorker",
+        element: <ServicesPage pageType="allWorker" />,
+      },
     ],
   },
+
   {
     path: "/signIn/",
     element: <SignIn />,

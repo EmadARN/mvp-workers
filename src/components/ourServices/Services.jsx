@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Title from "../../common/Tilte";
 import { buttons } from "../../constants";
 
 const OurService = () => {
@@ -7,10 +6,6 @@ const OurService = () => {
 
   return (
     <>
-      <div className="my-16">
-        <Title title="سرویس ها" />
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
         {buttons.map((item) => {
           return (
