@@ -92,14 +92,14 @@ npm run build
 ---
 ````
 
-````plaintext
+
 ## Key Features
 
-### Async use-reducer-async Management
+### Async use-reducer-async Management.
 
 - Uses the use-reducer-async package to handle async logic (similar to redux-thunk).
 
-### API Interaction
+### API Interaction.
 
 - The service/authSignIn.js file manages login and registration API requests.
 
@@ -110,6 +110,7 @@ npm run build
 
 ---
 
+````
 ## File Tree Structure
 
 src/
