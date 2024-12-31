@@ -49,7 +49,7 @@ const CounterMain = () => {
             endValue={10}
             icon={<GrUserWorker className="text-4xl pl-2" />}
             title="کارگران ثبت نام شده"
-            bgColor="bg-[#fdbe33]"
+            bgColor="bg-main-1"
             textColor="text-[#030f27]"
           />
         )}
@@ -64,7 +64,7 @@ const CounterMain = () => {
             icon={<IoMdPeople className="text-4xl pl-2" />}
             title="تعداد بازدید از سایت"
             bgColor="bg-[#030f27]"
-            textColor="text-[#fdbe33]"
+            textColor="text-main-1"
           />
         )}
       </div>

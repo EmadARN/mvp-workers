@@ -7,7 +7,7 @@ import useUploadImageForm from "./useUploadImageForm";
 import useCaptureImage from "./useCaptureImage";
 import Stepper from "../Stepper";
 import CustomeBtn from "../../../common/CustomeBtn";
-import { useSignup } from "../../../context/signupProvider";
+import { useStep } from "../../../context/signupProvider";
 
 const ImageForm = () => {
   const [previewImage, setPreviewImage] = useState(null); // visiable upload img
@@ -17,7 +17,7 @@ const ImageForm = () => {
   const [openFile, setOpenFile] = useState(false);
   const [photoCaptured, setPhotoCaptured] = useState(false);
   const [isDisable, setIsDisable] = useState(false);
-  const { setCurrentStep } = useSignup();
+  const { goToStep } = useStep();
 
   const [cookieValue] = useCookie("auth-token");
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ const ImageForm = () => {
     //     token: cookieValue,
     //   },
     // });
-    setCurrentStep(5);
+    goToStep(5);
     navigate("/signIn/SigninFinal");
   };
 

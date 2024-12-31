@@ -3,7 +3,7 @@ function Details() {
     <div className="md:mt-16 px-4">
       <div className="flex justify-center">
         <div className="w-full sm:w-8/12 md:w-2/3 text-right">
-          <p className="text-[#fdbe33] text-2xl sm:text-3xl font-bold font-sans_normal ">
+          <p className="text-main-1 text-2xl sm:text-3xl font-bold font-sans_normal ">
             چرا سازندگان
           </p>
 

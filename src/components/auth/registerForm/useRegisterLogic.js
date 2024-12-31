@@ -6,11 +6,11 @@ import { fields } from "../../../constants";
 import { includeObj } from "../../../utils/objectUtils";
 import toast from "react-hot-toast";
 import { useFormState } from "../../../context/StateContext";
-import { useSignup } from "../../../context/signupProvider";
+import { useStep } from "../../../context/signupProvider";
 
 export const useRegisterLogic = () => {
   const { formState } = useFormState();
-  const { setCurrentStep } = useSignup();
+  const { goToStep } = useStep();
 
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -56,14 +56,14 @@ export const useRegisterLogic = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-   
+
     try {
       dispatch({
         type: "FORM_POST",
         payload: { formData, cookieValue },
       });
       toast.success("اطلاعات با موفقیت ثبت شد!");
-      setCurrentStep(4);
+      goToStep(4);
       {
         formState
           ? navigate(`/signIn/SigninFinal`)

@@ -7,6 +7,7 @@ import { useFormState } from "../../../context/StateContext";
 import CustomeBtn from "../../../common/CustomeBtn";
 import { useState } from "react";
 import Loading from "../../../common/Loading";
+import { useStep } from "../../../context/signupProvider";
 
 const SignUpFinalPage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ const SignUpFinalPage = () => {
   const [cookieValue, removeCookie] = useCookie("auth-token");
   const { setFormState } = useFormState();
   const [loading, setLoading] = useState(false);
+  const { goToStep } = useStep();
+
   const handleButtonClick = async () => {
     if (!loading) {
       setLoading(true);
@@ -25,6 +28,7 @@ const SignUpFinalPage = () => {
       });
       removeCookie();
       setTimeout(() => {
+        goToStep(1);
         navigate("/");
       }, 5100);
     } catch (error) {
@@ -38,6 +42,7 @@ const SignUpFinalPage = () => {
 
   const editButtonClick = () => {
     setFormState(true);
+    goToStep(3);
     navigate("/signIn/SigninRegister");
   };
 

@@ -1,22 +1,19 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-const SignupContext = createContext();
+const StepContext = createContext();
 
-export const useSignup = () => useContext(SignupContext);
+export const StepProvider = ({ children }) => {
+  const [currentStep, setCurrentStep] = useState(1); // وضعیت قدم فعلی
 
-export const SignupProvider = ({ children }) => {
-  const [currentStep, setCurrentStep] = useState(() => {
-    const savedStep = parseInt(localStorage.getItem("currentStep") || "1", 10);
-    return savedStep;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("currentStep", currentStep);
-  }, [currentStep]);
+  const goToStep = (step) => {
+    setCurrentStep(step);
+  };
 
   return (
-    <SignupContext.Provider value={{ currentStep, setCurrentStep }}>
+    <StepContext.Provider value={{ currentStep, goToStep }}>
       {children}
-    </SignupContext.Provider>
+    </StepContext.Provider>
   );
 };
+
+export const useStep = () => useContext(StepContext);

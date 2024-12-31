@@ -13,7 +13,7 @@ const OurService = () => {
               <div className="relative">
                 <div
                   onClick={() => navigate(item.to)}
-                  className="absolute bg-black bg-opacity-50 w-full h-full opacity-0 transition-all duration-500 cursor-pointer hover:opacity-100"
+                  className="absolute bg-main-2 bg-opacity-50 w-full h-full opacity-0 transition-all duration-500 cursor-pointer hover:opacity-100"
                 >
                   <p
                     onClick={() => navigate(item.to)}
@@ -31,7 +31,7 @@ const OurService = () => {
 
               <div className="p-0 m-0">
                 <a href={item.to}>
-                  <button className="w-full bg-[#030f27] text-[#fdbe33] font-lalezar text-2xl py-2 px-4 hover:bg-[#fdbe33] hover:text-[#030f27] transition-all">
+                  <button className="w-full bg-main-2 text-main-1 font-lalezar text-2xl py-2 px-4 hover:bg-main-1 hover:text-main-2 ransition-all">
                     {item.name}
                   </button>
                 </a>
