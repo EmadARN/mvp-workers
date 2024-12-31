@@ -151,6 +151,7 @@ export const asyncActionHandlers = {
         });
         const data = await response.json();
         dispatch({ type: "FINALIZATION_SIGNUP_GET_SUCCESS" });
+        toast.success(data.status_text);
         console.log("form success", data);
       } catch (error) {
         const errorMessage = error.message || "خطایی رخ داده است";

@@ -12,7 +12,7 @@ const Table = ({ title }) => {
   const location = useLocation();
   const [searchState, setSearchState] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(4);
 
   const dispatch = useAuthActions();
   const { userInTable } = useAuth();
@@ -68,7 +68,7 @@ const Table = ({ title }) => {
     const endIndex = startIndex + itemsPerPage;
 
     return location.pathname === "/"
-      ? filteredUsers.slice(-4)
+      ? filteredUsers.slice(-5)
       : filteredUsers.slice(startIndex, endIndex);
   }, [filteredUsers, currentPage, itemsPerPage, location.pathname]);
 
@@ -87,7 +87,7 @@ const Table = ({ title }) => {
         <Title title={title} />
       </div>
       <div className="overflow-x-auto overflow-y-hidden">
-        {(location.pathname === "/allWorker" ||
+        {(location.pathname === "/services/allWorker" ||
           location.pathname === "/services/construction" ||
           location.pathname === "/services/homeService") && (
           <div className="w-full flex items-center justify-between mb-7">
@@ -118,6 +118,22 @@ const Table = ({ title }) => {
           </div>
         )}
 
+        {location.pathname === "/" && (
+          <div className="w-full flex items-center justify-end mb-4">
+            <button
+              className="bg-main-1 md:bg-main-2 flex items-center p-2 rounded-md"
+              onClick={fetchData}
+            >
+              <AiOutlineReload
+                size={14}
+                className="text-main-2 md:text-main-1"
+              />
+              <span className="text-main-2 md:text-main-1 mr-2 text-[10px] md:text-[16px]">
+                بروز رسانی
+              </span>
+            </button>
+          </div>
+        )}
         <table className="w-full min-w-full table-auto border-collapse border border-gray-300">
           <thead>
             <tr className="bg-main-2 text-white">

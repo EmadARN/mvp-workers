@@ -17,7 +17,7 @@ const RegisterMain = () => {
   const { formState } = useFormState();
 
   return (
-    <div className="flex justify-center items-center flex-col px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-6">
+    <div className="flex justify-center items-center flex-col px-4 my-24 md:my-2 sm:px-6 md:px-8 lg:px-12 xl:px-16 pb-6">
       <Stepper currentStep={2} />
 
       <div className="bg-white p-6 rounded-lg shadow-md max-w-full w-full sm:max-w-screen-sm lg:max-w-screen-md">

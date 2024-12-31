@@ -2,32 +2,44 @@ import { useNavigate } from "react-router-dom";
 import SubmitInputs from "./SubmitInputs";
 import Stepper from "../Stepper";
 import { useCookie } from "../../../hooks/useCookies";
-import { useAuth, useAuthActions } from "../../../context/AuthReducer";
+import { useAuthActions } from "../../../context/AuthReducer";
 import { useFormState } from "../../../context/StateContext";
 import CustomeBtn from "../../../common/CustomeBtn";
+import { useState } from "react";
+import Loading from "../../../common/Loading";
 
 const SignUpFinalPage = () => {
   const navigate = useNavigate();
   const dispatch = useAuthActions();
-  const [cookieValue] = useCookie("auth-token");
+  const [cookieValue, removeCookie] = useCookie("auth-token");
   const { setFormState } = useFormState();
-  const { userInTable, userInfo } = useAuth();
-
-  const handleButtonClick = () => {
-    dispatch({
-      type: "FINALIZATION_SIGNUP_GET",
-      payload: { cookieValue },
-    });
-
-    navigate("/");
+  const [loading, setLoading] = useState(false);
+  const handleButtonClick = async () => {
+    if (!loading) {
+      setLoading(true);
+    }
+    try {
+      await dispatch({
+        type: "FINALIZATION_SIGNUP_GET",
+        payload: { cookieValue },
+      });
+      removeCookie();
+      setTimeout(() => {
+        navigate("/");
+      }, 5100);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 5000);
+    }
   };
 
   const editButtonClick = () => {
     setFormState(true);
     navigate("/signIn/SigninRegister");
   };
-
-  console.log("sssssss", userInTable);
 
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 my-28 md:my-10">
@@ -50,7 +62,7 @@ const SignUpFinalPage = () => {
         />
         <CustomeBtn
           clickHandler={handleButtonClick}
-          content="ثبت اطلاعات حساب"
+          content={loading ? <Loading /> : "ثپت اطلاعات حساب"}
           w="60"
         />
       </div>

@@ -19,7 +19,7 @@ function NavBar({ signinBtnVisable }) {
       <div
         className={`${
           isScrolled
-            ? "bg-main-2  fixed top-0 w-full z-50 flex justify-between items-center px-4 py-2 transition-all duration-1000"
+            ? "bg-main-2  fixed top-0 w-full z-50 flex justify-between items-center px-4 transition-all duration-1000"
             : " bg-main-2 w-11/12 mx-auto flex justify-between items-center px-4 py-2 transition-all duration-1000"
         }`}
       >

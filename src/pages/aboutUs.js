@@ -1,6 +1,7 @@
 import Layout from "../container";
 import WhyWorkers from "../components/whyWorkers/WhyWorkers";
 import CounterMain from "../components/counterMain/CounterMain";
+import FAQs from "../components/AccordionMenu";
 
 const AboutUs = () => {
   return (
@@ -9,6 +10,9 @@ const AboutUs = () => {
         <WhyWorkers />
         <div className=" pb-20">
           <CounterMain />
+        </div>
+        <div className=" mx-6 sm:mx-16 pb-12 my-16 md:my-6">
+          <FAQs />
         </div>
       </div>
     </Layout>

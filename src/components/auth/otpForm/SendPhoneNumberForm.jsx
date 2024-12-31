@@ -7,7 +7,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useSignup } from "../../../context/signupProvider";
 
-const SendOTPForm = () => {
+const SendPhoneNumberForm = () => {
   const { loading } = useAuth();
   const navigate = useNavigate();
   const dispatch = useAuthActions();
@@ -68,4 +68,4 @@ const SendOTPForm = () => {
   );
 };
 
-export default SendOTPForm;
+export default SendPhoneNumberForm;

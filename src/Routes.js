@@ -1,6 +1,6 @@
 import ImageForm from "./components/auth/ImageForm/ImageForm";
 import CheckOTPForm from "./components/auth/otpForm/CheckOTPForm";
-import SendOTPForm from "./components/auth/otpForm/SendOTPForm";
+import SendPhoneNumberForm from "./components/auth/otpForm/SendPhoneNumberForm";
 import RegisterMain from "./components/auth/registerForm/RegisterMain";
 import SignUpFinalPage from "./components/auth/submitInformation";
 import ServicesPage from "./components/ourServices/ServicesPage";
@@ -45,7 +45,7 @@ const routes = [
         index: true,
         element: (
           <StepProtectedRoute requiredStep={1}>
-            <SendOTPForm />
+            <SendPhoneNumberForm />
           </StepProtectedRoute>
         ),
       },
