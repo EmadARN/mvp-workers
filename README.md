@@ -73,20 +73,20 @@ This project includes a user-friendly multi-step registration process:
 First, install the project dependencies using npm:
 
 
-````bash
+````
 npm install
 
 ### 2.Run the Application
 To run the project in development mode:
 
-```bash
+```
 npm run dev
 
 
 ### 3.Build the Application
 To build the project for production:
 
-```bash
+```
 npm run build
 
 ---
@@ -106,7 +106,6 @@ npm run build
 ### Protected Route Management
 
 - The ProtectedRoute component is used to control access to specific pages for authenticated users.
-
 
 
 ---
