@@ -1,106 +1,117 @@
 # React + Vite Project
 
-این پروژه یک برنامه React با استفاده از Vite است که شامل تنظیمات اولیه برای توسعه سریع، HMR (Hot Module Replacement)، و قوانین ESLint می‌باشد. در این پروژه از **Tailwind CSS** برای طراحی رابط کاربری استفاده شده است.
+This project is a React application built with Vite, featuring initial setups for fast development, Hot Module Replacement (HMR), and ESLint rules. It uses Tailwind CSS for the user interface design.
 
 ---
 
-## ویژگی‌های پروژه
+## Project Features
 
-- **استفاده از Vite**: سرعت بالا در اجرا و ساخت پروژه.
-- **Fast Refresh**: بازخوانی سریع کدها برای تجربه بهتر توسعه‌دهنده.
-- **طراحی با Tailwind CSS**: طراحی سریع، زیبا و ماژولار.
-- **مراحل ثبت‌نام سلسله‌مراتبی**: یک فرآیند کاربرپسند برای ثبت‌نام کاربران.
+- **Vite Usage**: High-speed project execution and build times.
+- **Fast Refresh**: Fast code reloading for a better developer experience.
+- **Tailwind CSS Design**: Fast, beautiful, and modular design.
+- **Hierarchical Registration Steps**: A user-friendly multi-step user registration process.
 
 ---
 
-## ساختار فایل‌ها
+## File Structure
 
 ```plaintext
 src/
-├── App.jsx            # فایل اصلی برنامه
-├── main.jsx           # فایل ورودی برای Vite
-├── ProtectedRoute.js  # مدیریت مسیرهای محافظت‌شده
-├── Routes.js          # تعریف مسیرها
-├── assets/            # منابع شامل تصاویر و فونت‌ها
-├── common/            # کامپوننت‌های عمومی و قابل استفاده مجدد
-├── components/        # کامپوننت‌های اصلی برنامه
-├── constants/         # مقادیر ثابت و تنظیمات
-├── container/         # کامپوننت‌های کانتینری (مثل AppBar و Footer)
-├── context/           # مدیریت Context API برای وضعیت‌های مختلف
-├── hooks/             # هوک‌های سفارشی
-├── pages/             # صفحات اصلی برنامه
-├── service/           # فایل‌های مرتبط با API و درخواست‌ها
-├── utils/             # توابع کاربردی و ابزارها
-├── widget/            # ابزارها و ویجت‌های خاص
+├── App.jsx            # Main application file
+├── main.jsx           # Entry file for Vite
+├── ProtectedRoute.js  # Managing protected routes
+├── Routes.js          # Define routes
+├── assets/            # Resources including images and fonts
+├── common/            # Reusable and common components
+├── components/        # Main application components
+├── constants/         # Constants and configurations
+├── container/         # Container components (e.g., AppBar and Footer)
+├── context/           # Context API management for various states
+├── hooks/             # Custom hooks
+├── pages/             # Main application pages
+├── service/           # API-related files and requests
+├── utils/             # Utility functions and tools
+├── widget/            # Specific tools and widgets
 ```
 
 ---
 
-## مراحل ثبت‌نام سلسله‌مراتبی
+## Hierarchical Registration Steps
 
-این پروژه دارای یک فرآیند ثبت‌نام چندمرحله‌ای کاربرپسند است:
+This project includes a user-friendly multi-step registration process:
 
-### مرحله اول: وارد کردن شماره همراه
-- کاربر شماره همراه خود را وارد می‌کند.
-- درخواست ارسال کد OTP به شماره وارد شده ارسال می‌شود.
+### Step 1: Enter Mobile Number
 
-### مرحله دوم: تایید کد OTP
-- کاربر کد ارسال شده به تلفن همراه خود را وارد می‌کند.
-- سیستم کد وارد شده را تأیید می‌کند.
+- The user enters their mobile number.
+- A request is sent to send an OTP code to the entered number.
 
-### مرحله سوم: تکمیل فرم ثبت‌نام
-- کاربر اطلاعات حساب کاربری شامل نام، ایمیل، و دیگر اطلاعات را وارد می‌کند.
+### Step 2: OTP Verification
 
-### مرحله چهارم: بارگذاری یا گرفتن عکس
-- کاربر می‌تواند عکسی از خود بارگذاری کند یا از وب‌کم برای گرفتن عکس استفاده کند.
 
-### مرحله پنجم: تایید اطلاعات
-- تمامی اطلاعات وارد شده به کاربر نمایش داده می‌شود.
-- کاربر اطلاعات را تأیید و حساب کاربری خود را نهایی می‌کند.
+- The user enters the OTP code sent to their mobile.
+- The system verifies the entered code.
+
+### Step 3: Complete Registration Form
+
+- The user enters account information such as name, email, and other details.
+
+### Step 4: Upload or Capture Photo
+
+- The user can either upload a photo or use a webcam to take a picture.
+
+### Step 5: Confirm Information
+
+- All entered information is displayed for user confirmation.
+- The user confirms the details and finalizes their registration.
 
 ---
 
-## نصب و اجرا
+## Installation and Setup
 
-### 1. نصب وابستگی‌ها
-ابتدا با استفاده از npm یا yarn وابستگی‌های پروژه را نصب کنید:
-```bash
+### 1. Install Dependencies
+
+First, install the project dependencies using npm:
+
+
+````bash
 npm install
 
-### 2. اجرای برنامه
-برای اجرا در حالت توسعه:
+### 2.Run the Application
+To run the project in development mode:
+
 ```bash
 npm run dev
 
 
-### 3. ساخت برنامه
-برای ساخت نسخه آماده تولید:
+### 3.Build the Application
+To build the project for production:
+
 ```bash
 npm run build
 
 ---
+````
 
-## امکانات مهم
+````plaintext
+## Key Features
 
-### طراحی رابط کاربری با Tailwind CSS
-- استفاده از کلاس‌های پیش‌ساخته Tailwind برای طراحی سریع و زیبا.
+### Async use-reducer-async Management
 
-### مدیریت مسیرهای محافظت‌شده
-- استفاده از کامپوننت `ProtectedRoute` برای کنترل دسترسی کاربران به صفحات خاص.
+- Uses the use-reducer-async package to handle async logic (similar to redux-thunk).
 
-### تعامل با API
-- فایل `service/authSignIn.js` برای مدیریت درخواست‌های ورود و ثبت‌نام.
+### API Interaction
 
----
+- The service/authSignIn.js file manages login and registration API requests.
 
-## مشارکت در توسعه
+### Protected Route Management
 
-اگر مایل به مشارکت در توسعه هستید:
-1. پروژه را فورک کنید.
-2. تغییرات خود را در شاخه جدید اعمال کنید.
-3. درخواست Pull ایجاد کنید.
+- The ProtectedRoute component is used to control access to specific pages for authenticated users.
+
+
 
 ---
+
+## File Tree Structure
 
 src/
 ├── src/
@@ -199,3 +210,5 @@ src/
 │   │   ├── toPersianDigits.js
 │   ├── widget/
 │   │   ├── serviceVisitBtn.jsx
+
+````
